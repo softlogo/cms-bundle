@@ -27,7 +27,6 @@
 		"incenteev/composer-parameter-handler": "~2.0",
 		"egeloen/ckeditor-bundle": "2.3.*@dev",
 		"knplabs/knp-menu-bundle": "v2.0.0-alpha1",
-		"sonata-project/admin-bundle": "2.3.*@dev",
 		"sonata-project/core-bundle": "2.2.*@dev",
 		"sonata-project/jquery-bundle" : "1.8.*",
 		"sonata-project/doctrine-orm-admin-bundle" : "dev-master",
