@@ -1,0 +1,30 @@
+section:
+    pattern:  /
+    defaults: { _controller: "SoftlogoCMSBundle:Section:index" }
+
+section_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "SoftlogoCMSBundle:Section:show" }
+
+section_new:
+    pattern:  /new
+    defaults: { _controller: "SoftlogoCMSBundle:Section:new" }
+
+section_create:
+    pattern:  /create
+    defaults: { _controller: "SoftlogoCMSBundle:Section:create" }
+    requirements: { _method: post }
+
+section_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "SoftlogoCMSBundle:Section:edit" }
+
+section_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "SoftlogoCMSBundle:Section:update" }
+    requirements: { _method: post|put }
+
+section_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "SoftlogoCMSBundle:Section:delete" }
+    requirements: { _method: post|delete }

@@ -1,0 +1,34 @@
+home:
+    pattern:  /
+    defaults: { _controller: "SoftlogoCMSBundle:Page:show" }
+
+form:
+    pattern: /form
+    defaults: { _controller: SoftlogoCMSBundle:Contact:form }
+
+form-informacja:
+    pattern: /form-informacja
+    defaults: { _controller: SoftlogoCMSBundle:Contact:informacja}
+
+page_show:
+    pattern:  /{anchor}
+    defaults: { _controller: "SoftlogoCMSBundle:Page:show" }
+
+
+SoftlogoCMSBundle_section:
+    resource: "@SoftlogoCMSBundle/Resources/config/routing/section.yml"
+    prefix:   /section
+
+SoftlogoCMSBundle_article:
+    resource: "@SoftlogoCMSBundle/Resources/config/routing/article.yml"
+    prefix:   /article
+
+SoftlogoCMSBundle_type:
+    resource: "@SoftlogoCMSBundle/Resources/config/routing/type.yml"
+    prefix:   /type
+
+SoftlogoCMSBundle_language:
+    resource: "@SoftlogoCMSBundle/Resources/config/routing/language.yml"
+    prefix:   /language
+
+

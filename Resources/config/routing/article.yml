@@ -1,0 +1,30 @@
+article:
+    pattern:  /
+    defaults: { _controller: "SoftlogoCMSBundle:Article:index" }
+
+article_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "SoftlogoCMSBundle:Article:show" }
+
+article_new:
+    pattern:  /new
+    defaults: { _controller: "SoftlogoCMSBundle:Article:new" }
+
+article_create:
+    pattern:  /create
+    defaults: { _controller: "SoftlogoCMSBundle:Article:create" }
+    requirements: { _method: post }
+
+article_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "SoftlogoCMSBundle:Article:edit" }
+
+article_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "SoftlogoCMSBundle:Article:update" }
+    requirements: { _method: post|put }
+
+article_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "SoftlogoCMSBundle:Article:delete" }
+    requirements: { _method: post|delete }

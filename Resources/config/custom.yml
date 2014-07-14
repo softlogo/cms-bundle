@@ -1,0 +1,168 @@
+#dodane zeby media działały
+sonata_admin:
+    title: CMS Admin
+    templates:
+        short_object_description: ApplicationSonataMediaBundle::short-object-description.html.twig
+        layout:  SonataAdminBundle::layout.html.twig
+sonata_media:
+    # if you don't use default namespace configuration
+    #class:
+    #    media: MyVendor\MediaBundle\Entity\Media
+    #    gallery: MyVendor\MediaBundle\Entity\Gallery
+    #    gallery_has_media: MyVendor\MediaBundle\Entity\GalleryHasMedia
+    default_context: default
+    db_driver: doctrine_orm # or doctrine_mongodb, doctrine_phpcr
+    contexts:
+        default:  # the default context is mandatory
+            providers:
+                - sonata.media.provider.dailymotion
+                - sonata.media.provider.youtube
+                - sonata.media.provider.image
+                - sonata.media.provider.file
+
+            formats:
+                small: { width: 100 , quality: 90}
+                medium: { width: 300 , quality: 90}
+                big:   { width: 600 , quality: 90}
+                large:   { width: 900 , quality: 90}
+        work:  
+            providers:
+                - sonata.media.provider.image
+
+            formats:
+                small: { width: 100 , quality: 96}
+                medium: { width: 300 , quality: 96}
+                big:   { width: 600 , quality: 96}
+                large:   { width: 1000 , quality: 96}
+        banner:  
+            providers:
+                - sonata.media.provider.image
+
+            formats:
+                small: { width: 100 , quality: 90}
+                medium: { width: 300 , quality: 90}
+                big:   { width: 1140 , quality: 90}
+                large:   { width: 1600 , quality: 90}
+    providers:
+        image:
+            resizer: sonata.media.resizer.square
+
+    cdn:
+        server:
+            path: /uploads/media # http://media.sonata-project.org/
+
+    filesystem:
+        local:
+            directory:  %kernel.root_dir%/../web/uploads/media
+            create:     false
+
+# app/config/config.yml
+sonata_block:
+    default_contexts: [cms]
+    blocks:
+        # Enable the SonataAdminBundle block
+        sonata.admin.block.admin_list:
+            contexts:   [admin]
+        # Your other blocks
+sonata_formatter:
+    formatters:
+        markdown:
+            service: sonata.formatter.text.markdown
+            extensions:
+                - sonata.formatter.twig.control_flow
+                - sonata.formatter.twig.gist
+        #        - sonata.media.formatter.twig #keep this commented unless you are using media bundle.
+
+
+        text:
+            service: sonata.formatter.text.text
+            extensions:
+                - sonata.formatter.twig.control_flow
+                - sonata.formatter.twig.gist
+        #        - sonata.media.formatter.twig
+
+
+        rawhtml:
+            service: sonata.formatter.text.raw
+            extensions:
+                - sonata.formatter.twig.control_flow
+                - sonata.formatter.twig.gist
+        #        - sonata.media.formatter.twig
+
+
+        richhtml:
+            service: sonata.formatter.text.raw
+            extensions:
+                - sonata.formatter.twig.control_flow
+                - sonata.formatter.twig.gist
+        #        - sonata.media.formatter.twig
+
+
+        twig:
+            service: sonata.formatter.text.twigengine
+            extensions: [] # Twig formatter cannot have extensions
+
+# Assetic Configuration
+assetic:
+    debug:          "%kernel.debug%"
+    use_controller: false
+    bundles:        [SoftlogoCMSBundle ]
+    #java: /usr/bin/java
+    filters:
+        less:
+            #node: /home/softlogo/.local/bin/node
+            #node_paths: [~.local/node_modules]
+            node: /usr/bin/node
+            node_paths: [/usr/lib/node_modules]
+            apply_to: "\.less$"
+        cssrewrite: ~
+    assets:
+        bootstrap_css:
+            inputs:
+                - %kernel.root_dir%/Resources/less/bootstrap.less
+            filters:
+                - less
+                - cssrewrite
+            output: assets/css/bootstrap.css
+        jquery:
+            output: assets/js/jquery.js
+        bootstrap_js:
+            output: assets/js/bootstrap.js
+
+
+#braincrafted_bootstrap:
+    #less_filter: less
+    #customize:
+        #variables_file: %kernel.root_dir%/Resources/less/variables.less
+        ##bootstrap_file: %kernel.root_dir%/Resources/less/bootstrap.less
+braincrafted_bootstrap:
+    output_dir:
+    assets_dir: %kernel.root_dir%/../vendor/twbs/bootstrap
+    jquery_path: %kernel.root_dir%/../vendor/jquery/jquery/jquery-1.10.2.js
+    less_filter: less # "less", "lessphp", "sass" or "none"
+    auto_configure:
+        assetic: true
+        twig: true
+        knp_menu: true
+        knp_paginator: true
+    customize:
+        variables_file: %kernel.root_dir%/Resources/less/variables.less
+        bootstrap_output: %kernel.root_dir%/Resources/less/bootstrap.less
+        bootstrap_template: BraincraftedBootstrapBundle:Bootstrap:bootstrap.less.twig
+ivory_ck_editor:
+    default_config: default
+    configs:
+        default:
+            filebrowserBrowseRoute: admin_sonata_media_media_ckeditor_browser
+            filebrowserImageBrowseRoute: admin_sonata_media_media_ckeditor_browser
+            # Display images by default when clicking the image dialog browse button
+            filebrowserImageBrowseRouteParameters:
+                provider: sonata.media.provider.image
+            filebrowserUploadRoute: admin_sonata_media_media_ckeditor_upload
+            filebrowserUploadRouteParameters:
+                provider: sonata.media.provider.file
+            # Upload file as image when sending a file from the image dialog
+            filebrowserImageUploadRoute: admin_sonata_media_media_ckeditor_upload
+            filebrowserImageUploadRouteParameters:
+                provider: sonata.media.provider.image
+                context: my-context # Optional, to upload in a custom context

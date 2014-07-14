@@ -1,0 +1,24 @@
+{% extends "SoftlogoCMSBundle:Menu:Menu-Basic.html.twig" %}
+{% block all%}	
+<div class="navbar navbar-inverse navbar-fixed-top">
+	<div class="container">
+		<div class="col-md-2">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<div class="logo">
+					<a href="/przychodnia" class=""><img class="" src="/css/img/{{site.value}}" alt="" /></a>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-10">
+			{% block menu%}	
+			{{parent()}}
+			{%endblock%}
+		</div>
+	</div>
+</div>
+{%endblock%}
