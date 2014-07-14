@@ -25,7 +25,7 @@
 		"sensio/generator-bundle": "~2.3",
 		"incenteev/composer-parameter-handler": "~2.0",
 		"egeloen/ckeditor-bundle": "2.3.*@dev",
-		"knplabs/knp-menu-bundle": "dev-master",
+		"knplabs/knp-menu-bundle": "v2.0.0-alpha2",
 		"sonata-project/admin-bundle": "2.3.*@dev",
 		"sonata-project/core-bundle": "2.2.*@dev",
 		"sonata-project/jquery-bundle" : "1.8.*",
