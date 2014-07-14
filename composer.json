@@ -27,6 +27,7 @@
 		"incenteev/composer-parameter-handler": "~2.0",
 		"egeloen/ckeditor-bundle": "2.3.*@dev",
 		"knplabs/knp-menu-bundle": "v2.0.0-alpha1",
+        "sonata-project/admin-bundle": "@dev",
 		"sonata-project/core-bundle": "2.2.*@dev",
 		"sonata-project/jquery-bundle" : "1.8.*",
 		"sonata-project/doctrine-orm-admin-bundle" : "@dev",
@@ -35,12 +36,12 @@
 		"sonata-project/intl-bundle" : "@dev",
 		"sonata-project/media-bundle": "2.2.8",
 		"sonata-project/formatter-bundle": "2.3.*@dev",
-		"doctrine/doctrine-fixtures-bundle": "dev-master",
+		"doctrine/doctrine-fixtures-bundle": "@dev",
 		"braincrafted/bootstrap-bundle": "~2.1",
 		"twbs/bootstrap": "3.1.*",
 		"jquery/jquery":  "1.10.2",
 		"friendsofsymfony/user-bundle": "~2.0@dev",
-		"imagine/imagine": "dev-master"
+		"imagine/imagine": "@dev"
 
     },
     "autoload" : {
