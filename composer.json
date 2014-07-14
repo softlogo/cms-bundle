@@ -29,6 +29,7 @@
 		"knplabs/knp-menu-bundle": "v2.0.0-alpha1",
 		"sonata-project/core-bundle": "2.2.*@dev",
 		"sonata-project/jquery-bundle" : "1.8.*",
+		"sonata-project/doctrine-orm-admin-bundle" : "@dev",
 		"sonata-project/block-bundle" : "dev-master",
 		"sonata-project/cache-bundle" : "dev-master",
 		"sonata-project/intl-bundle" : "dev-master",
