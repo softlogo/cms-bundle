@@ -39,7 +39,6 @@
 		"doctrine/doctrine-fixtures-bundle": "@dev",
 		"braincrafted/bootstrap-bundle": "~2.1",
 		"twbs/bootstrap": "3.1.*",
-		"jquery/jquery":  "1.10.2",
 		"friendsofsymfony/user-bundle": "~2.0@dev",
 		"imagine/imagine": "@dev"
 
@@ -50,7 +49,10 @@
         }
     },
     "target-dir" : "Softlogo/CMSBundle",
-    "repositories" : [{}
+    "repositories": [
+        {
+        
+        }
     ],
     "extra" : {
     "branch-alias" : {
