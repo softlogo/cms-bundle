@@ -39,7 +39,7 @@
 		"doctrine/doctrine-fixtures-bundle": "@dev",
 		"braincrafted/bootstrap-bundle": "~2.1",
 		"twbs/bootstrap": "3.1.*",
-		"friendsofsymfony/user-bundle": "~2.0@dev",
+		"friendsofsymfony/user-bundle": "@dev",
 		"imagine/imagine": "@dev"
 
     },
