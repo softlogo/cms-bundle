@@ -1,6 +1,6 @@
 parameters:
     softlogo_cms_language.class: Softlogo\CMSBundle\Controller\LanguageController
-    cms_configpath: "%kernel.root_dir%/../src/Softlogo/CMSBundle/Resources/config/config.yml"
+    cms_configpath: "%kernel.root_dir%/../vendor/softlogo/cmsbundle/Softlogo/CMSBundle/Resources/config/config.yml"
     custom_configpath: ""
 services:
     foo.twig.extension:
