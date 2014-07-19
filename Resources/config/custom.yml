@@ -166,3 +166,8 @@ ivory_ck_editor:
             filebrowserImageUploadRouteParameters:
                 provider: sonata.media.provider.image
                 context: my-context # Optional, to upload in a custom context
+fos_user:
+    db_driver: orm # other valid values are 'mongodb', 'couchdb' and 'propel'
+    firewall_name: main
+    #user_class: Softlogo\UserBundle\Entity\User
+    user_class: FOS\UserBundle\Entity\User
