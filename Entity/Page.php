@@ -29,6 +29,19 @@ class Page extends AbstractSection
 	private $isMenu;
 
 	/**
+	 * @var boolean
+	 *
+	 * @ORM\Column(name="is_active", type="boolean", nullable=true)
+	 */
+	private $isActive;
+
+	/**
+	* @ORM\Column(type="decimal", precision=1, scale=1, options={"default":0.5})
+	*/
+	private $priority;
+
+
+	/**
 	 * @ORM\OneToMany(targetEntity="PageSection", mappedBy="page", cascade="persist", orphanRemoval=true)
 	 * @ORM\OrderBy({"itemorder" = "ASC"})
      */
@@ -213,4 +226,50 @@ class Page extends AbstractSection
         return $this->pages;
     }
 
+
+    /**
+     * Set isActive
+     *
+     * @param boolean $isActive
+     * @return Page
+     */
+    public function setIsActive($isActive)
+    {
+        $this->isActive = $isActive;
+
+        return $this;
+    }
+
+    /**
+     * Get isActive
+     *
+     * @return boolean 
+     */
+    public function getIsActive()
+    {
+        return $this->isActive;
+    }
+
+    /**
+     * Set priority
+     *
+     * @param string $priority
+     * @return Page
+     */
+    public function setPriority($priority)
+    {
+        $this->priority = $priority;
+
+        return $this;
+    }
+
+    /**
+     * Get priority
+     *
+     * @return string 
+     */
+    public function getPriority()
+    {
+        return $this->priority;
+    }
 }

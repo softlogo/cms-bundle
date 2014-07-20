@@ -29,6 +29,7 @@ class ContactController extends Controller
 		}
 		return $this->render("SoftlogoCMSBundle:Contact:form.html.twig", array(
 			'form'      => $form->createView(),
+			'title'      => "Formularz",
 		));
 	}
 	public function informacjaAction(Request $request){

@@ -67,6 +67,8 @@ class PageAdmin extends Admin
 			->add('page')
 			->add('href', 'text', array('label' => 'Href', 'required' => false))
 			->add('isMenu')
+			->add('priority')
+			->add('isActive')
 			->add('articles', 'sonata_type_collection', array('label' => 'Articles', 'required' => false, 'by_reference' => false), array('edit' => 'inline','inline' => 'standard'))
 			->add('pages', 'sonata_type_collection', array('label' => 'Pages', 'required' => false, 'by_reference' => false), array('edit' => 'inline','inline' => 'table'))
 			->add('pageSections', 'sonata_type_collection', array('label' => 'Sekcje', 'required' => false, 'by_reference' => false), array('edit' => 'inline','inline' => 'table'))

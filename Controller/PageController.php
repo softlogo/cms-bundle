@@ -32,6 +32,7 @@ class PageController extends Controller
 		}else $viewpath="SoftlogoCMSBundle:Page:page.html.twig";
 		return $this->render($viewpath, array(
 			'page'      => $page,
+			'title'      => $page->getTitle(),
 			'menu'      => $menu,
 		));
 	}

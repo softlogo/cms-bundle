@@ -2,6 +2,10 @@ home:
     pattern:  /
     defaults: { _controller: "SoftlogoCMSBundle:Page:show" }
 
+SoftlogoCMSBundle_sitemap:
+    defaults: { _controller: "SoftlogoCMSBundle:Sitemap:index" }
+    pattern:  /sitemap.xml
+
 form:
     pattern: /form
     defaults: { _controller: SoftlogoCMSBundle:Contact:form }
