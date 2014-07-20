@@ -3,14 +3,9 @@ namespace Softlogo\CMSBundle\DataFixtures\ORM;
 
 use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
-/*
- *use Softlogo\CMSBundle\Entity\PageType;
- *use Softlogo\CMSBundle\Entity\SubpageType;
- *use Softlogo\CMSBundle\Entity\ArticleType;
- *use Softlogo\CMSBundle\Entity\Language;
- *use Softlogo\CMSBundle\Entity\User;
- */
+use Softlogo\CMSBundle\Entity\Language;
 use Softlogo\CMSBundle\Entity\Page;
+use Softlogo\CMSBundle\Entity\Article;
 use Softlogo\CMSBundle\Entity\Section;
 use Softlogo\CMSBundle\Entity\PageSection;
 
@@ -19,45 +14,35 @@ class PopulateDatabase implements FixtureInterface
 	/*
 	 * {@inheritDoc}
 	 */
-	public function load(ObjectManager $em)
+	public function load(ObjectManager $manager)
 	{
 
-		$pss=$em->getRepository('SoftlogoCMSBundle:PageSection')->findAll();
-		foreach($pss as $ps){
-			echo $ps->getSection()->getType();
-		}
 
-		//$menu = $this->getRepository()->findBy(array('isMenu'=>true), array('itemorder' => 'ASC'));
+		$langPl = new Language();
+		$langPl->setName("polski");
+		$langPl->setAbbr("pl");
+		$manager->persist($langPl);
+		
+		$langEn = new Language();
+		$langEn->setName("English");
+		$langEn->setAbbr("en");
+		$manager->persist($langEn);
 
+
+		$intro=new Article();
+		$intro->setLanguage($langPl);
+		$intro->setContent("To jest automatycznie wygenerowany artykuł");
+		$manager->persist($intro);
+
+		
+		
+		$homePl = new Page();
+		$homePl->setTitle("Strona główna");
+		$homePl->setAnchor("home");
+		$homePl->addArticle($intro);
+		$manager->persist($homePl);
+		
 		/*
-		 *$standardPage = new PageType();
-		 *$standardPage->setName("Standard");
-         *$manager->persist($standardPage);
-		 *
-		 *$standardSubpage = new SubpageType();
-		 *$standardSubpage->setName("Standard");
-         *$manager->persist($standardSubpage);
-		 *
-		 *$standardArticle = new ArticleType();
-		 *$standardArticle->setName("Standard");
-         *$manager->persist($standardArticle);
-		 *
-		 *$langPl = new Language();
-		 *$langPl->setName("polski");
-		 *$langPl->setAbbr("pl");
-		 *$manager->persist($langPl);
-		 *
-		 *$langEn = new Language();
-		 *$langEn->setName("English");
-		 *$langEn->setAbbr("en");
-		 *$manager->persist($langEn);
-		 *
-		 *$homePl = new Page();
-		 *$homePl->setTitle("Strona główna");
-		 *$homePl->setAnchor("home");
-		 *$homePl->setLanguage($langPl);
-		 *$manager->persist($homePl);
-		 *
 		 *$homeEn = new Page();
 		 *$homeEn->setTitle("Home page");
 		 *$homeEn->setAnchor("home");
@@ -65,7 +50,7 @@ class PopulateDatabase implements FixtureInterface
 		 *$manager->persist($homeEn);
 		 */
 		
-		$em->flush();
+		$manager->flush();
 	}
 
     /**
