@@ -303,10 +303,9 @@ class PageSection
     /**
      * Set offset
      *
-     * @param \Softlogo\CMSBundle\Entity\Offset $offset
-     * @return PageSection
+     * @return string
      */
-    public function setOffset(\Softlogo\CMSBundle\Entity\Offset $offset = null)
+    public function setOffset($offset)
     {
         $this->offset = $offset;
 
@@ -316,7 +315,7 @@ class PageSection
     /**
      * Get offset
      *
-     * @return \Softlogo\CMSBundle\Entity\Offset 
+     * @return string 
      */
     public function getOffset()
     {
