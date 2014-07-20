@@ -57,7 +57,7 @@ class SectionAdmin extends Admin
 	{
 		$datagridMapper
 			->add('parent')
-			->add('sectionType')
+			->add('type')
 			->add('isMainSection')
 			//->add('parent.isPage')
 			;
@@ -69,7 +69,7 @@ class SectionAdmin extends Admin
 			->addIdentifier('title')
 			->add('parent')
 			->add('itemorder')
-			->add('sectionType')
+			->add('type')
 			->add('sections')
 			->add('isMainSection')
 			;

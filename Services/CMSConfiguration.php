@@ -49,6 +49,14 @@ class CMSConfiguration
 	{
 		return $view=$this->confArray['article_types'][$type];
 	}
+	public function getWrapperValue($type)
+	{
+		return $view=$this->confArray['wrapper_types'][$type];
+	}
+	public function getOffsetValue($type)
+	{
+		return $view=$this->confArray['offset_types'][$type];
+	}
 	public function getKeys($dictionary)
 	{
 		$lista=$this->confArray[$dictionary];

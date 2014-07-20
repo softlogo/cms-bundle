@@ -68,9 +68,9 @@ class SectionMedia
     private $createdAt;
 
     /**
-     * @var \Softlogo\CMSBundle\Entity\Media
+     * @var \Application\Sonata\MediaBundle\Entity\Media
      *
-     * @ORM\ManyToOne(targetEntity="\Softlogo\CMSBundle\Entity\Media")
+     * @ORM\ManyToOne(targetEntity="\Application\Sonata\MediaBundle\Entity\Media")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="media_id", referencedColumnName="id")
      * })
@@ -194,10 +194,10 @@ class SectionMedia
     /**
      * Set media
      *
-     * @param \Softlogo\CMSBundle\Entity\Media $media
+     * @param \Application\Sonata\MediaBundle\Entity\Media $media
      * @return SectionMedia
      */
-    public function setMedia(\Softlogo\CMSBundle\Entity\Media $media = null)
+    public function setMedia(\Application\Sonata\MediaBundle\Entity\Media $media = null)
     {
         $this->media = $media;
 
@@ -207,7 +207,7 @@ class SectionMedia
     /**
      * Get media
      *
-     * @return \Softlogo\CMSBundle\Entity\Media 
+     * @return \Application\Sonata\MediaBundle\Entity\Media 
      */
     public function getMedia()
     {

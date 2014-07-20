@@ -32,3 +32,9 @@ softlogo_cms:
   article_types:
     main: main
     slave: slave
+  wrapper_types:
+    col-md-12: col-md-12
+    col-md-6: col-md-6
+  offset_types:
+    col-md-offset-1: col-md-offset-1
+    col-md-offset-2: col-md-offset-2

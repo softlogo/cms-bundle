@@ -38,6 +38,12 @@ class Configuration implements ConfigurationInterface
 				->arrayNode('article_types')
 					->prototype('scalar')->end()
 				->end()
+				->arrayNode('wrapper_types')
+					->prototype('scalar')->end()
+				->end()
+				->arrayNode('offset_types')
+					->prototype('scalar')->end()
+				->end()
 			->end()
 		->end()
 		;

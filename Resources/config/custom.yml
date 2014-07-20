@@ -2,12 +2,12 @@
 sonata_admin:
     title: CMS Admin
     templates:
-        short_object_description: ApplicationSonataMediaBundle::short-object-description.html.twig
+        short_object_description: SoftlogoCMSBundle:Sonata:short-object-description.html.twig
         #layout:  SonataAdminBundle::layout.html.twig
 sonata_media:
-    # if you don't use default namespace configuration
+     #if you don't use default namespace configuration
     #class:
-    #    media: MyVendor\MediaBundle\Entity\Media
+        #media: Softlogo\CMSBundle\Entity\Media
     #    gallery: MyVendor\MediaBundle\Entity\Gallery
     #    gallery_has_media: MyVendor\MediaBundle\Entity\GalleryHasMedia
     default_context: default

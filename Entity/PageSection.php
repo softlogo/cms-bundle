@@ -80,17 +80,19 @@ class PageSection
 	private $itemorder;
 
 	/**
-	 * @var \Wrapper
+	 * @var string
 	 *
-	 * @ORM\ManyToOne(targetEntity="Wrapper")
+	 * @ORM\Column(name="wrapper", type="string", nullable=true)
 	 */
+
 	private $wrapper;
 
 	/**
-	 * @var \Offset
+	 * @var string
 	 *
-	 * @ORM\ManyToOne(targetEntity="Offset")
+	 * @ORM\Column(name="offset", type="string", nullable=true)
 	 */
+
 	private $offset;
 
 	/**
