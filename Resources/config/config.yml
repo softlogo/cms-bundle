@@ -29,3 +29,6 @@ softlogo_cms:
     sections: Sections.html.twig
     content: Content.html.twig
     header: Standard.html.twig
+  article_types:
+    main: main
+    slave: slave

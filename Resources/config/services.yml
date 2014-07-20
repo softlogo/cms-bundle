@@ -71,6 +71,8 @@ services:
             - ~
         calls:
             - [ setTranslationDomain, [SoftlogoCMSBundle]]
+        properties:
+            conf: @cms_conf
     softlogo.cms.admin.section_media:
         class: Softlogo\CMSBundle\Admin\SectionMediaAdmin
         tags:

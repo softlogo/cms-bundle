@@ -35,6 +35,9 @@ class Configuration implements ConfigurationInterface
 				->arrayNode('menu_types')
 					->prototype('scalar')->end()
 				->end()
+				->arrayNode('article_types')
+					->prototype('scalar')->end()
+				->end()
 			->end()
 		->end()
 		;

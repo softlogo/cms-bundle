@@ -7,6 +7,7 @@ use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 class ArticleAdmin extends Admin
 {
+	public $conf;
 
 	// Fields to be shown on create/edit forms
 	protected function configureFormFields(FormMapper $formMapper)
@@ -14,7 +15,7 @@ class ArticleAdmin extends Admin
 		$formMapper
 			->add('title', 'text', array('label' => 'Title'))
 			->add('abstract', null, array('label' => 'Abstract'))
-			->add('type', null, array('label'=>'Type'))
+			->add('type', 'choice', array('multiple'=>false, 'choices'=>$this->conf->getKeys('article_types')))
 			->add('itemorder', null, array('label'=>'Itemorder'))
 			->add('content', 'ckeditor', array('label' => 'Content'))
 			/*

@@ -45,6 +45,10 @@ class CMSConfiguration
 	{
 		return $view=$this->confArray['menu_types'][$type];
 	}
+	public function getArticleValue($type)
+	{
+		return $view=$this->confArray['article_types'][$type];
+	}
 	public function getKeys($dictionary)
 	{
 		$lista=$this->confArray[$dictionary];
