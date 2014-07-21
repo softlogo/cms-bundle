@@ -28,6 +28,13 @@ class Article extends AbstractSection
     /**
      * @var string
      *
+     * @ORM\Column(name="description", type="text", nullable=true)
+     */
+    private $description;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(name="content", type="text", nullable=true)
      */
     private $content;
@@ -242,4 +249,27 @@ class Article extends AbstractSection
     }
 
 
+
+    /**
+     * Set description
+     *
+     * @param string $description
+     * @return Article
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
+    /**
+     * Get description
+     *
+     * @return string 
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
 }

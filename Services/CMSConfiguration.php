@@ -14,6 +14,7 @@ class CMSConfiguration
 		 *Łączę dwa pliki konfiguracyjne. Robię merge iteracyjnie.
 		 */
 		$cmsConfig = Yaml::parse($cmsConfigPath);
+		//$cmsConfig: "%kernel.root_dir%/../vendor/softlogo/cmsbundle/Softlogo/CMSBundle/Resources/config/config.yml"
 		$root="softlogo_cms";
 		if($customConfigPath){
 			$customConfig = Yaml::parse($customConfigPath);

@@ -14,8 +14,9 @@ class ArticleAdmin extends Admin
 	{
 		$formMapper
 			->add('title', 'text', array('label' => 'Title'))
-			->add('abstract', null, array('label' => 'Abstract'))
-			->add('type', 'choice', array('multiple'=>false, 'choices'=>$this->conf->getKeys('article_types')))
+			->add('description', 'text', array('label' => 'Description'))
+			//->add('abstract', null, array('label' => 'Abstract'))
+			//->add('type', 'choice', array('multiple'=>false, 'choices'=>$this->conf->getKeys('article_types')))
 			->add('itemorder', null, array('label'=>'Itemorder'))
 			->add('content', 'ckeditor', array('label' => 'Content'))
 			/*

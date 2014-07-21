@@ -30,11 +30,35 @@ softlogo_cms:
     content: Content.html.twig
     header: Standard.html.twig
   article_types:
-    main: main
-    slave: slave
+    Główny-Artykuł: main
+    Portfolio-Opis: more
+    Portfolio-zakres-prac: pencil
+    Portfolio-technologia: wrench
+    Portfolio-strona-internetowa: home
+    Offer-Strony-internetowe: desktop
+    Offer-Sklepy-internetowe: shopping-cart
+    Offer-Identyfikacja-wizualna: briefcase
+    Offer-Pozycjonowanie: signal
+    Offer-Aplikacje-dedykowane: puzzle-piece
+    Offer-Strony-responsywne: tablet
+    Offer-systemy-rezerwacji: plane
+    Offer-CRM: cogs
+    Offer-Wyszukiwarki-internetowe: search
+    Offer-Audyt: check
+    Websites-Project: lemon
+    Websites-CMS: edit
+    Websites-HTML5/CSS3: html5
+    Websites-SEO: signal
+    Websites-Support: wrench
+    Websites-Responsibility: tablet
   wrapper_types:
-    col-md-12: col-md-12
-    col-md-6: col-md-6
+    col-lg-12: col-lg-12
+    col-lg-8: col-lg-8
+    col-lg-6: col-lg-6
+    col-lg-3: col-lg-3
+    col-lg-2: col-lg-2
   offset_types:
     col-md-offset-1: col-md-offset-1
     col-md-offset-2: col-md-offset-2
+    col-offset-3: col-md-offset-3
+    col-offset-4: col-md-offset-4

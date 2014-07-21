@@ -14,11 +14,11 @@ class PageSectionAdmin extends Admin
 	{
 		$formMapper
 			->add('section')
-			->add('type', 'choice', array('multiple'=>false, 'choices'=>$this->conf->getKeys('section_types')))
+			->add('type', 'choice', array('empty_value' => "brak",'multiple'=>false, 'choices'=>$this->conf->getKeys('section_types')))
 			->add('blockType', 'choice', array('multiple'=>false, 'choices'=>$this->conf->getKeys('block_types')))
 			->add('itemorder')
-			->add('wrapper', 'choice', array('multiple'=>false, 'choices'=>$this->conf->getKeys('wrapper_types')))
-			->add('offset', 'choice', array('multiple'=>false, 'choices'=>$this->conf->getKeys('offset_types')))
+			->add('wrapper', 'choice', array('empty_value' => "brak",'multiple'=>false, 'choices'=>$this->conf->getKeys('wrapper_types')))
+			->add('offset', 'choice', array('empty_value' => "brak",'multiple'=>false, 'choices'=>$this->conf->getKeys('offset_types')))
 			->add('anchor')
 			->add('class')
 

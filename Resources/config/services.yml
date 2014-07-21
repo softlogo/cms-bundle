@@ -76,7 +76,7 @@ services:
     softlogo.cms.admin.section_media:
         class: Softlogo\CMSBundle\Admin\SectionMediaAdmin
         tags:
-            - { name: sonata.admin, manager_type: orm, group: cms, label:SectionsMedia, show_in_dashboard: true }
+            - { name: sonata.admin, manager_type: orm, group: cms, label:SectionsMedia, show_in_dashboard: false }
         arguments:
             - ~
             - Softlogo\CMSBundle\Entity\SectionMedia
@@ -109,12 +109,6 @@ services:
         tags:
             - {name: sonata.admin, manager_type: orm, group: dictionary, label: Dictionary}
 
-    softlogo_cms.admin.article_type:
-        class: Softlogo\CMSBundle\Admin\DictionaryAdmin
-        arguments: [~, Softlogo\CMSBundle\Entity\ArticleType, SonataAdminBundle:CRUD]
-        tags:
-            - {name: sonata.admin, manager_type: orm, group: dictionary, label: ArticleType}
-
 
     softlogo_cms.admin.parameter:
         class: Softlogo\CMSBundle\Admin\DictionaryAdmin
@@ -123,34 +117,12 @@ services:
             - {name: sonata.admin, manager_type: orm, group: dictionary, label: Parameter}
 
 
-
-    softlogo_cms.admin.dictionary_type:
-        class: Softlogo\CMSBundle\Admin\DictionaryAdmin
-        arguments: [~, Softlogo\CMSBundle\Entity\DictionaryType, SonataAdminBundle:CRUD]
-        tags:
-            - {name: sonata.admin, manager_type: orm, group: dictionary, label: DictionaryType}
-
     softlogo_cms.admin.main_dictionary:
         class: Softlogo\CMSBundle\Admin\MainDictionaryAdmin
         arguments: [~, Softlogo\CMSBundle\Entity\MainDictionary, SonataAdminBundle:CRUD]
         tags:
             - {name: sonata.admin, manager_type: orm, group: admin, label: MainDictionary}
 
-    softlogo_cms.admin.wrapper:
-        class: Softlogo\CMSBundle\Admin\DictionaryAdmin
-        arguments: [~, Softlogo\CMSBundle\Entity\Wrapper, SonataAdminBundle:CRUD]
-        tags:
-            - {name: sonata.admin, manager_type: orm, group: dictionary, label: Wrapper}
-        properties:
-            conf: @cms_conf
-
-    softlogo_cms.admin.offset:
-        class: Softlogo\CMSBundle\Admin\DictionaryAdmin
-        arguments: [~, Softlogo\CMSBundle\Entity\Offset, SonataAdminBundle:CRUD]
-        tags:
-            - {name: sonata.admin, manager_type: orm, group: dictionary, label: Offset}
-        properties:
-            conf: @cms_conf
     softlogo_cms.admin.site:
         class: Softlogo\CMSBundle\Admin\DictionaryAdmin
         arguments: [~, Softlogo\CMSBundle\Entity\Site, SonataAdminBundle:CRUD]
