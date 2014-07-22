@@ -11,7 +11,7 @@ class PageController extends Controller
 		$em = $this->getDoctrine()->getManager();
 		return $em->getRepository('SoftlogoCMSBundle:Page');
 	}
-	public function showAction($anchor)
+	public function showAction($anchor="home")
 	{
 		$conf=$this->get('cms_conf');
 
