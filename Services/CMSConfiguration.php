@@ -25,10 +25,14 @@ class CMSConfiguration
 			}
 		}
 		else $config=$cmsConfig;
-		//print_r($config);
-		$processor = new Processor;
-		$configuration = new Configuration;
-		$this->confArray = $processor->processConfiguration($configuration, $config);
+		/*
+		 *$processor = new Processor;
+		 *$configuration = new Configuration;
+		 *$this->confArray = $processor->processConfiguration($configuration, $config);
+		 *print_r($this->confArray);
+		 */
+		$this->confArray=$config["softlogo_cms"];
+		
 	}
 	public function getSectionView($type)
 	{
