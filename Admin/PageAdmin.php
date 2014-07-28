@@ -55,10 +55,12 @@ class PageAdmin extends Admin
 		//$conf=$this->container->get('cms_conf');
 		$nested = is_numeric($formMapper->getFormBuilder()->getForm()->getName());
 		$formMapper
-			->add('title', 'text', array('label' => 'Page Title'))
-			->add('subtitle')
+			->add('name')
 			->add('itemorder', 'text', array('label' => 'Item Order'))
 			->add('anchor', 'text', array('label' => 'Anchor'))
+			->add('title', 'text', array('label' => 'Page Title'))
+			->add('description', 'text', array('label' => 'Page Description'))
+			->add('keywords', 'text', array('label' => 'Page Keywords'))
 			->add('type', 'choice', array('multiple'=>false, 'choices'=>$this->conf->getKeys('page_types')));
 		if(!$nested){
 		
@@ -88,6 +90,7 @@ class PageAdmin extends Admin
 	protected function configureListFields(ListMapper $listMapper)
 	{
 		$listMapper
+			->add('name')
 			->addIdentifier('fulltitle')
 			->add('page.fulltitle')
 			->add('pages')

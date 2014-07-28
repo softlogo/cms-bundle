@@ -40,6 +40,20 @@ class Page extends AbstractSection
 	*/
 	private $priority;
 
+	/**
+	 * @var string
+	 *
+	 * @ORM\Column(name="description", type="string", length=255, nullable=true)
+	 */
+	private $description;
+
+	/**
+	 * @var string
+	 *
+	 * @ORM\Column(name="keywords", type="string", length=255, nullable=true)
+	 */
+	private $keywords;
+
 
 	/**
 	 * @ORM\OneToMany(targetEntity="PageSection", mappedBy="page", cascade="persist", orphanRemoval=true)
@@ -271,5 +285,51 @@ class Page extends AbstractSection
     public function getPriority()
     {
         return $this->priority;
+    }
+
+    /**
+     * Set description
+     *
+     * @param string $description
+     * @return Page
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
+    /**
+     * Get description
+     *
+     * @return string 
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * Set keywords
+     *
+     * @param string $keywords
+     * @return Page
+     */
+    public function setKeywords($keywords)
+    {
+        $this->keywords = $keywords;
+
+        return $this;
+    }
+
+    /**
+     * Get keywords
+     *
+     * @return string 
+     */
+    public function getKeywords()
+    {
+        return $this->keywords;
     }
 }
