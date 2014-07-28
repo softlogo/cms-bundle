@@ -274,7 +274,7 @@ class PageSection
      */
     public function getWrapper()
     {
-        return $this->wrapper;
+        return str_replace('_','-',$this->wrapper);
     }
 
     /**
@@ -319,7 +319,7 @@ class PageSection
      */
     public function getOffset()
     {
-        return $this->offset;
+        return str_replace('_','-',$this->offset);
     }
 
     /**
