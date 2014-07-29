@@ -10,7 +10,7 @@ class SitemapController extends Controller
 {
 	public function indexAction()
 	{
-		$em = $this->getDoctrine()->getEntityManager();
+		$em = $this->getDoctrine()->getManager();
 
 		$urls = array();
 		$hostname = $this->getRequest()->getHost();
