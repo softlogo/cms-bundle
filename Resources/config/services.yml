@@ -2,7 +2,11 @@ parameters:
     softlogo_cms_language.class: Softlogo\CMSBundle\Controller\LanguageController
     cms_configpath: "%kernel.root_dir%/../vendor/softlogo/cmsbundle/Softlogo/CMSBundle/Resources/config/config.yml"
     custom_configpath: ""
+    softlogo.controller.section.class: Softlogo\CMSBundle\Controller\SectionController
 services:
+    softlogo.section.controller:
+        class:     "%softlogo.controller.section.class%"
+        arguments: [@cms_conf, @doctrine.orm.entity_manager, @templating]
     foo.twig.extension:
         class: Softlogo\CMSBundle\Extension\MyTwigExtension
         tags:
@@ -128,3 +132,9 @@ services:
         arguments: [~, Softlogo\CMSBundle\Entity\Site, SonataAdminBundle:CRUD]
         tags:
             - {name: sonata.admin, manager_type: orm, group: dictionary, label: Site}
+
+    softlogo_cms.admin.section_section:
+        class: Softlogo\CMSBundle\Admin\SectionSectionAdmin
+        arguments: [~, Softlogo\CMSBundle\Entity\SectionSection, SonataAdminBundle:CRUD]
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: admin, label: SectionSection}
