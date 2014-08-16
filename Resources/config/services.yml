@@ -3,6 +3,7 @@ parameters:
     cms_configpath: "%kernel.root_dir%/../vendor/softlogo/cmsbundle/Softlogo/CMSBundle/Resources/config/config.yml"
     custom_configpath: ""
     softlogo.controller.section.class: Softlogo\CMSBundle\Controller\SectionController
+    cms.section.offset: 6
 services:
     softlogo.section.controller:
         class:     "%softlogo.controller.section.class%"
@@ -34,7 +35,11 @@ services:
         class: Softlogo\CMSBundle\Extension\TwigCMS
         tags:
             - { name: 'twig.extension' }
-        arguments : [ @service_container, @doctrine.orm.entity_manager ]
+        arguments : [ @service_container, @doctrine.orm.entity_manager, @cms.section.pager ]
+
+    cms.section.pager:
+        class: Softlogo\CMSBundle\Util\SectionCollectionPager
+        arguments : [ 3 ]
             
 
     cms_conf:

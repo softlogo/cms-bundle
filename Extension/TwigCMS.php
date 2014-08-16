@@ -9,17 +9,19 @@ class TwigCMS extends \Twig_Extension{
 
 	protected $container;
 	protected $page;
+	protected $sectionPager;
 
 	/**
 	 * Constructor.
 	 *
 	 * @param ContainerInterface $container
 	 */
-	public function __construct($container, $em)
+	public function __construct($container, $em, $sectionPager)
 	{
 		$this->container = $container;
 		$this->em = $em;
 		$this->page=$this->getPage();
+		$this->sectionPager=$sectionPager;
 	}
 
 	public function getName()
@@ -49,7 +51,10 @@ class TwigCMS extends \Twig_Extension{
 	public function getSection($parameters = array())
 	{
 		if(isset($parameters['entity'])){
-			$entity=$parameters['entity'];
+			$entityOryg=$parameters['entity'];
+			$this->sectionPager->setSection($entityOryg);
+			$entity=$this->sectionPager->getSectionsPage(1);
+
 			$entityTitle=$entity->getTitle();
 			//$entityType=$entity->getSectionType()->__toString();
 			$entityType=$entity->getType();

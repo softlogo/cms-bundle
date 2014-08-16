@@ -28,6 +28,13 @@ class Section extends AbstractSection
      */
     private $sectionSections;
 
+	/**
+	 * @var \Section
+	 *
+	 * @ORM\OneToMany(targetEntity="Section", mappedBy="parent",cascade={"all"}, orphanRemoval=true)
+	 * @ORM\OrderBy({"itemorder" = "ASC"})
+	 */
+	private $sections;
 
 	/**
 	 * @var \Article
@@ -51,9 +58,6 @@ class Section extends AbstractSection
 		$this->articles = new \Doctrine\Common\Collections\ArrayCollection();
 		$this->isPage=0;
 		$this->isMainSection=1;
-	}
-	public function clearSections(){
-		$this->sectionSections->clear();
 	}
 
 	/**
@@ -88,11 +92,7 @@ class Section extends AbstractSection
 	 */
 	public function getSections()
 	{
-		$sections = new \Doctrine\Common\Collections\ArrayCollection();
-		foreach ($this->sectionSections as $sSections){
-			$sections->add($sSections->getChild());
-		}
-		return $sections;
+		return $this->sections;
 	}
 
 	/**
@@ -236,38 +236,4 @@ class Section extends AbstractSection
 	}
 
 
-
-    /**
-     * Add sectionSections
-     *
-     * @param \Softlogo\CMSBundle\Entity\SectionSection $sectionSections
-     * @return Section
-     */
-    public function addSectionSection(\Softlogo\CMSBundle\Entity\SectionSection $sectionSections)
-    {
-	$sectionSections->setParent($this);    
-        $this->sectionSections[] = $sectionSections;
-
-        return $this;
-    }
-
-    /**
-     * Remove sectionSections
-     *
-     * @param \Softlogo\CMSBundle\Entity\SectionSection $sectionSections
-     */
-    public function removeSectionSection(\Softlogo\CMSBundle\Entity\SectionSection $sectionSections)
-    {
-        $this->sectionSections->removeElement($sectionSections);
-    }
-
-    /**
-     * Get sectionSections
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getSectionSections()
-    {
-        return $this->sectionSections;
-    }
 }

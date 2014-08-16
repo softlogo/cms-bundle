@@ -6,10 +6,6 @@ SoftlogoCMSBundle_sitemap:
     defaults: { _controller: "SoftlogoCMSBundle:Sitemap:index" }
     pattern:  /sitemap.xml
 
-SoftlogoCMSBundle_section:
-    resource: "@SoftlogoCMSBundle/Resources/config/routing/section.yml"
-    prefix:   /section
-
 form:
     pattern: /form
     defaults: { _controller: SoftlogoCMSBundle:Contact:form }
@@ -18,11 +14,20 @@ form-informacja:
     pattern: /form-informacja
     defaults: { _controller: SoftlogoCMSBundle:Contact:informacja}
 
-page:
+cms_page:
     pattern:  /{anchor}
-    defaults: { _controller: "SoftlogoCMSBundle:Page:show" }
+    defaults: { _controller: SoftlogoCMSBundle:Page:show }
 
+cms_section_paging:
+    path:     /section/{id}
+    defaults: { _controller: SoftlogoCMSBundle:Section:paging }
 
-show:
+cms_section_paging_number:
+    path:     /section/{id}/page/{pageNumber}
+    defaults: { _controller: SoftlogoCMSBundle:Section:paging }
+
+cms_section_show:
     path:     /section/{id}/show
     defaults: { _controller: SoftlogoCMSBundle:Section:show }
+
+
