@@ -68,7 +68,7 @@ services:
     softlogo.cms.admin.article:
         class: Softlogo\CMSBundle\Admin\ArticleAdmin
         tags:
-            - { name: sonata.admin, manager_type: orm, group: cms, label:Articles, show_in_dashboard: true }
+            - { name: sonata.admin, manager_type: orm, group: cms, label:Articles, show_in_dashboard: false }
         arguments:
             - ~
             - Softlogo\CMSBundle\Entity\Article
@@ -111,7 +111,7 @@ services:
         class: Softlogo\CMSBundle\Admin\DictionaryAdmin
         arguments: [~, Softlogo\CMSBundle\Entity\Dictionary, SonataAdminBundle:CRUD]
         tags:
-            - {name: sonata.admin, manager_type: orm, group: dictionary, label: Dictionary}
+            - {name: sonata.admin, manager_type: orm, group: dictionary, label: Dictionary, show_in_dashboard: false }
 
 
     softlogo_cms.admin.parameter:
@@ -125,7 +125,7 @@ services:
         class: Softlogo\CMSBundle\Admin\MainDictionaryAdmin
         arguments: [~, Softlogo\CMSBundle\Entity\MainDictionary, SonataAdminBundle:CRUD]
         tags:
-            - {name: sonata.admin, manager_type: orm, group: admin, label: MainDictionary}
+            - {name: sonata.admin, manager_type: orm, group: admin, label: MainDictionary, show_in_dashboard: false }
 
     softlogo_cms.admin.site:
         class: Softlogo\CMSBundle\Admin\DictionaryAdmin
@@ -137,4 +137,4 @@ services:
         class: Softlogo\CMSBundle\Admin\SectionSectionAdmin
         arguments: [~, Softlogo\CMSBundle\Entity\SectionSection, SonataAdminBundle:CRUD]
         tags:
-            - {name: sonata.admin, manager_type: orm, group: admin, label: SectionSection}
+            - {name: sonata.admin, manager_type: orm, group: admin, label: SectionSection, show_in_dashboard: false }
