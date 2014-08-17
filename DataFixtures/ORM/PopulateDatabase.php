@@ -39,7 +39,7 @@ class PopulateDatabase implements FixtureInterface
 		$homePl = new Page();
 		$homePl->setTitle("Strona główna");
 		$homePl->setAnchor("home");
-		$homePl->setPriority(1);
+		$homePl->setPriority(0.9);
 		$homePl->addArticle($intro);
 		$manager->persist($homePl);
 		
