@@ -17,12 +17,17 @@ class SitemapController extends Controller
 
 		// add some urls homepage
 		$urls[] = array('loc' => $this->get('router')->generate('home'), 'changefreq' => 'weekly', 'priority' => '1.0');
+		$urls[] = array('loc' => $this->get('router')->generate('cms_strony_internetowe'), 'changefreq' => 'weekly', 'priority' => '1.0');
 
 		// pages
 		foreach ($em->getRepository('SoftlogoCMSBundle:Page')->findAll() as $page) 
 		{
 			if($page->getIsActive()){
-				$urls[] = array('loc' => $this->get('router')->generate('page_show', array('anchor' => $page->getAnchor())), 'priority' => $page->getPriority());
+				if($page->getSite()=="main"){
+					$urls[] = array('loc' => $this->get('router')->generate('cms_page', array('anchor' => $page->getAnchor())), 'priority' => $page->getPriority());
+				}else{
+					$urls[] = array('loc' => $this->get('router')->generate('cms_site_page', array('site' => $page->getSite(), 'anchor' => $page->getAnchor())), 'priority' => $page->getPriority());
+				}
 			}
 		}
 

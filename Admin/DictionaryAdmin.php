@@ -62,7 +62,9 @@ class DictionaryAdmin extends Admin
 		$formMapper
 			->add('name');
 		if(!$nested){
-			$formMapper->add('description');
+			$formMapper
+			->add('description')
+			->add('isMain');
 		}
 		$formMapper
 			->add('value')

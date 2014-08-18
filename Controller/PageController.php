@@ -11,7 +11,7 @@ class PageController extends Controller
 		$em = $this->getDoctrine()->getManager();
 		return $em->getRepository('SoftlogoCMSBundle:Page');
 	}
-	public function showAction($anchor="home")
+	public function showAction($anchor="home",$site="main")
 	{
 		$conf=$this->get('cms_conf');
 
@@ -31,6 +31,7 @@ class PageController extends Controller
 			$viewpath="SoftlogoCMSBundle:Page:$view";
 		}else $viewpath="SoftlogoCMSBundle:Page:page.html.twig";
 		return $this->render($viewpath, array(
+			'site'      => $site,
 			'page'      => $page,
 			'title'      => $page->getTitle(),
 			'menu'      => $menu,

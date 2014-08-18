@@ -36,7 +36,7 @@ class Page extends AbstractSection
 	private $isActive;
 
 	/**
-	* @ORM\Column(type="decimal", precision=1, scale=1, options={"default":0.5})
+	* @ORM\Column(type="decimal", precision=2, scale=1, options={"default":0.5})
 	*/
 	private $priority;
 
