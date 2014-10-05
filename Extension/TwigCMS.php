@@ -42,9 +42,18 @@ class TwigCMS extends \Twig_Extension{
 	{
 		return array(
 			'render_section' => new \Twig_Function_Method($this, 'getSection' ,array('is_safe' => array('html'))),
+			'render_section_by_name' => new \Twig_Function_Method($this, 'getSectionByName' ,array('is_safe' => array('html'))),
 			'render_block' => new \Twig_Function_Method($this, 'getBlock' ,array('is_safe' => array('html'))),
 			'render_menu' => new \Twig_Function_Method($this, 'getMenu' ,array('is_safe' => array('html'))),
 		);
+	}
+	public function getSectionByName($parameters = array())
+	{
+		$entity= $this->em->getRepository('SoftlogoCMSBundle:Section')->findOneBy(array('title'=>$parameters['name']));
+		$entityType=$entity->getType();
+		$parameters['entity'] =$entity;
+		$parameters['type']= $entityType;
+		return $this->container->get('softlogo.CMSHelper')->section($parameters);
 	}
 
 
