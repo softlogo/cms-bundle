@@ -10,7 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Entity(repositoryClass="Softlogo\CMSBundle\Repository\DictionaryRepository")
  * @ORM\InheritanceType("SINGLE_TABLE")
  * @ORM\DiscriminatorColumn(name="discr", type="string")
- * @ORM\DiscriminatorMap({"parameter" = "Parameter", "dictionary" = "Dictionary", "dictionaryType" = "DictionaryType", "site" = "Site"})
+ * @ORM\DiscriminatorMap({"parameter" = "Parameter", "dictionary" = "Dictionary", "site" = "Site"})
  */
 class Dictionary
 {

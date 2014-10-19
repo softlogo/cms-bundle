@@ -23,7 +23,7 @@ class Section extends AbstractSection
 	private $sectionMedias;
 
 	/**
-	 * @ORM\OneToMany(targetEntity="SectionSection", mappedBy="parent", cascade="persist", orphanRemoval=true)
+	 * @ORM\OneToMany(targetEntity="SectionSection", mappedBy="parent", cascade="all", orphanRemoval=true)
 	 * @ORM\OrderBy({"itemorder" = "ASC"})
      */
     private $sectionSections;
@@ -93,6 +93,17 @@ class Section extends AbstractSection
 			$sections->add($sSections->getChild());
 		}
 		return $sections;
+	}
+
+	public function sectionsCount()
+	{
+		$i=0;
+		$sections = new \Doctrine\Common\Collections\ArrayCollection();
+		foreach ($this->sectionSections as $sSections){
+			//$sections->add($sSections->getChild());
+			$i++;
+		}
+		return $i;
 	}
 
 	/**

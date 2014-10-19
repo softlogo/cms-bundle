@@ -36,6 +36,7 @@ class SectionAdmin extends Admin
 			->add('title', 'text', array('label' => 'Title'))
 			->add('itemorder', 'text', array('label' => 'Item Order'))
 			->add('type', 'choice', array('multiple'=>false, 'choices'=>$this->conf->getKeys('section_types')))
+			->end()
 			;
 
 
@@ -44,10 +45,14 @@ class SectionAdmin extends Admin
 			$formMapper
 				->with('Media')
 				->add('sectionMedias', 'sonata_type_collection', array('label' => 'Media', 'required' => false, 'by_reference' => false), array('edit' => 'inline','inline' => 'table'))
+			->end()
 				->add('articles', 'sonata_type_collection', array('label' => 'Articles', 'required' => false, 'by_reference' => false), array('edit' => 'inline','inline' => 'standard'))
+			->end()
 				->with('Sekcje')
 				->add('sectionSections', 'sonata_type_collection', array('label' => 'Sekcje', 'required' => false, 'by_reference' => false), array('edit' => 'inline','inline' => 'table'))
+			->end()
 				->add('sectionParameters', 'sonata_type_collection', array('label' => 'Parameters', 'required' => false, 'by_reference' => false), array('edit' => 'inline','inline' => 'table',))
+			->end()
 				; 
 
 		}
