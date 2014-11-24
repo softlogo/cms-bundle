@@ -3,6 +3,8 @@
 namespace Softlogo\CMSBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Softlogo\CMSBundle\Entity\Contact;
+use Symfony\Component\HttpFoundation\Request;
 
 class PageController extends Controller
 {
@@ -11,7 +13,7 @@ class PageController extends Controller
 		$em = $this->getDoctrine()->getManager();
 		return $em->getRepository('SoftlogoCMSBundle:Page');
 	}
-	public function showAction($anchor="home",$site="main")
+	public function showAction($anchor="home",$site="main", Request $request)
 	{
 		$conf=$this->get('cms_conf');
 
@@ -30,11 +32,29 @@ class PageController extends Controller
 		{
 			$viewpath="SoftlogoCMSBundle:Page:$view";
 		}else $viewpath="SoftlogoCMSBundle:Page:page.html.twig";
+
+
+		$contact=new Contact();
+		$contact->setNazwisko('Borys Jankiewicz');
+		$form=$this->createFormBuilder($contact)
+			->add('message',null,array('label'=>'Wiadomość'))
+			->add('email')
+			->add('save','submit',array('label'=>'Wyślij'))
+			->getForm();
+		$form->handleRequest($request);
+		if ($form->isValid()) {
+			$flash = $this->get('braincrafted_bootstrap.flash');
+			$flash->success('Formularz został wysłany.');
+			return $this->redirect($this->generateUrl('form-informacja'));
+		}
+
+
 		return $this->render($viewpath, array(
 			'site'      => $site,
 			'page'      => $page,
 			'title'      => $page->getTitle(),
 			'menu'      => $menu,
+			'form'      => $form->createView(),
 		));
 	}
 }

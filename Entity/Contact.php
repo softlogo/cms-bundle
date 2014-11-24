@@ -3,6 +3,7 @@
 namespace Softlogo\CMSBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Contact
@@ -39,6 +40,10 @@ class Contact
      * @var string
      *
      * @ORM\Column(name="email", type="string", length=255)
+     * @Assert\Email(
+     *     message = "To nie jest prawidłowy adres E-mail.",
+     *     checkMX = true
+     * )
      */
     private $email;
 
