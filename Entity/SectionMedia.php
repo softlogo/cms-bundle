@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * SectionMedia
  *
- * @ORM\Table(name="section_media", indexes={@ORM\Index(name="IDX_80D4C541EA9FDD75", columns={"media_id"}), @ORM\Index(name="fk_section_media_1_idx", columns={"section_id"})})
+ * @ORM\Table(name="section_media", indexes={@ORM\Index(columns={"media_id"}), @ORM\Index(columns={"section_id"})})
  * @ORM\Entity
  */
 class SectionMedia

@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Article
  *
- * @ORM\Table(name="article", indexes={@ORM\Index(name="IDX_23A0E66C4663E4", columns={"section_id"}), @ORM\Index(name="fk_article_1_idx", columns={"language_id"})})
+ * @ORM\Table(name="article", indexes={@ORM\Index(columns={"section_id"}), @ORM\Index(columns={"language_id"})})
  * @ORM\Entity
  */
 class Article extends AbstractSection
