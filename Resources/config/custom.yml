@@ -25,24 +25,6 @@ sonata_media:
                 medium: { width: 300 , quality: 90}
                 big:   { width: 600 , quality: 90}
                 large:   { width: 900 , quality: 90}
-        work:  
-            providers:
-                - sonata.media.provider.image
-
-            formats:
-                small: { width: 100 , quality: 96}
-                medium: { width: 300 , quality: 96}
-                big:   { width: 600 , quality: 96}
-                large:   { width: 1000 , quality: 96}
-        banner:  
-            providers:
-                - sonata.media.provider.image
-
-            formats:
-                small: { width: 100 , quality: 90}
-                medium: { width: 300 , quality: 90}
-                big:   { width: 1140 , quality: 90}
-                large:   { width: 1600 , quality: 90}
     providers:
         image:
             resizer: sonata.media.resizer.square
@@ -64,44 +46,6 @@ sonata_block:
         sonata.admin.block.admin_list:
             contexts:   [admin]
         # Your other blocks
-sonata_formatter:
-    formatters:
-        markdown:
-            service: sonata.formatter.text.markdown
-            extensions:
-                - sonata.formatter.twig.control_flow
-                - sonata.formatter.twig.gist
-        #        - sonata.media.formatter.twig #keep this commented unless you are using media bundle.
-
-
-        text:
-            service: sonata.formatter.text.text
-            extensions:
-                - sonata.formatter.twig.control_flow
-                - sonata.formatter.twig.gist
-        #        - sonata.media.formatter.twig
-
-
-        rawhtml:
-            service: sonata.formatter.text.raw
-            extensions:
-                - sonata.formatter.twig.control_flow
-                - sonata.formatter.twig.gist
-        #        - sonata.media.formatter.twig
-
-
-        richhtml:
-            service: sonata.formatter.text.raw
-            extensions:
-                - sonata.formatter.twig.control_flow
-                - sonata.formatter.twig.gist
-        #        - sonata.media.formatter.twig
-
-
-        twig:
-            service: sonata.formatter.text.twigengine
-            extensions: [] # Twig formatter cannot have extensions
-
 # Assetic Configuration
 assetic:
     debug:          "%kernel.debug%"

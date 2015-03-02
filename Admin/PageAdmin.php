@@ -6,6 +6,7 @@ use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
+use Sonata\AdminBundle\Show\ShowMapper;
 use Sonata\DoctrineORMAdminBundle\Datagrid\ProxyQuery; 
 class PageAdmin extends Admin
 {
@@ -99,6 +100,15 @@ class PageAdmin extends Admin
 			->addIdentifier('site.name')
 			;
 	}
+    protected function configureShowFields(ShowMapper $showMapper)
+    {
+        $showMapper
+
+            ->add('title')
+            ->add('articles')
+        ;
+
+    }
 	/*
 	 *public function getFormTheme()
 	 *{

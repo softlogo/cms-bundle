@@ -69,9 +69,9 @@ class DictionaryAdmin extends Admin
 		$formMapper
 			->add('value')
 			->add('itemorder')
-			->with('Options', array('collapsed' => false))
+			//->with('Options', array('collapsed' => false))
 			->add('dictionaries', 'sonata_type_collection', array('label' => 'Dictionaries', 'required' => false, 'by_reference' => false), array('edit' => 'inline','inline' => 'table',))
-			->end()
+			//->end()
 			;
 	}
 
