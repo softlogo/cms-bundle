@@ -1,6 +1,9 @@
-home:
-    pattern:  /
-    defaults: { _controller: "SoftlogoCMSBundle:Page:show" }
+softlogo_cms_routing:
+    resource: "@SoftlogoCMSBundle/Resources/config/routing/page.yml"
+    prefix:   /{_locale}/
+    defaults: { _locale: %locale% }
+    requirements:
+        _locale: en|pl|de|ru
 
 SoftlogoCMSBundle_sitemap:
     defaults: { _controller: "SoftlogoCMSBundle:Sitemap:index" }
@@ -14,17 +17,6 @@ form-informacja:
     pattern: /form-informacja
     defaults: { _controller: SoftlogoCMSBundle:Contact:informacja}
 
-cms_strony_internetowe:
-    pattern: /strony_internetowe
-    defaults: { _controller: SoftlogoCMSBundle:Page:show, site: "strony-internetowe", anchor: "strony-internetowe" }
-
-cms_page:
-    pattern:  /{anchor}
-    defaults: { _controller: SoftlogoCMSBundle:Page:show }
-
-cms_site_page:
-    pattern:  /{site}/{anchor}
-    defaults: { _controller: SoftlogoCMSBundle:Page:show }
 
 cms_section_paging:
     path:     /section/{id}
