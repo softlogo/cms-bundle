@@ -45,7 +45,9 @@ class ArticleAdmin extends Admin
 	protected function configureListFields(ListMapper $listMapper)
 	{
 		$listMapper
-			->addIdentifier('content')
+			->addIdentifier('title')
+			->addIdentifier('page.title',null, array('label' => 'Page'))
+			->addIdentifier('language.name',null, array('label' => 'Content'))
 			;
 	}
 
@@ -54,7 +56,7 @@ class ArticleAdmin extends Admin
         $showMapper
 
             ->add('title')
-            ->add('content')
+            ->add('content', null, array('safe' => true))
         ;
 
     }
