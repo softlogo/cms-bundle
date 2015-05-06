@@ -1,11 +1,11 @@
 {%for ps in collection%}
-<div class="{{ps.wrapper}} {{ps.offset}} {{ps.class}}">
+
+
 	{{ render_section({'entity':ps.section, 'type':ps.type}) }}
-</div>
 {%endfor%}
 {%if collection is empty%}
-<div class="col-lg-12">
+
+
 	{{ render_section({'type':'articles'}) }}
-</div>
 {%endif%}
 
