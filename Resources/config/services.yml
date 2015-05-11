@@ -5,6 +5,9 @@ parameters:
     softlogo.controller.section.class: Softlogo\CMSBundle\Controller\SectionController
     cms.section.offset: 6
 services:
+    mail_helper:
+        class: Softlogo\CMSBundle\Tools\MailHelper
+        arguments: ["@mailer", "@twig"]
     softlogo.section.controller:
         class:     "%softlogo.controller.section.class%"
         arguments: [@cms_conf, @doctrine.orm.entity_manager, @templating]
