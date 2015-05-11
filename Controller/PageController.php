@@ -15,6 +15,9 @@ class PageController extends Controller
 	}
 	public function showAction($anchor="home",$site="main", Request $request)
 	{
+		$from=$this->container->getParameter('mailer_from');
+		$to=$this->container->getParameter('mailer_to');
+
 		$conf=$this->get('cms_conf');
 
 		$menu = $this->getRepository()->findBy(array('isMenu'=>true), array('itemorder' => 'ASC'));
@@ -36,6 +39,7 @@ class PageController extends Controller
 
 		$contact=new Contact();
 		$contact->setNazwisko('Borys Jankiewicz');
+		$contact->setTitle('Formularz kontaktowy');
 		$form=$this->createFormBuilder($contact)
 			->add('message',null,array('label'=>'Wiadomość'))
 			->add('email')
@@ -43,9 +47,28 @@ class PageController extends Controller
 			->getForm();
 		$form->handleRequest($request);
 		if ($form->isValid()) {
+			$mailHelper = $this->container->get('mail_helper');
+			$mailHelper->sendEmail(
+				$from,
+				$to,
+				$contact->getTitle(),
+				"teścik"
+			);
+
+			$mailHelper->sendEmailWithView(
+				$from,
+				$to,
+				$contact->getTitle(),
+				"SoftlogoCMSBundle:Contact:contact.html.twig",
+				array(
+					"message"=>$contact->getMessage(),
+					"email"=>$contact->getEmail()
+				)
+			);
+
 			$flash = $this->get('braincrafted_bootstrap.flash');
 			$flash->success('Formularz został wysłany.');
-			return $this->redirect($this->generateUrl('form-informacja'));
+			//return $this->redirect($this->generateUrl('form-informacja'));
 		}
 
 
