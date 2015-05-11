@@ -48,13 +48,7 @@ class PageController extends Controller
 		$form->handleRequest($request);
 		if ($form->isValid()) {
 			$mailHelper = $this->container->get('mail_helper');
-			$mailHelper->sendEmail(
-				$from,
-				$to,
-				$contact->getTitle(),
-				"teścik"
-			);
-
+  
 			$mailHelper->sendEmailWithView(
 				$from,
 				$to,
