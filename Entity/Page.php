@@ -36,7 +36,7 @@ class Page extends AbstractSection
 	private $isActive;
 
 	/**
-	* @ORM\Column(type="decimal", precision=2, scale=1, options={"default":0.5})
+	* @ORM\Column(type="decimal", precision=2, scale=1, options={"default":0.5}, nullable=true)
 	*/
 	private $priority;
 
@@ -53,6 +53,14 @@ class Page extends AbstractSection
 	 * @ORM\Column(name="keywords", type="string", length=255, nullable=true)
 	 */
 	private $keywords;
+
+    /**
+     * @var \Application\Sonata\MediaBundle\Entity\Media
+     *
+     * @ORM\ManyToOne(targetEntity="\Application\Sonata\MediaBundle\Entity\Media")
+     */
+	private $media;
+
 
 
 	/**
@@ -331,5 +339,28 @@ class Page extends AbstractSection
     public function getKeywords()
     {
         return $this->keywords;
+    }
+
+    /**
+     * Set media
+     *
+     * @param \Application\Sonata\MediaBundle\Entity\Media $media
+     * @return Page
+     */
+    public function setMedia(\Application\Sonata\MediaBundle\Entity\Media $media = null)
+    {
+        $this->media = $media;
+
+        return $this;
+    }
+
+    /**
+     * Get media
+     *
+     * @return \Application\Sonata\MediaBundle\Entity\Media 
+     */
+    public function getMedia()
+    {
+        return $this->media;
     }
 }

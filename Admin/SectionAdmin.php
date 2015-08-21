@@ -45,14 +45,14 @@ class SectionAdmin extends Admin
 			$formMapper
 				->with('Media')
 				->add('sectionMedias', 'sonata_type_collection', array('label' => 'Media', 'required' => false, 'by_reference' => false), array('edit' => 'inline','inline' => 'table'))
-			->end()
+				->end()
 				->add('articles', 'sonata_type_collection', array('label' => 'Articles', 'required' => false, 'by_reference' => false), array('edit' => 'inline','inline' => 'standard'))
-			->end()
+				->end()
 				->with('Sekcje')
 				->add('sectionSections', 'sonata_type_collection', array('label' => 'Sekcje', 'required' => false, 'by_reference' => false), array('edit' => 'inline','inline' => 'table'))
-			->end()
+				->end()
 				->add('sectionParameters', 'sonata_type_collection', array('label' => 'Parameters', 'required' => false, 'by_reference' => false), array('edit' => 'inline','inline' => 'table',))
-			->end()
+				->end()
 				; 
 
 		}
@@ -75,9 +75,16 @@ class SectionAdmin extends Admin
 			->add('parent')
 			->add('itemorder')
 			->add('type')
-			->add('sections')
 			->add('isMainSection')
+			->add('_action', 'actions', array(
+				'actions' => array(
+					//'show' => array(),
+					'edit' => array(),
+				)
+			))
 			;
+
+		;
 		;
 	}
 	/*

@@ -10,10 +10,10 @@ sonata_media:
         #media: Softlogo\CMSBundle\Entity\Media
     #    gallery: MyVendor\MediaBundle\Entity\Gallery
     #    gallery_has_media: MyVendor\MediaBundle\Entity\GalleryHasMedia
-    default_context: default
+    default_context: Default
     db_driver: doctrine_orm # or doctrine_mongodb, doctrine_phpcr
     contexts:
-        default:  # the default context is mandatory
+        Default:  # the default context is mandatory
             providers:
                 - sonata.media.provider.dailymotion
                 - sonata.media.provider.youtube
@@ -22,9 +22,10 @@ sonata_media:
 
             formats:
                 small: { width: 100 , quality: 90}
-                medium: { width: 300 , quality: 90}
-                big:   { width: 600 , quality: 90}
-                large:   { width: 900 , quality: 90}
+                medium: { width: 400 , quality: 90}
+                big:   { width: 900 , quality: 90}
+                large:   { width: 1200 , quality: 80}
+                xlarge:   { width: 1600 , quality: 70}
     providers:
         image:
             resizer: sonata.media.resizer.square

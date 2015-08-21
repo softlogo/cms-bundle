@@ -15,21 +15,10 @@ class ArticleAdmin extends Admin
 	{
 		$formMapper
 			->add('title', 'text', array('label' => 'Title'))
-			->add('description', 'text', array('label' => 'Description'))
-			//->add('abstract', null, array('label' => 'Abstract'))
-			//->add('type', 'choice', array('multiple'=>false, 'choices'=>$this->conf->getKeys('article_types')))
+			->add('anchor', 'text', array('label' => 'Anchor'))
 			->add('itemorder', null, array('label'=>'Itemorder'))
 			->add('content', 'ckeditor', array('label' => 'Content'))
-			/*
-			 *->add('shortContent', 'sonata_formatter_type', array(
-			 *    'source_field'         => 'rawContent',
-			 *    'source_field_options' => array('attr' => array('class' => 'span10', 'rows' => 20)),
-			 *    'format_field'         => 'contentFormatter',
-			 *    'target_field'         => 'content',
-			 *    'ckeditor_context'     => 'default',
-			 *    'event_dispatcher'     => $formMapper->getFormBuilder()->getEventDispatcher()
-			 *))
-			 */
+			->add('media', 'sonata_type_model_list', array('required' => false), array())
 			->add('language')
 			; 
 

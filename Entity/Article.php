@@ -18,6 +18,7 @@ class Article extends AbstractSection
   }
 
 
+
     /**
      * @var string
      *
@@ -53,6 +54,13 @@ class Article extends AbstractSection
      * })
      */
     private $language;
+
+    /**
+     * @var \Application\Sonata\MediaBundle\Entity\Media
+     *
+     * @ORM\ManyToOne(targetEntity="\Application\Sonata\MediaBundle\Entity\Media")
+     */
+    private $media;
 
 
 
@@ -272,4 +280,28 @@ class Article extends AbstractSection
     {
         return $this->description;
     }
-}
+
+    /**
+     * Set media
+     *
+     * @param \Application\Sonata\MediaBundle\Entity\Media $media
+     * @return Article
+     */
+    public function setMedia(\Application\Sonata\MediaBundle\Entity\Media $media = null)
+    {
+        $this->media = $media;
+
+        return $this;
+    }
+
+    /**
+     * Get media
+     *
+     * @return \Application\Sonata\MediaBundle\Entity\Media 
+     */
+    public function getMedia()
+    {
+        return $this->media;
+    }
+
+    }
