@@ -4,6 +4,9 @@ parameters:
     custom_configpath: ""
     softlogo.controller.section.class: Softlogo\CMSBundle\Controller\SectionController
     cms.section.offset: 6
+
+    mailer_from: sklep@localhost
+    mailer_to: borysjank@gmail.com
 services:
     mail_helper:
         class: Softlogo\CMSBundle\Tools\MailHelper
