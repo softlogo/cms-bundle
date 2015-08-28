@@ -1,5 +1,5 @@
 {
-    "name" : "softlogo/cmsbundle",
+    "name" : "softlogo/cms-bundle",
     "description" : "CMS bundle",
     "type" : "symfony-bundle",
     "authors" : [{
