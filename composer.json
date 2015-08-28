@@ -1,36 +1,36 @@
 {
-    "name" : "softlogo/cms-bundle",
-    "description" : "CMS bundle",
-    "type" : "symfony-bundle",
-    "authors" : [{
-        "name" : "cms",
-        "email" : "borysjank@gmail.com"
-    }],
-    "keywords" : [
-        "cms bundle"
-    ],
-    "license" : [
-        "MIT"
-    ],
-    "require" : {
+	"name" : "softlogo/cms-bundle",
+	"description" : "CMS bundle",
+	"type" : "symfony-bundle",
+	"authors" : [{
+		"name" : "cms",
+		"email" : "borysjank@gmail.com"
+	}],
+	"keywords" : [
+		"cms bundle"
+	],
+	"license" : [
+		"MIT"
+	],
+	"require" : {
 
-    },
-    "autoload" : {
-        "psr-0" : {
-            "Softlogo\\CMSBundle" : ""
-        }
-    },
-    "target-dir" : "Softlogo/CMSBundle",
-    "repositories": [
-        {
-        
-        }
-    ],
-    "extra" : {
-    "branch-alias" : {
-            "dev-master" : "1.1-dev"
-        }
-    }
+	},
+	"autoload" : {
+		"psr-0" : {
+			"Softlogo\\CMSBundle" : ""
+		}
+	},
+	"target-dir" : "Softlogo/CMSBundle",
+	"repositories": [
+		{
+
+		}
+	],
+	"extra" : {
+		"branch-alias" : {
+			"dev-master" : "1.0-dev"
+		}
+	}
 }
 
 
