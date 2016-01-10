@@ -43,6 +43,13 @@ class Section extends AbstractSection
 	private $sectionParameters;
 
 	/**
+	 * @ORM\OneToMany(targetEntity="Softlogo\CMSBundle\Entity\Content", mappedBy="section", cascade="persist", orphanRemoval=true)
+	 *
+	 */
+	private $contents;
+
+
+	/**
 	 * Constructor
 	 */
 	public function __construct()
@@ -280,5 +287,40 @@ class Section extends AbstractSection
     public function getSectionSections()
     {
         return $this->sectionSections;
+    }
+
+    /**
+     * Add content
+     *
+     * @param \Softlogo\CMSBundle\Entity\Content $content
+     *
+     * @return Section
+     */
+    public function addContent(\Softlogo\CMSBundle\Entity\Content $content)
+    {
+		$content->setSection($this);
+        $this->contents[] = $content;
+
+        return $this;
+    }
+
+    /**
+     * Remove content
+     *
+     * @param \Softlogo\CMSBundle\Entity\Content $content
+     */
+    public function removeContent(\Softlogo\CMSBundle\Entity\Content $content)
+    {
+        $this->contents->removeElement($content);
+    }
+
+    /**
+     * Get contents
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getContents()
+    {
+        return $this->contents;
     }
 }

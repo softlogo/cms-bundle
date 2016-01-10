@@ -23,10 +23,9 @@ class PageAdmin extends Admin
 	 * @var array
 	 */
 	protected $datagridValues = array (
-		'isMenu' => array ('value' => false), // pageType 2 : >
+		'isMenu' => array ('value' => 1), // pageType 2 : >
 		'_page' => 1, // Display the first page (default = 1)
 		'_sort_order' => 'ASC', // Descendant ordering (default = 'ASC')
-		'_sort_by' => 'site.id' // name of the ordered field (default = the model id field, if any)
 		// the '_sort_by' key can be of the form 'mySubModel.mySubSubModel.myField'.
 	);
 	/**
@@ -76,6 +75,8 @@ class PageAdmin extends Admin
 				->add('articles', 'sonata_type_collection', array('label' => 'Articles', 'required' => false, 'by_reference' => false), array('edit' => 'inline','inline' => 'standard'))
 				->add('pages', 'sonata_type_collection', array('label' => 'Pages', 'required' => false, 'by_reference' => false), array('edit' => 'inline','inline' => 'table'))
 				->add('pageSections', 'sonata_type_collection', array('label' => 'Sekcje', 'required' => false, 'by_reference' => false), array('edit' => 'inline','inline' => 'table'))
+				->add('language')
+				->add('contents', 'sonata_type_collection', array('label' => 'Wersje językowe', 'required' => false, 'by_reference' => false), array('edit' => 'inline','inline' => 'standard'))
 				; 
 		}
 	}
@@ -85,7 +86,7 @@ class PageAdmin extends Admin
 		$datagridMapper
 			->add('site')
 			->add('isMenu')
-			->add('itemorder')
+			->add('language')
 			;
 	}
 	// Fields to be shown on lists
@@ -98,6 +99,7 @@ class PageAdmin extends Admin
 			->add('pages')
 			->add('itemorder')
 			->add('isMenu')
+			->add('language')
 			->addIdentifier('site.name')
 			->add('_action', 'actions', array(
 				'actions' => array(

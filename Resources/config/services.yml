@@ -1,9 +1,9 @@
 parameters:
     softlogo_cms_language.class: Softlogo\CMSBundle\Controller\LanguageController
-    cms_configpath: "%kernel.root_dir%/../vendor/softlogo/cmsbundle/Softlogo/CMSBundle/Resources/config/config.yml"
+    cms_configpath: "%kernel.root_dir%/../vendor/softlogo/cms-bundle/Softlogo/CMSBundle/Resources/config/config.yml"
     custom_configpath: ""
     softlogo.controller.section.class: Softlogo\CMSBundle\Controller\SectionController
-    cms.section.offset: 6
+    cms.section.offset: 60
 
     mailer_from: sklep@localhost
     mailer_to: borysjank@gmail.com
@@ -11,9 +11,13 @@ services:
     mail_helper:
         class: Softlogo\CMSBundle\Tools\MailHelper
         arguments: ["@mailer", "@twig"]
-    softlogo.section.controller:
-        class:     "%softlogo.controller.section.class%"
-        arguments: [@cms_conf, @doctrine.orm.entity_manager, @templating]
+    #softlogo.section.controller:
+        #class:     "%softlogo.controller.section.class%"
+        #arguments: [@cms_conf, @doctrine.orm.entity_manager, @templating]
+    softlogo.gallery.controller:
+        class: Softlogo\CMSBundle\Controller\GalleryController
+        arguments: ['@templating', '@softlogo.page.params', '@sonata.classification.manager.category', '@doctrine.orm.entity_manager', '@sonata.media.manager.media']
+
     foo.twig.extension:
         class: Softlogo\CMSBundle\Extension\MyTwigExtension
         tags:
@@ -33,29 +37,43 @@ services:
     softlogo.CMSHelper:
         class : Softlogo\CMSBundle\Templating\Helper\CMSHelper
         tags : 
-        - {name : 'templating.helper', alias : 'cms'} 
+        - {name : 'templating.helper', alias : 'CMS'} 
         arguments : [ @templating, @cms_conf ]
 
 
-    twig.extension.softlogo_section:
+    softlogo.twig.extension:
         class: Softlogo\CMSBundle\Extension\TwigCMS
         tags:
             - { name: 'twig.extension' }
-        arguments : [ @service_container, @doctrine.orm.entity_manager, @cms.section.pager ]
+        arguments : [ @service_container, @doctrine.orm.entity_manager, @cms.section.pager, @request_stack, @sonata.media.manager.media, @sonata.classification.manager.category]
+
+    softlogo.page.params:
+        class: Softlogo\CMSBundle\Util\PageParams
+        arguments : [ @doctrine.orm.entity_manager, @request_stack]
+
+
 
     cms.section.pager:
         class: Softlogo\CMSBundle\Util\SectionCollectionPager
-        arguments : [ 3 ]
+        arguments : [ "%cms.section.offset%" ]
             
 
     cms_conf:
         class:        Softlogo\CMSBundle\Services\CMSConfiguration
         arguments : [ "%cms_configpath%", "%custom_configpath%"]
+
+
+    #INTL 
+    twig.extension.intl:       
+        class: Twig_Extensions_Extension_Intl
+        tags:
+            - { name: twig.extension }  
+
     #SONATA
     softlogo.cms.admin.page:
         class: Softlogo\CMSBundle\Admin\PageAdmin
         tags:
-            - { name: sonata.admin, manager_type: orm, group: cms, label:Pages }
+            - { name: sonata.admin, manager_type: orm, group: CMS, label:Pages }
         arguments:
             - ~
             - Softlogo\CMSBundle\Entity\Page
@@ -67,7 +85,7 @@ services:
     softlogo.cms.admin.section:
         class: Softlogo\CMSBundle\Admin\SectionAdmin
         tags:
-            - { name: sonata.admin, manager_type: orm, group: cms, label: Sections }
+            - { name: sonata.admin, manager_type: orm, group: CMS, label: Sections }
         arguments:
             - ~
             - Softlogo\CMSBundle\Entity\Section
@@ -79,7 +97,7 @@ services:
     softlogo.cms.admin.article:
         class: Softlogo\CMSBundle\Admin\ArticleAdmin
         tags:
-            - { name: sonata.admin, manager_type: orm, group: cms, label:Articles, show_in_dashboard: false }
+            - { name: sonata.admin, manager_type: orm, group: CMS, label:Articles, show_in_dashboard: false }
         arguments:
             - ~
             - Softlogo\CMSBundle\Entity\Article
@@ -91,7 +109,7 @@ services:
     softlogo.cms.admin.section_media:
         class: Softlogo\CMSBundle\Admin\SectionMediaAdmin
         tags:
-            - { name: sonata.admin, manager_type: orm, group: cms, label:SectionsMedia, show_in_dashboard: false }
+            - { name: sonata.admin, manager_type: orm, group: CMS, label:SectionsMedia, show_in_dashboard: false }
         arguments:
             - ~
             - Softlogo\CMSBundle\Entity\SectionMedia
@@ -101,7 +119,7 @@ services:
     softlogo.cms.admin.page_section:
         class: Softlogo\CMSBundle\Admin\PageSectionAdmin
         tags:
-            - { name: sonata.admin, manager_type: orm, group: cms, label:Page_Sections, show_in_dashboard: false }
+            - { name: sonata.admin, manager_type: orm, group: CMS, label:Page_Sections, show_in_dashboard: false }
         arguments:
             - ~
             - Softlogo\CMSBundle\Entity\PageSection
@@ -129,7 +147,7 @@ services:
         class: Softlogo\CMSBundle\Admin\DictionaryAdmin
         arguments: [~, Softlogo\CMSBundle\Entity\Parameter, SonataAdminBundle:CRUD]
         tags:
-            - {name: sonata.admin, manager_type: orm, group: dictionary, label: Parameter}
+            - {name: sonata.admin, manager_type: orm, group: CMS, label: Parameter}
 
 
     softlogo_cms.admin.main_dictionary:
@@ -142,10 +160,16 @@ services:
         class: Softlogo\CMSBundle\Admin\DictionaryAdmin
         arguments: [~, Softlogo\CMSBundle\Entity\Site, SonataAdminBundle:CRUD]
         tags:
-            - {name: sonata.admin, manager_type: orm, group: dictionary, label: Site}
+            - {name: sonata.admin, manager_type: orm, group: CMS, label: Site}
 
     softlogo_cms.admin.section_section:
         class: Softlogo\CMSBundle\Admin\SectionSectionAdmin
         arguments: [~, Softlogo\CMSBundle\Entity\SectionSection, SonataAdminBundle:CRUD]
         tags:
             - {name: sonata.admin, manager_type: orm, group: admin, label: SectionSection, show_in_dashboard: false }
+
+    softlogo_cms.admin.content:
+        class: Softlogo\CMSBundle\Admin\ContentAdmin
+        arguments: [~, Softlogo\CMSBundle\Entity\Content, SonataAdminBundle:CRUD]
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: admin, label: Content, show_in_dashboard: false }

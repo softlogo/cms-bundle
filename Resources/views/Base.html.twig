@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html class="no-js"> 
+	<head>
+		<meta charset="utf-8">
+
+		<meta name="description" content="{{page is defined?page.description:""}}">
+
+		<!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+		<!--- This should placed first off all other scripts -->
+
+
+		{% block title %}
+		<title>{{page is defined?page.title:""}}</title>
+		{% endblock %}
+		{% block style %}
+
+		<link rel="stylesheet" href="/css/bootstrap.css">
+		<link rel="stylesheet" href="/css/font-awesome.css">
+
+		{% endblock style %}
+	</head>
+	<body>
+		<nav class="navbar navbar-default navbar-default-top">
+		<div class="container">
+			<ul class="nav navbar-nav">
+
+				{% block menu %}
+
+				{% endblock %}
+			</ul>
+		</div>
+		</nav>
+
+		
+		{% block content %}
+
+		{% endblock %}
+
+		{% block scripts %}	
+
+
+		{%endblock%}
+	</body>
+</html>
+
+

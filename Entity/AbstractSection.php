@@ -4,12 +4,13 @@ namespace Softlogo\CMSBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
+use Softlogo\CMSBundle\Entity\AbstractContent;
 
 /**
 
  * @ORM\MappedSuperclass
  */
-class AbstractSection
+class AbstractSection extends AbstractContent
 {
 	public function __toString()
 	{
@@ -109,6 +110,17 @@ class AbstractSection
 	 * })
 	 */
 	private $parent;
+
+    /**
+     * @var \Language
+     *
+     * @ORM\ManyToOne(targetEntity="Language")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="language_id", referencedColumnName="id")
+     * })
+     */
+    private $language;
+
 
 	/**
 	 * @var \Page
@@ -451,4 +463,27 @@ class AbstractSection
     {
         return $this->name;
     }
+    /**
+     * Set language
+     *
+     * @param \Softlogo\CMSBundle\Entity\Language $language
+     * @return Article
+     */
+    public function setLanguage(\Softlogo\CMSBundle\Entity\Language $language = null)
+    {
+        $this->language = $language;
+
+        return $this;
+    }
+
+    /**
+     * Get language
+     *
+     * @return \Softlogo\CMSBundle\Entity\Language 
+     */
+    public function getLanguage()
+    {
+        return $this->language;
+    }
+
 }

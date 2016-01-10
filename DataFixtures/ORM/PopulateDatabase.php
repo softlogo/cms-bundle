@@ -7,6 +7,7 @@ use Softlogo\CMSBundle\Entity\Language;
 use Softlogo\CMSBundle\Entity\Page;
 use Softlogo\CMSBundle\Entity\Article;
 use Softlogo\CMSBundle\Entity\Section;
+use Softlogo\CMSBundle\Entity\Site;
 use Softlogo\CMSBundle\Entity\PageSection;
 
 class PopulateDatabase implements FixtureInterface
@@ -16,6 +17,8 @@ class PopulateDatabase implements FixtureInterface
 	 */
 	public function load(ObjectManager $manager)
 	{
+		$home=new Site();
+		$home->setName('main');
 
 
 		$langPl = new Language();
@@ -37,7 +40,11 @@ class PopulateDatabase implements FixtureInterface
 		
 		
 		$homePl = new Page();
+		$homePL->setSite($home);
 		$homePl->setTitle("Strona główna");
+		$homePl->setDescription("Strona główna");
+		$homePl->setKeywords("start");
+		$homePl->setName("Strona główna");
 		$homePl->setAnchor("home");
 		$homePl->setPriority(0.9);
 		$homePl->addArticle($intro);

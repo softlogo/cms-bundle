@@ -1,0 +1,19 @@
+{% for item in collection%}
+<li class="{{app.request.get('anchor')==item.anchor?'active'}}">
+
+
+{% if item.pages.count>0%}
+<a href="#" >{{item.name}}</a>
+<ul>
+	{% for subitem in item.pages %}
+	<li><a href="{{ path('cms_page', { 'anchor': subitem.anchor }) }}">{{subitem.name}}</a></li>
+	{% endfor %}
+</ul>
+
+
+{% else %}
+<a href="{{ path('cms_page', { 'anchor': item.anchor }) }}">{{item.name}}</a>
+{% endif %}
+</li>
+{% endfor%}
+

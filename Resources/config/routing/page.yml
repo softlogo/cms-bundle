@@ -4,6 +4,6 @@ home:
 cms_page:
     pattern:  /{anchor}
     defaults: { _controller: SoftlogoCMSBundle:Page:show }
-#cms_site_page:
-    #pattern:  /{site}/{anchor}
-    #defaults: { _controller: SoftlogoCMSBundle:Page:show }
+cms_site_page:
+    pattern:  /{site}/{anchor}
+    defaults: { _controller: SoftlogoCMSBundle:Page:show }
