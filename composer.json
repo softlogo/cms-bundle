@@ -1,18 +1,18 @@
 {
-    "name" : "softlogo/cms-bundle",
-    "description" : "CMS bundle",
-    "type" : "symfony-bundle",
-    "authors" : [{
-        "name" : "cms",
-        "email" : "borysjank@gmail.com"
-    }],
-    "keywords" : [
-        "cms bundle"
-    ],
-    "license" : [
-        "MIT"
-    ],
-    "require" : {
+	"name" : "softlogo/cms-bundle",
+	"description" : "CMS bundle",
+	"type" : "symfony-bundle",
+	"authors" : [{
+		"name" : "cms",
+		"email" : "borysjank@gmail.com"
+	}],
+	"keywords" : [
+		"cms bundle"
+	],
+	"license" : [
+		"MIT"
+	],
+	"require" : {
 
     },
     "autoload" : {
