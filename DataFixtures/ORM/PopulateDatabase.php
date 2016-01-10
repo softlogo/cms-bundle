@@ -9,8 +9,9 @@ use Softlogo\CMSBundle\Entity\Article;
 use Softlogo\CMSBundle\Entity\Section;
 use Softlogo\CMSBundle\Entity\Site;
 use Softlogo\CMSBundle\Entity\PageSection;
+use Symfony\Component\DependencyInjection\ContainerAware;
 
-class PopulateDatabase implements FixtureInterface
+class PopulateDatabase extends ContainerAware implements FixtureInterface 
 {
 	/*
 	 * {@inheritDoc}
@@ -19,6 +20,8 @@ class PopulateDatabase implements FixtureInterface
 	{
 		$home=new Site();
 		$home->setName('main');
+		$home->setIsMain(true);
+		$manager->persist($home);
 
 
 		$langPl = new Language();
@@ -40,10 +43,11 @@ class PopulateDatabase implements FixtureInterface
 		
 		
 		$homePl = new Page();
-		$homePL->setSite($home);
+		$homePl->setSite($home);
 		$homePl->setTitle("Strona główna");
 		$homePl->setDescription("Strona główna");
 		$homePl->setKeywords("start");
+		$homePl->setType("home");
 		$homePl->setName("Strona główna");
 		$homePl->setAnchor("home");
 		$homePl->setPriority(0.9);
@@ -59,6 +63,22 @@ class PopulateDatabase implements FixtureInterface
 		 */
 		
 		$manager->flush();
+
+
+		//USER
+		$userManager = $this->container->get('fos_user.user_manager');
+        // Create our user and set details
+        $user = $userManager->createUser();
+        $user->setUsername('borys');
+        $user->setEmail('borysjank@gmail.com');
+        $user->setPlainPassword('fmsoft583');
+        //$user->setPassword('3NCRYPT3D-V3R51ON');
+        $user->setEnabled(true);
+        $user->setRoles(array('ROLE_SUPER_ADMIN'));
+        //$user->setRoles(array('ROLE_SONATA_ADMIN'));
+
+        // Update the user
+        $userManager->updateUser($user, true);
 	}
 
     /**
