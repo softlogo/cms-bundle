@@ -1,7 +1,6 @@
 {%for ps in collection%}
-<section id="{{ps.anchor}}" class="{{ps.class}}">
+
 <div class="{{ps.wrapper}} {{ps.offset}}">
 	{{ render_section({'entity':ps.section, 'type':ps.type}) }}
 </div>
-</section>
 {%endfor%}

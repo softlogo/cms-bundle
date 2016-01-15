@@ -13,6 +13,11 @@ class PageController extends Controller
 		$em = $this->getDoctrine()->getManager();
 		return $em->getRepository('SoftlogoCMSBundle:Page');
 	}
+	public function getSiteRepository()
+	{
+		$em = $this->getDoctrine()->getManager();
+		return $em->getRepository('SoftlogoCMSBundle:Site');
+	}
 	public function showAction($anchor="home",$site="main", Request $request)
 	{
 		$from=$this->container->getParameter('mailer_from');
@@ -21,7 +26,8 @@ class PageController extends Controller
 		$conf=$this->get('cms_conf');
 
 		$menu = $this->getRepository()->findBy(array('isMenu'=>true), array('itemorder' => 'ASC'));
-		$page = $this->getRepository()->findOneByAnchor($anchor);
+		$sitee= $this->getSiteRepository()->findOneByName($site);
+		$page = $this->getRepository()->findSitePage($site, $anchor);
 
 		if (!$page) {
 			throw $this->createNotFoundException('Unable to find Section entity.');
@@ -67,7 +73,7 @@ class PageController extends Controller
 
 
 		return $this->render($viewpath, array(
-			'site'      => $site,
+			'site'      => $sitee,
 			'page'      => $page,
 			'title'      => $page->getTitle(),
 			'menu'      => $menu,

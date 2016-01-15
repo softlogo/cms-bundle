@@ -1,0 +1,32 @@
+{% extends "SoftlogoCMSBundle:Page:page.html.twig" %}
+
+{% block style %}	
+{{parent()}}
+<style type="text/css">
+</style>
+{% endblock %}	
+
+{% block sections%}	
+<div class="row room-list">
+{% for category in categories %}
+	<!-- room begin -->
+	<div class="col-md-6">
+
+		<div class="room-item item">
+			<div class="overlay">
+				<a href="{{path('cms_gallery',{'site':app.request.get('site'),'id':category.id})}}">
+					<h1>{{category.name}}</h1>
+				</a>
+				<div class="desc">
+					<a href="{{path('cms_gallery',{'site':app.request.get('site'),'id':category.id})}}" class="btn-border">Zobacz galerię</a>
+				</div>
+			</div>
+			<img class="img-responsive" src="{% path category.media, 'big'%}" alt="" />
+		</div>
+
+	</div>
+
+{% endfor %}
+</div>
+
+{%endblock%}

@@ -45,15 +45,6 @@ class Article extends AbstractSection
      * @ORM\ManyToOne(targetEntity="Section")
      */
     private $section;
-    /**
-     * @var \Language
-     *
-     * @ORM\ManyToOne(targetEntity="Language")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="language_id", referencedColumnName="id")
-     * })
-     */
-    private $language;
 
     /**
      * @var \Application\Sonata\MediaBundle\Entity\Media
@@ -93,7 +84,7 @@ class Article extends AbstractSection
      *
      * @return string 
      */
-    public function getContent()
+    public function getContent($locale='')
     {
         return $this->content;
     }
@@ -124,28 +115,6 @@ class Article extends AbstractSection
         return $this->section;
     }
 
-    /**
-     * Set language
-     *
-     * @param \Softlogo\CMSBundle\Entity\Language $language
-     * @return Article
-     */
-    public function setLanguage(\Softlogo\CMSBundle\Entity\Language $language = null)
-    {
-        $this->language = $language;
-
-        return $this;
-    }
-
-    /**
-     * Get language
-     *
-     * @return \Softlogo\CMSBundle\Entity\Language 
-     */
-    public function getLanguage()
-    {
-        return $this->language;
-    }
 
     /**
      * Set abstract

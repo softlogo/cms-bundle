@@ -1,0 +1,27 @@
+{% block menu%}	
+
+{% for item in collection %}
+
+{% if item.isMenu %}
+<li class="menu-parent {{'kuku'==item.name ? 'active'}}">
+
+
+{% if item.pages.count>0%}
+<a href="#" class="dropdown-toggle" data-toggle="dropdown">{{item.name}}<b class="caret"></b></a>
+<ul class="dropdown-menu">
+	{% for subitem in item.pages %}
+	<li><a href="{{ path('cms_page', { 'anchor': subitem.anchor }) }}">{{subitem.name}}</a></li>
+	{% endfor %}
+</ul>
+
+
+{% else %}
+<a href="{{ path('cms_page', { 'anchor': item.anchor }) }}">{{item.name}}</a>
+{% endif %}
+</li>
+
+{% endif %}
+{% endfor%}
+{% endblock menu %}
+
+

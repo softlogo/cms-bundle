@@ -19,4 +19,17 @@ class PageRepository extends EntityRepository
             ->setParameter('name', $name);
 		return $qb;
 	}
+	public function findSitePage($site, $anchor){
+		$qb = $this->createQueryBuilder('p')
+			->join('p.site', 's');
+		$qb->andWhere('s.name= :site')
+			->setParameter('site', $site);
+        $qb->andWhere('p.anchor= :anchor')
+            ->setParameter('anchor', $anchor);
+		$query=$qb->getQuery();
+		$sql=$query->getSQL();
+		//echo($sql);
+		return $query->getResult()[0];
+	}
+
 }

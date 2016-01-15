@@ -14,7 +14,7 @@ class Language
 {
   public function __toString()
   {
-    return $this->getName() ? $this->getName() : "";
+    return $this->getAbbr() ? $this->getAbbr() : "";
   }
     /**
      * @var integer

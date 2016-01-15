@@ -81,6 +81,13 @@ class Page extends AbstractSection
      */
     private $pages;
 
+	/**
+	 * @ORM\OneToMany(targetEntity="Softlogo\CMSBundle\Entity\Content", mappedBy="page", cascade="persist", orphanRemoval=true)
+	 *
+	 */
+	private $contents;
+
+
     /**
      * Constructor
      */
@@ -362,5 +369,40 @@ class Page extends AbstractSection
     public function getMedia()
     {
         return $this->media;
+    }
+
+    /**
+     * Add content
+     *
+     * @param \Softlogo\CMSBundle\Entity\Content $content
+     *
+     * @return Page
+     */
+    public function addContent(\Softlogo\CMSBundle\Entity\Content $content)
+    {
+		$content->setPage($this);
+        $this->contents[] = $content;
+
+        return $this;
+    }
+
+    /**
+     * Remove content
+     *
+     * @param \Softlogo\CMSBundle\Entity\Content $content
+     */
+    public function removeContent(\Softlogo\CMSBundle\Entity\Content $content)
+    {
+        $this->contents->removeElement($content);
+    }
+
+    /**
+     * Get contents
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getContents()
+    {
+        return $this->contents;
     }
 }

@@ -10,7 +10,7 @@ sonata_media:
         #media: Softlogo\CMSBundle\Entity\Media
     #    gallery: MyVendor\MediaBundle\Entity\Gallery
     #    gallery_has_media: MyVendor\MediaBundle\Entity\GalleryHasMedia
-    default_context: Default
+    default_context: Foto
     db_driver: doctrine_orm # or doctrine_mongodb, doctrine_phpcr
     contexts:
         Default:  # the default context is mandatory
@@ -111,3 +111,41 @@ ivory_ck_editor:
             filebrowserImageUploadRouteParameters:
                 provider: sonata.media.provider.image
                 context: my-context # Optional, to upload in a custom context
+
+sonata_formatter:
+    formatters:
+        markdown:
+            service: sonata.formatter.text.markdown
+            extensions:
+                - sonata.formatter.twig.control_flow
+                - sonata.formatter.twig.gist
+        #        - sonata.media.formatter.twig #keep this commented unless you are using media bundle.
+
+
+        text:
+            service: sonata.formatter.text.text
+            extensions:
+                - sonata.formatter.twig.control_flow
+                - sonata.formatter.twig.gist
+        #        - sonata.media.formatter.twig
+
+
+        rawhtml:
+            service: sonata.formatter.text.raw
+            extensions:
+                - sonata.formatter.twig.control_flow
+                - sonata.formatter.twig.gist
+        #        - sonata.media.formatter.twig
+
+
+        richhtml:
+            service: sonata.formatter.text.raw
+            extensions:
+                - sonata.formatter.twig.control_flow
+                - sonata.formatter.twig.gist
+        #        - sonata.media.formatter.twig
+
+
+        twig:
+            service: sonata.formatter.text.twigengine
+            extensions: [] # Twig formatter cannot have extensions

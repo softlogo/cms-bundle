@@ -47,6 +47,7 @@ class SectionAdmin extends Admin
 				->add('sectionMedias', 'sonata_type_collection', array('label' => 'Media', 'required' => false, 'by_reference' => false), array('edit' => 'inline','inline' => 'table'))
 				->end()
 				->add('articles', 'sonata_type_collection', array('label' => 'Articles', 'required' => false, 'by_reference' => false), array('edit' => 'inline','inline' => 'standard'))
+				->add('contents', 'sonata_type_collection', array('label' => 'Wersje językowe', 'required' => false, 'by_reference' => false), array('edit' => 'inline','inline' => 'standard'))
 				->end()
 				->with('Sekcje')
 				->add('sectionSections', 'sonata_type_collection', array('label' => 'Sekcje', 'required' => false, 'by_reference' => false), array('edit' => 'inline','inline' => 'table'))
@@ -74,8 +75,8 @@ class SectionAdmin extends Admin
 			->addIdentifier('title')
 			->add('parent')
 			->add('itemorder')
-			->add('type')
-			->add('isMainSection')
+			->add('type', 'choice')
+			->add('isMainSection', null, array('editable' => true))
 			->add('_action', 'actions', array(
 				'actions' => array(
 					//'show' => array(),

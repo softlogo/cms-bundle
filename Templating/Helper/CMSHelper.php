@@ -35,6 +35,11 @@ class CMSHelper extends Helper
 		return $this->templating->render("SoftlogoCMSBundle:Menu:$view", $parameters);
 	}
 
+	public function galleries($parameters)
+	{
+		return $this->templating->render("SoftlogoCMSBundle:Gallery:!galleries.html.twig", $parameters);
+	}
+
 	public function getName()
 	{
 		return 'cms';
