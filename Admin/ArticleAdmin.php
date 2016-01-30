@@ -17,7 +17,42 @@ class ArticleAdmin extends Admin
 			->add('title', 'text', array('label' => 'Title'))
 			->add('anchor', 'text', array('label' => 'Anchor'))
 			->add('itemorder', null, array('label'=>'Itemorder'))
-			->add('content', 'ckeditor', array('label' => 'Content'))
+
+			/*
+			 *->add('content', 'sonata_formatter_type', array(
+			 *    'event_dispatcher' => $formMapper->getFormBuilder()->getEventDispatcher(),
+			 *    'format_field'   => 'contentFormatter',
+			 *    'source_field'   => 'rawContent',
+			 *    'source_field_options'      => array(
+			 *        'attr' => array('class' => 'span10', 'rows' => 20)
+			 *    ),
+			 *    'listener'       => true,
+			 *    'target_field'   => 'content'
+			 *))
+			 */
+			//->add('content', 'sonata_simple_formatter_type', array(
+			//'format' => 'markdown'))
+
+			->add('content', 'sonata_simple_formatter_type', array(
+				'format' => 'richhtml',
+				'ckeditor_context'=>'default',
+			/*
+			 *    'ckeditor_toolbar_icons'    => array(array(
+			 *        '-', 'Format', 'Styles', 'RemoveFormat',
+			 *        '-', 'Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord',
+			 *        '-', 'Undo', 'Redo',
+			 *        '-', 'NumberedList', 'BulletedList', '-', 'Outdent', 'Indent',
+			 *        '-', 'Blockquote',
+			 *        '-', 'Image', 'Link', 'Unlink', 'Table', ),
+			 *     array('Maximize', 'Source'),
+			 *),
+			 */
+
+			
+			))
+
+
+
 			->add('media', 'sonata_type_model_list', array('required' => false), array())
 			->add('language')
 			; 
@@ -40,13 +75,13 @@ class ArticleAdmin extends Admin
 			;
 	}
 
-    protected function configureShowFields(ShowMapper $showMapper)
-    {
-        $showMapper
+	protected function configureShowFields(ShowMapper $showMapper)
+	{
+		$showMapper
 
-            ->add('title')
-            ->add('content', null, array('safe' => true))
-        ;
+			->add('title')
+			->add('content', null, array('safe' => true))
+			;
 
-    }
+	}
 }

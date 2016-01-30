@@ -17,9 +17,9 @@ class ArticleType extends AbstractType
         $builder
             ->add('title')
             ->add('abstract')
-            ->add('content', 'ckeditor')
-            ->add('createdAt')
-            ->add('updatedAt')
+			->add('content', 'ckeditor')
+			->add('createdAt')
+			->add('updatedAt')
             ->add('section')
             ->add('language')
         ;

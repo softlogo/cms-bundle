@@ -40,6 +40,19 @@ class Article extends AbstractSection
      */
     private $content;
 
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="rawContent", type="text", nullable=true)
+     */
+    private $rawContent;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="contentFormatter", type="string", length=255, nullable=true)
+     */
+    private $contentFormatter;
 
     /**
      * @ORM\ManyToOne(targetEntity="Section")

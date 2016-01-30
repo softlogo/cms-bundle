@@ -1,4 +1,4 @@
 # cms-bundle
 Simple cms
 
-Wersja 1.2
+Wersja 1.3.1

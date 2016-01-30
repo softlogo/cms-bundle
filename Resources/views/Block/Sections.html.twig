@@ -1,6 +1,3 @@
 {%for ps in collection%}
-
-<div class="{{ps.wrapper}} {{ps.offset}}">
 	{{ render_section({'entity':ps.section, 'type':ps.type}) }}
-</div>
 {%endfor%}
