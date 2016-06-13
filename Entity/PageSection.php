@@ -75,7 +75,7 @@ class PageSection
 	/**
 	 * @var integer
 	 *
-	 * @ORM\Column(name="itemorder", type="integer")
+	 * @ORM\Column(name="itemorder", type="integer", nullable=true)
 	 */
 	private $itemorder;
 

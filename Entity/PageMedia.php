@@ -5,12 +5,12 @@ namespace Softlogo\CMSBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * SectionMedia
+ * PageMedia
  *
- * @ORM\Table(name="section_media")
+ * @ORM\Table(name="page_media")
  * @ORM\Entity
  */
-class SectionMedia
+class PageMedia
 {
 	public function __toString()
 	{
@@ -78,14 +78,14 @@ class SectionMedia
     private $media;
 
     /**
-     * @var \Section
+     * @var \Page
      *
-     * @ORM\ManyToOne(targetEntity="Section")
+     * @ORM\ManyToOne(targetEntity="Page")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="section_id", referencedColumnName="id")
+     *   @ORM\JoinColumn(name="page_id", referencedColumnName="id")
      * })
      */
-    private $section;
+    private $page;
 
 
 
@@ -103,7 +103,7 @@ class SectionMedia
      * Set position
      *
      * @param integer $position
-     * @return SectionMedia
+     * @return PageMedia
      */
     public function setPosition($position)
     {
@@ -126,7 +126,7 @@ class SectionMedia
      * Set enabled
      *
      * @param boolean $enabled
-     * @return SectionMedia
+     * @return PageMedia
      */
     public function setEnabled($enabled)
     {
@@ -149,7 +149,7 @@ class SectionMedia
      * Set updatedAt
      *
      * @param \DateTime $updatedAt
-     * @return SectionMedia
+     * @return PageMedia
      */
     public function setUpdatedAt($updatedAt)
     {
@@ -172,7 +172,7 @@ class SectionMedia
      * Set createdAt
      *
      * @param \DateTime $createdAt
-     * @return SectionMedia
+     * @return PageMedia
      */
     public function setCreatedAt($createdAt)
     {
@@ -195,7 +195,7 @@ class SectionMedia
      * Set media
      *
      * @param \Application\Sonata\MediaBundle\Entity\Media $media
-     * @return SectionMedia
+     * @return PageMedia
      */
     public function setMedia(\Application\Sonata\MediaBundle\Entity\Media $media = null)
     {
@@ -215,28 +215,6 @@ class SectionMedia
     }
 
     /**
-     * Set section
-     *
-     * @param \Softlogo\CMSBundle\Entity\Section $section
-     * @return SectionMedia
-     */
-    public function setSection(\Softlogo\CMSBundle\Entity\Section $section = null)
-    {
-        $this->section = $section;
-
-        return $this;
-    }
-
-    /**
-     * Get section
-     *
-     * @return \Softlogo\CMSBundle\Entity\Section 
-     */
-    public function getSection()
-    {
-        return $this->section;
-    }
-    /**
      * @ORM\PrePersist
      */
     public function UpdateTimestamps()
@@ -248,7 +226,7 @@ class SectionMedia
      * Set itemorder
      *
      * @param integer $itemorder
-     * @return SectionMedia
+     * @return PageMedia
      */
     public function setItemorder($itemorder)
     {
@@ -271,7 +249,7 @@ class SectionMedia
      * Set href
      *
      * @param string $href
-     * @return SectionMedia
+     * @return PageMedia
      */
     public function setHref($href)
     {
@@ -288,5 +266,29 @@ class SectionMedia
     public function getHref()
     {
         return $this->href;
+    }
+
+    /**
+     * Set page
+     *
+     * @param \Softlogo\CMSBundle\Entity\Page $page
+     *
+     * @return PageMedia
+     */
+    public function setPage(\Softlogo\CMSBundle\Entity\Page $page = null)
+    {
+        $this->page = $page;
+
+        return $this;
+    }
+
+    /**
+     * Get page
+     *
+     * @return \Softlogo\CMSBundle\Entity\Page
+     */
+    public function getPage()
+    {
+        return $this->page;
     }
 }

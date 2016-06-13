@@ -3,7 +3,7 @@
 {% for item in collection %}
 
 {% if item.isMenu %}
-<li class="menu-parent {{'kuku'==item.name ? 'active'}}">
+<li class="menu-parent {{app.request.get('anchor')==item.name ? 'active'}}">
 
 
 {% if item.pages.count>0%}

@@ -3,14 +3,14 @@ softlogo_gallery_routing:
     prefix:   /{_locale}/
     defaults: { _locale: %locale% }
     requirements:
-        _locale: en|pl|de|ru
+        _locale: en|pl|de|ru|se
 
 softlogo_cms_routing:
     resource: "@SoftlogoCMSBundle/Resources/config/routing/page.yml"
     prefix:   /{_locale}/
     defaults: { _locale: %locale% }
     requirements:
-        _locale: en|pl|de|ru
+        _locale: en|pl|de|ru|se
 
 
 

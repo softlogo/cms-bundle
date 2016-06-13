@@ -1,48 +1,118 @@
+{%block all%}
 <!DOCTYPE html>
-<html class="no-js"> 
+<html lang="pl">
+	{%block html%}
 	<head>
+		{%block head%}
+		{%block meta%}
 		<meta charset="utf-8">
-
-		<meta name="description" content="{{page is defined?page.description:""}}">
-
-		<!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-		<!--- This should placed first off all other scripts -->
-
-
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		{%endblock meta%}
+		{%block seo%}
 		{% block title %}
-		<title>{{page is defined?page.title:""}}</title>
-		{% endblock %}
-		{% block style %}
+		<title>{{title is defined ? title : 'Demo'}}</title>
+		{% endblock title %}	
+		<meta name="description" content="{{page.description is defined ? page.description}}">
+		<meta name="author" content="Softlogo.pl">
+		<meta name="keywords" content="{{page.keywords is defined ? page.keywords}}">
+		{% endblock seo %}	
 
-		<link rel="stylesheet" href="/css/bootstrap.css">
-		<link rel="stylesheet" href="/css/font-awesome.css">
 
-		{% endblock style %}
+		{% block style %}	
+		<link rel="shortcut icon" href="/img/favicon.ico">
+
+		<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+		<link href="/css/style.css" rel="stylesheet">
+
+		{% endblock %}	
+
+		{% block topscript %}	
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+		<script src="http://code.jquery.com/jquery-migrate-1.4.0.min.js"></script>
+
+
+		<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+		<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+		<!--[if lt IE 9]>
+		<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+		<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+		<![endif]-->
+
+		<script src='https://cdnjs.cloudflare.com/ajax/libs/device.js/0.2.7/device.min.js'></script>
+		{% endblock %}	
+		{% endblock head %}	
 	</head>
 	<body>
-		<nav class="navbar navbar-default navbar-default-top">
+		{%block body%}
+
+
+		<!--==============================cookie-warn=================================-->	
+		<section id="cookie-warn">
+		{% block cookie %}	
+		<p>Używamy plików cookies, aby ułatwić korzystanie z naszej strony. Jeżeli nie chcesz, aby były zapisywane na Twoim dysku zmień ustawienia przeglądarki. 
+		<a href="javascript:void(0);" id="close-cookie-warn">zamknij x</a></p>
+		<div class="clear"></div>
+		{% endblock cookie %}	
+		</section>	
+		<!--==========================================================================-->	
+
+
+
+		<section id="quick-contact">
+		{% block quickcontact %}	
 		<div class="container">
-			<ul class="nav navbar-nav">
-
-				{% block menu %}
-
-				{% endblock %}
+			<ul class="quick-contact">
+				<li><span class="fa fa-envelope"></span> <a href="mailto:demo@demo.pl">demo@demo.pl</a></li>
+				<li><span class="fa fa-mobile-phone"></span> <strong><a href="tel:0 739 868 229">0 739 868 229</a></strong></li>
 			</ul>
 		</div>
-		</nav>
+		{% endblock quickcontact%}	
+		</section>
 
-		
-		{% block content %}
+		<header>
 
+		{% block header %}
+		<div class="container">
+			<div class="row">
+				<div class="col-md-3 logo">
+					<img src="/img/logo.png" >
+				</div>
+				<div class="col-md-9">
+					<nav>
+
+					<div id="cssmenu" class="pull-right">
+						{% block menu %}
+						{{ knp_menu_render('main') }}
+						{% endblock %}
+					</div>
+					</nav>
+				</div>
+			</div>
+		</div>	
+		{% endblock header %}
+		</header>
+
+		{% block bread%}
+		{% endblock %}
+		{% block sections%}
 		{% endblock %}
 
-		{% block scripts %}	
+
+		<footer>
+		{% block footer%}
+		{% endblock %}	
+		</footer>
 
 
-		{%endblock%}
+
+		{% block script %}	
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+		<script src="/js/scripts.js"></script>
+		{% endblock %}	
+		{% endblock body %}	
 	</body>
+	{% endblock html %}	
 </html>
 
-
+{%endblock all%}

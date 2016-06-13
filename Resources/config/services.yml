@@ -8,6 +8,32 @@ parameters:
     mailer_from: sklep@localhost
     mailer_to: borysjank@gmail.com
 services:
+
+    cms.menu_builder:
+        class: Softlogo\CMSBundle\Menu\Builder
+        arguments: ["@knp_menu.factory", '@doctrine.orm.entity_manager']
+
+    cms.main_menu:
+        class: Knp\Menu\MenuItem # the service definition requires setting the class
+        factory: ["@cms.menu_builder", mainMenu]
+        arguments: ["@request_stack"]
+        tags:
+            - { name: knp_menu.menu, alias: main } # The alias is what is used to retrieve the menu
+
+    cms.flat:
+        class: Knp\Menu\MenuItem # the service definition requires setting the class
+        factory: ["@cms.menu_builder", flatMenu]
+        arguments: ["@request_stack"]
+        tags:
+            - { name: knp_menu.menu, alias: flat } # The alias is what is used to retrieve the menu
+
+
+    # ...
+
+
+
+
+
     mail_helper:
         class: Softlogo\CMSBundle\Tools\MailHelper
         arguments: ["@mailer", "@twig"]
@@ -16,7 +42,7 @@ services:
         #arguments: [@cms_conf, @doctrine.orm.entity_manager, @templating]
     softlogo.gallery.controller:
         class: Softlogo\CMSBundle\Controller\GalleryController
-        arguments: ['@templating', '@softlogo.page.params', '@sonata.classification.manager.category', '@doctrine.orm.entity_manager', '@sonata.media.manager.media']
+        arguments: ['@templating', '@softlogo.page.params', '@sonata.classification.manager.category', '@doctrine.orm.entity_manager', '@sonata.media.manager.media', '@knp_paginator']
 
     foo.twig.extension:
         class: Softlogo\CMSBundle\Extension\MyTwigExtension
@@ -173,3 +199,9 @@ services:
         arguments: [~, Softlogo\CMSBundle\Entity\Content, SonataAdminBundle:CRUD]
         tags:
             - {name: sonata.admin, manager_type: orm, group: admin, label: Content, show_in_dashboard: false }
+
+    softlogo_cms.admin.page_media:
+        class: Softlogo\CMSBundle\Admin\PageMediaAdmin
+        arguments: [~, Softlogo\CMSBundle\Entity\PageMedia, SonataAdminBundle:CRUD]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: admin, label: PageMedia, show_in_dashboard: false }

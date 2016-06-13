@@ -15,6 +15,13 @@ class Site extends Dictionary{
      */
     private $pages;
 
+	/**
+     * @var string
+     *
+     * @ORM\Column(name="host", type="string", length=255, nullable=false)
+     */
+	private $host;
+
     /**
      * Constructor
      */
@@ -54,5 +61,30 @@ class Site extends Dictionary{
     public function getPages()
     {
         return $this->pages;
+    }
+
+
+    /**
+     * Set host
+     *
+     * @param string $host
+     *
+     * @return Site
+     */
+    public function setHost($host)
+    {
+        $this->host = $host;
+
+        return $this;
+    }
+
+    /**
+     * Get host
+     *
+     * @return string
+     */
+    public function getHost()
+    {
+        return $this->host;
     }
 }

@@ -23,7 +23,7 @@ class PageAdmin extends Admin
 	 * @var array
 	 */
 	protected $datagridValues = array (
-		'isMenu' => array ('value' => 1), // pageType 2 : >
+		'site' => array ('value' => 1), // pageType 2 : >
 		'_page' => 1, // Display the first page (default = 1)
 		'_sort_order' => 'ASC', // Descendant ordering (default = 'ASC')
 		// the '_sort_by' key can be of the form 'mySubModel.mySubSubModel.myField'.
@@ -51,34 +51,64 @@ class PageAdmin extends Admin
 	// Fields to be shown on create/edit forms
 	protected function configureFormFields(FormMapper $formMapper)
 	{
-		//$conf=new CMSConfiguration();
-		//$conf=$this->container->get('cms_conf');
-		$nested = is_numeric($formMapper->getFormBuilder()->getForm()->getName());
-		$formMapper
-			->add('name')
-			->add('itemorder', 'text', array('label' => 'Item Order'))
-			->add('anchor', 'text', array('label' => 'Anchor'))
-			->add('title', 'text', array('label' => 'Page Title'))
-			->add('description', 'text', array('label' => 'Page Description'))
-			->add('keywords', 'text', array('label' => 'Page Keywords'))
-			->add('type', 'choice', array('multiple'=>false, 'choices'=>$this->conf->getKeys('page_types')));
-		if(!$nested){
 
-			$formMapper
-				->add('media', 'sonata_type_model_list', array('required' => false), array())
-				->add('site')
-				->add('page')
-				->add('href', 'text', array('label' => 'Href', 'required' => false))
-				->add('isMenu')
-				->add('priority')
-				->add('isActive')
-				->add('articles', 'sonata_type_collection', array('label' => 'Articles', 'required' => false, 'by_reference' => false), array('edit' => 'inline','inline' => 'standard'))
-				->add('pages', 'sonata_type_collection', array('label' => 'Pages', 'required' => false, 'by_reference' => false), array('edit' => 'inline','inline' => 'table'))
-				->add('pageSections', 'sonata_type_collection', array('label' => 'Sekcje', 'required' => false, 'by_reference' => false), array('edit' => 'inline','inline' => 'table'))
-				->add('language')
-				->add('contents', 'sonata_type_collection', array('label' => 'Wersje językowe', 'required' => false, 'by_reference' => false), array('edit' => 'inline','inline' => 'standard'))
-				; 
-		}
+		$formMapper
+			->tab('General')
+			->with('Content', array('class' => 'col-md-9'))
+			->add('name')
+			->add('anchor', 'text', array('label' => 'Anchor'))
+			->add('articles', 'sonata_type_collection', array('label' => 'Articles', 'required' => false, 'by_reference' => false), array('edit' => 'inline','inline' => 'standard'))
+			->end()
+			->with('Settings', array('class' => 'col-md-3'))
+			->add('itemorder', 'text', array('label' => 'Item Order'))
+			->add('media', 'sonata_type_model_list', array('required' => false), array())
+			->add('isMenu')
+			->add('type', 'choice', array('multiple'=>false, 'choices'=>$this->conf->getKeys('page_types')))
+			->add('site')
+			->add('page')
+
+			->end()
+			->end()
+
+			->tab('Media')
+			->with('Media')
+			->add('pageMedias', 'sonata_type_collection', array('label' => 'Media', 'required' => false, 'by_reference' => false), array('edit' => 'inline','inline' => 'table'))
+			->end()
+			->end()
+
+
+
+			->tab('SEO')
+			->with('SEO', array('class' => 'col-md-6'))
+			->add('title', null, array('label' => 'Page Title'))
+			->add('description', null, array('label' => 'Page Description'))
+			->add('keywords', null, array('label' => 'Page Keywords'))
+			->end()
+			->end()
+
+
+			->tab('Languages')
+			->with('Content', array('class' => 'col-md-12'))
+			->add('articles', 'sonata_type_collection', array('label' => 'Articles', 'required' => false, 'by_reference' => false), array('edit' => 'inline','inline' => 'standard'))
+			->add('contents', 'sonata_type_collection', array('label' => 'Wersje językowe', 'required' => false, 'by_reference' => false), array('edit' => 'inline','inline' => 'standard'))
+
+			->end()
+			->end()
+
+			->tab('Advanced')
+			->with('Settings', array('class' => 'col-md-6'))
+
+			->add('priority')
+			->add('href', 'text', array('label' => 'Href', 'required' => false))
+			->add('language')
+			->end()
+			->with('Sections', array('class' => 'col-md-12'))
+			->add('pageSections', 'sonata_type_collection', array('label' => 'Sekcje', 'required' => false, 'by_reference' => false), array('edit' => 'inline','inline' => 'table'))
+			->end()
+			->end()
+
+			;
+
 	}
 	// Fields to be shown on filter forms
 	protected function configureDatagridFilters(DatagridMapper $datagridMapper)

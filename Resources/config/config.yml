@@ -46,3 +46,4 @@ softlogo_cms:
     bootstrap: Menu-Bootstrap.html.twig
     simple: Menu-Simple.html.twig
     simple-site: Menu-Simple-Site.html.twig
+    flat: Menu-Flat.html.twig

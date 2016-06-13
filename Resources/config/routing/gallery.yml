@@ -1,6 +1,8 @@
 cms_gallery:
-    path:     /{site}/gallery/{id}
-    defaults: { _controller: softlogo.gallery.controller:indexAction }
+    path:     /{anchor}/{name}
+    defaults: 
+        _controller: softlogo.gallery.controller:indexAction
+        anchor: gallery
 cms_galleries:
-    path:     /{site}/galleries/{id}
+    path:     /galleries/{id}
     defaults: { _controller: softlogo.gallery.controller:galleriesAction }

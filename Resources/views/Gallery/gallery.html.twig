@@ -7,13 +7,18 @@
 {% endblock %}	
 
 {% block sections%}	
+
+<section id="content" class="container">
+{#
 <div class="row">
 	<div class="col-md-4">
 		<a href="{{path('cms_galleries',{'site':app.request.get('site'),'id':rootCategory.id})}}">Powrót</a>
 	</div>
 </div>
+#}
 <div class="row">
 	{% if categories.count>0%}
+	{#
 	<div class="col-md-12">
 		<ul id="filters">
 			<li><a href="gallery.html#" data-filter="*" class="selected">Wszystko</a></li>
@@ -23,23 +28,16 @@
 		</ul>
 
 	</div>
+	#}
 	{% endif %}
-	<div class="col-md-12">
-		<div id="gallery" class="gallery">
-
-			{% for media in medias %}
-			<div class="item {{media.category.id}}">
-				<a class="preview" href="{% path media, 'large'%}" data-gal="prettyPhoto" title="Your Title">
-					<img class="img-responsive" src="{% path media, 'medium'%}" alt="" />
-				</a>
-				<h4>{{media.name}}</h4>
-			</div>
-
-			{% endfor %}
-
-		</div>
-	</div>
 </div>
+<div class="row gallery">
+	{% for media in medias %}
+	<div class="col-md-3"><a href="{% path media, 'large'%}" class="gal"><img src="{% path media, 'medium'%}" class="img-responsive"><span></span></a></div>
+
+	{% endfor %}
+</div>
+</section>
 
 
 {%endblock%}

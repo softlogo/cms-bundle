@@ -60,7 +60,8 @@ class DictionaryAdmin extends Admin
 		$nested = is_numeric($formMapper->getFormBuilder()->getForm()->getName());
 
 		$formMapper
-			->add('name');
+			->add('name')
+			->add('host');
 		if(!$nested){
 			$formMapper
 			->add('description')

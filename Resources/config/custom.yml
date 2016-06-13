@@ -26,6 +26,17 @@ sonata_media:
                 big:   { width: 900 , quality: 90}
                 large:   { width: 1200 , quality: 80}
                 xlarge:   { width: 1600 , quality: 70}
+                xxlarge:   { width: 1920 , quality: 80}
+        news:
+            providers:
+                - sonata.media.provider.dailymotion
+                - sonata.media.provider.youtube
+                - sonata.media.provider.image
+
+            formats:
+                small: { width: 150 , quality: 95}
+                big:   { width: 500 , quality: 90}
+                wide:   { width: 800 , quality: 90}
     providers:
         image:
             resizer: sonata.media.resizer.square
@@ -116,6 +127,8 @@ ivory_ck_editor:
             filebrowserImageUploadRouteParameters:
                 provider: sonata.media.provider.image
                 context: my-context # Optional, to upload in a custom context
+        news:
+            toolbar:      standard  
 
 sonata_formatter:
     formatters:

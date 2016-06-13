@@ -1,5 +1,5 @@
 {% extends "SoftlogoCMSBundle::Layout.html.twig" %}
-{% block content%}	
+{% block sections%}	
 	{{ render_block({'name':'header'}) }}
 	{{ render_block({'name':'sections'}) }}
 {%endblock%}
@@ -28,7 +28,7 @@
 	});
 </script>
 
-		<script src="js/jquery.form.js"></script>
+		<script src="/js/jquery.form.js"></script>
 		<script>
 			$(document).ready(function() {
 			var options = {

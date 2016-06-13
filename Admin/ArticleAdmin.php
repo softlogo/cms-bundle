@@ -15,8 +15,6 @@ class ArticleAdmin extends Admin
 	{
 		$formMapper
 			->add('title', 'text', array('label' => 'Title'))
-			->add('anchor', 'text', array('label' => 'Anchor'))
-			->add('itemorder', null, array('label'=>'Itemorder'))
 
 			/*
 			 *->add('content', 'sonata_formatter_type', array(
@@ -55,6 +53,8 @@ class ArticleAdmin extends Admin
 
 			->add('media', 'sonata_type_model_list', array('required' => false), array())
 			->add('language')
+			->add('itemorder', null, array('label'=>'Itemorder'))
+			//->add('anchor', 'text', array('label' => 'Anchor'))
 			; 
 
 	}

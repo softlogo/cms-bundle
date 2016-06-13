@@ -5,6 +5,7 @@ namespace Softlogo\CMSBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use Softlogo\CMSBundle\Entity\Section;
+use Symfony\Component\HttpKernel\Exception;
 
 /**
  * @ORM\Entity
@@ -54,12 +55,23 @@ class Page extends AbstractSection
 	 */
 	private $keywords;
 
-    /**
+	/**
      * @var \Application\Sonata\MediaBundle\Entity\Media
      *
      * @ORM\ManyToOne(targetEntity="\Application\Sonata\MediaBundle\Entity\Media")
      */
-	private $media;
+    private $media;
+
+
+   
+	/**
+	 * @var \SectionMedia
+	 *
+	 * @ORM\OneToMany(targetEntity="PageMedia", mappedBy="page",cascade={"all"}, orphanRemoval=true)
+	 * @ORM\OrderBy({"itemorder" = "ASC"})
+	 */
+	private $pageMedias;
+
 
 
 
@@ -87,6 +99,17 @@ class Page extends AbstractSection
 	 */
 	private $contents;
 
+	public function getFullTitle()
+	{
+		if($this->getPage()){
+			$title=$this->getPage()->getFullTitle()." : ".$this->getName();
+		}else {
+			$title = $this->getName();
+		}
+		return $title;
+	}
+
+
 
     /**
      * Constructor
@@ -97,6 +120,13 @@ class Page extends AbstractSection
         $this->pageSections = new \Doctrine\Common\Collections\ArrayCollection();
         $this->articles = new \Doctrine\Common\Collections\ArrayCollection();
     }
+
+
+	public function __toString()
+	{
+
+			return (string)$this->getFullTitle();
+	}
 
     /**
      * Set isMenu
@@ -404,5 +434,40 @@ class Page extends AbstractSection
     public function getContents()
     {
         return $this->contents;
+    }
+
+    /**
+     * Add pageMedia
+     *
+     * @param \Softlogo\CMSBundle\Entity\PageMedia $pageMedia
+     *
+     * @return Page
+     */
+    public function addPageMedia(\Softlogo\CMSBundle\Entity\PageMedia $pageMedia)
+    {
+		$pageMedia->setPage($this);
+        $this->pageMedias[] = $pageMedia;
+
+        return $this;
+    }
+
+    /**
+     * Remove pageMedia
+     *
+     * @param \Softlogo\CMSBundle\Entity\PageMedia $pageMedia
+     */
+    public function removePageMedia(\Softlogo\CMSBundle\Entity\PageMedia $pageMedia)
+    {
+        $this->pageMedias->removeElement($pageMedia);
+    }
+
+    /**
+     * Get pageMedias
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getPageMedias()
+    {
+        return $this->pageMedias;
     }
 }
