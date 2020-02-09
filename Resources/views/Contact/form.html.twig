@@ -1,0 +1,14 @@
+{% extends "SoftlogoCMSBundle::Layout.html.twig" %}
+
+{% block content %}
+<div class="container">
+	<div class="row">
+		<div class="col-lg-4">
+			<h1>Stronka z formularzem</h1>
+			{% include 'BraincraftedBootstrapBundle::flash.html.twig' with { 'close': true } %}
+			{{ form(form, { 'style': 'horizontal' }) }}
+
+		</div>
+	</div>
+</div>
+{% endblock %}

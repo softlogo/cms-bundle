@@ -1,0 +1,17 @@
+<div class="section  latest-news">
+	<div class="container">
+		<div class="latest-news-wrapper">
+			{% if articles is defined %}
+			{% for art in articles %}
+			<div class="edugate-layout-1">
+				<div class="edugate-image"><img src="{% path art.media, 'medium' %}" alt="" class="img-responsive"/></div>
+				<div class="edugate-content"><a href="#" class="title">{{art.title}}</a>
+					<div class="description">{{art.content |raw}}</div>			
+				</div>
+			</div>
+			{% endfor %}
+			{% endif %}
+		</div>
+
+	</div>
+</div>

@@ -1,0 +1,49 @@
+{% extends "SoftlogoCMSBundle::Base.html.twig" %}
+{% block all%}	
+<!DOCTYPE HTML>
+<html lang="en">
+{% block html%}	
+	<head>
+		{% block head%}	
+
+		{% block meta%}
+		{{parent()}}
+		{% endblock %}
+
+		{% block seo%}
+		{{parent()}}
+		{% endblock %}
+
+		{% block style%}
+		{{parent()}}
+		{% endblock %}
+
+		{% endblock head%}	
+	</head>
+	<body>
+		{% block body%}
+
+		<header>
+		{% block header%}
+		{{parent()}}
+		{% endblock %}
+		</header>
+
+		{% block sections%}
+		{% endblock %}
+
+		<footer>
+		{% block footer%}
+		{{parent()}}
+		{% endblock %}
+		</footer>
+
+		{% block script%}
+		{{parent()}}
+		{% endblock %}
+
+		{% endblock body%}
+	</body>
+{% endblock html%}	
+</html>
+{% endblock all%}

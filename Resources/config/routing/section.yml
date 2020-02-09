@@ -1,0 +1,8 @@
+cms_section_index:
+    pattern:  /
+    defaults: { _controller: "SoftlogoCMSBundle:Section:index" }
+
+
+cms_section_show:
+    path:     /section/{id}/show
+    defaults: { _controller: SoftlogoCMSBundle:Section:show }

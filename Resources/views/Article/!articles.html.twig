@@ -1,0 +1,52 @@
+<div class="section  latest-news">
+	<div class="container">
+		<div class="latest-news-wrapper">
+			{% if articles is defined %}
+			{% for art in articles %}
+			{% set art_loop = loop.index %}
+			<div class="edugate-layout-1">
+				<div class="edugate-image"><img src="{% path art.media, 'medium' %}" alt="" class="img-responsive"/></div>
+				<div class="edugate-content"><a href="#" class="title">{{art.title}}</a>
+					<div class="description">{{art.content |raw}}</div>
+					<ul class="thumbnails isotope-items" id="isotope-items-{{ art_loop }}">
+					{% if art.gallery.GalleryHasMedias() is defined %}
+					{% for entitySecSecMedia in art.gallery.GalleryHasMedias() %}	
+					{%if loop.index == 1 %}
+						{% set firstMedia = entitySecSecMedia %}
+						<li class="" data-src="{% path entitySecSecMedia.media, 'xxlarge' %}" >
+							<a href="{% path entitySecSecMedia.media, 'xxlarge' %}" data-gallery="1" class="btn btn-green"><span>Zobacz galerię</span></a>
+							<img src="{% path entitySecSecMedia.media, 'small' %}" alt="" class="hidden" />
+						</li>
+					{% else %}
+						<li class="hidden" data-src="{% path entitySecSecMedia.media, 'xxlarge' %}" >
+							<a href="{% path entitySecSecMedia.media, 'xxlarge' %}" data-gallery="{{ art_loop }}"> 
+								<img src="{% path entitySecSecMedia.media, 'small' %}" alt="" class="hidden" />
+							</a>
+						  </li>
+					{% endif %}
+					{% endfor %}
+					{% endif %}	
+					</ul>					
+				</div>
+			</div>
+			{% endfor %}
+			{% endif %}
+		</div>
+
+	</div>
+	<div class="container">
+		<style>
+		.pagination {
+			display: inline-block;
+		}
+		.pagination li {
+			display: inline-block;
+			margin-right: 0px;
+		}
+
+		</style>
+		<div class="pagination-cont">
+		 {{ knp_pagination_render(articles) }}
+		</div>
+	</div>
+</div>

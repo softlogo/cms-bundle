@@ -1,0 +1,25 @@
+
+<div class="isotope-box hidden">
+  <div id="container" class="clearfix isotope-items-cont" >
+	<ul class="thumbnails " id="isotope-items-1"><!--col-xs-12 col-sm-6 col-md-3-->
+	{% for entitySecSecMedia in gallery.GalleryHasMedias() %}	
+	{%if loop.index == 1 %}
+		{% set firstMedia = entitySecSecMedia %}
+	{% endif %}
+	<li class="col-xs-12 col-sm-6 col-md-4 element isotope-filter1 {{ loop.index > 12 ? 'hidden' }}" data-src="{% path entitySecSecMedia.media, 'xxlarge' %}" >
+			<div class="thumb-isotope">
+			  <div class="thumbnail clearfix">
+				<a href="{% path entitySecSecMedia.media, 'xxlarge' %}" data-gallery="1">
+				  
+					<!--<img src="{% path entitySecSecMedia.media, 'medium' %}" alt="" class="rozmiar">-->
+				  
+				  <!--<div class="caption">{{ gallery.getName() }}</div>-->
+				</a>
+			  </div>
+			</div>
+		  </li>
+	{% endfor %}
+	</ul>
+  </div>
+</div>
+<a href="{% path firstMedia.media, 'xxlarge' %}" class="btn btn-green"><span>Zobacz zdjęcia</span></a>	

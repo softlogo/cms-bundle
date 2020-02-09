@@ -1,0 +1,7 @@
+cms_page:
+    path:  /{anchor}
+    defaults: 
+        _controller: SoftlogoCMSBundle:Page:show 
+        anchor: home
+
+
