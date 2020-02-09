@@ -35,7 +35,7 @@ class TwigCMS extends \Twig_Extension{
 		$this->page=$this->getPage();
 		$this->sectionPager=$sectionPager;
 	    $this->request = $request_stack->getCurrentRequest();
-	    $this->urlParams = $this->request->attributes->get('_route_params');
+		//$this->urlParams = $this->request->attributes->get('_route_params');
 		$this->templating  = $templating;
 		$this->conf  = $conf;
 		$this->galleryManager  = $galleryManager;
@@ -47,7 +47,7 @@ class TwigCMS extends \Twig_Extension{
 	}
 
 	private function getPage(){
-		if($this->request){
+		if($this->request!=""){
 			$urlParams = $this->request->attributes->get('_route_params');
 		}
 		$anchor=! isset($urlParams['anchor']) ? 'home':$urlParams['anchor'];

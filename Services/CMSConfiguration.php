@@ -49,7 +49,7 @@ class CMSConfiguration
 
 			$cmsConfig=$config;
 
-			if($siteConfigPath){
+			if($this->site){
 				$siteConfig = Yaml::parseFile($siteConfigPath);
 				//print_r($siteConfig);
 				$config1 = array_merge($cmsConfig[$root], $siteConfig[$root]);
@@ -57,11 +57,14 @@ class CMSConfiguration
 				foreach($config1 as $key=>$value){
 					$config[$root][$key]=array_merge($config2[$key], $config1[$key]);
 				}
+				$this->siteConfArray=$siteConfig["softlogo_cms"];
 			}
-			else $config=$cmsConfig;
+			else {
+				$config=$cmsConfig;
+				$this->siteConfArray=$cmsConfig["softlogo_cms"];
+			}
 
 			$this->confArray=$config["softlogo_cms"];
-			$this->siteConfArray=$siteConfig["softlogo_cms"];
 
 
 
