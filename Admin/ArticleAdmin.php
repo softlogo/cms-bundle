@@ -6,6 +6,7 @@ use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
+use Sonata\FormatterBundle\Form\Type\SimpleFormatterType;
 class ArticleAdmin extends Admin
 {
 	public $conf;
@@ -31,26 +32,9 @@ class ArticleAdmin extends Admin
 			//->add('content', 'sonata_simple_formatter_type', array(
 			//'format' => 'markdown'))
 
-			//->add('content', 'sonata_simple_formatter_type', array(
-				//'format' => 'richhtml',
-				//'ckeditor_context'=>'default',
-
-
-
-			/*
-			 *    'ckeditor_toolbar_icons'    => array(array(
-			 *        '-', 'Format', 'Styles', 'RemoveFormat',
-			 *        '-', 'Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord',
-			 *        '-', 'Undo', 'Redo',
-			 *        '-', 'NumberedList', 'BulletedList', '-', 'Outdent', 'Indent',
-			 *        '-', 'Blockquote',
-			 *        '-', 'Image', 'Link', 'Unlink', 'Table', ),
-			 *     array('Maximize', 'Source'),
-			 *),
-			 */
-
-			
-			//))
+			->add('content', SimpleFormatterType::class, [
+			'format' => 'text',
+			])
 
 
 
