@@ -17,9 +17,9 @@ class PageSectionAdmin extends Admin
 	protected function configureFormFields(FormMapper $formMapper)
 	{
 		$formMapper
-			->add('section', 'sonata_type_model_list', array('required' => false), array())
-			->add('type', 'choice', array('empty_value' => "brak",'multiple'=>false, 'choices'=>$this->conf->getKeys('section_types')))
-			->add('blockType', 'choice', array('multiple'=>false, 'choices'=>$this->conf->getKeys('block_types')))
+			->add('section', ModelListType::class, array('required' => false), array())
+			->add('type', ChoiceType::class, array('empty_value' => "brak",'multiple'=>false, 'choices'=>$this->conf->getKeys('section_types')))
+			->add('blockType', ChoiceType::class, array('multiple'=>false, 'choices'=>$this->conf->getKeys('block_types')))
 			->add('itemorder')
 			//->add('wrapper', 'choice', array('empty_value' => "brak",'multiple'=>false, 'choices'=>$this->conf->getKeys('wrapper_types')))
 			//->add('offset', 'choice', array('empty_value' => "brak",'multiple'=>false, 'choices'=>$this->conf->getKeys('offset_types')))

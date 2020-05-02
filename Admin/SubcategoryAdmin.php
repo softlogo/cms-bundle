@@ -9,6 +9,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Sonata\Form\Type\CollectionType;
 use Sonata\AdminBundle\Form\Type\ModelListType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
 class SubcategoryAdmin extends Admin
 {
@@ -18,15 +19,15 @@ class SubcategoryAdmin extends Admin
 		$nested = is_numeric($formMapper->getFormBuilder()->getForm()->getName());
 		
 		if(!$nested)
-			$formMapper->add('category', 'entity', array('class' => 'Softlogo\ShopBundle\Entity\Category', 'label' => 'Kategoria'));
+			$formMapper->add('category', EntityType::class, array('class' => 'Softlogo\ShopBundle\Entity\Category', 'label' => 'Kategoria'));
 		$formMapper
-			->add('name', 'text', array('label' => 'Nazwa podkategorii'));
+			->add('name', TextType::class, array('label' => 'Nazwa podkategorii'));
 			//->add('description', 'ckeditor', array('label' => 'Opis podkategorii'))
 		
 		if(!$nested)
 			$formMapper
 				->with('Produkty', array('collapsed' => true))
-				->add('products', 'sonata_type_collection', array(
+				->add('products', CollectionType::class, array(
 					'label' => 'Produkty',
 					'by_reference' => false,
 					'required' => false,

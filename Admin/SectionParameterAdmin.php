@@ -52,7 +52,7 @@ class SectionParameterAdmin extends Admin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-			->add('parameter', 'sonata_type_model_list', array('required' => false), array())
+			->add('parameter', ModelListType::class, array('required' => false), array())
             ->add('value')
             ->add('itemorder')
         ;

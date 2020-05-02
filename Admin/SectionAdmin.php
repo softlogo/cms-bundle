@@ -37,9 +37,9 @@ class SectionAdmin extends Admin
 		$nested = is_numeric($formMapper->getFormBuilder()->getForm()->getName());
 		$formMapper
 			->with('Section')
-			->add('title', 'text', array('label' => 'Title'))
-			->add('itemorder', 'text', array('label' => 'Item Order'))
-			->add('type', 'choice', array('multiple'=>false, 'choices'=>$this->conf->getKeys('section_types')))
+			->add('title', TextType::class, array('label' => 'Title'))
+			->add('itemorder', TextType::class, array('label' => 'Item Order'))
+			->add('type', ChoiceType::class, array('multiple'=>false, 'choices'=>$this->conf->getKeys('section_types')))
 			->end()
 			;
 
@@ -48,15 +48,15 @@ class SectionAdmin extends Admin
 
 			$formMapper
 				->with('Media')
-				->add('sectionMedias', 'sonata_type_collection', array('label' => 'Media', 'required' => false, 'by_reference' => false), array('edit' => 'inline','inline' => 'table'))
+				->add('sectionMedias', CollectionType::class, array('label' => 'Media', 'required' => false, 'by_reference' => false), array('edit' => 'inline','inline' => 'table'))
 				->end()
-				->add('articles', 'sonata_type_collection', array('label' => 'Articles', 'required' => false, 'by_reference' => false), array('edit' => 'inline','inline' => 'standard'))
-				->add('contents', 'sonata_type_collection', array('label' => 'Wersje językowe', 'required' => false, 'by_reference' => false), array('edit' => 'inline','inline' => 'standard'))
+				->add('articles', CollectionType::class, array('label' => 'Articles', 'required' => false, 'by_reference' => false), array('edit' => 'inline','inline' => 'standard'))
+				->add('contents', CollectionType::class, array('label' => 'Wersje językowe', 'required' => false, 'by_reference' => false), array('edit' => 'inline','inline' => 'standard'))
 				->end()
 				->with('Sekcje')
-				->add('sectionSections', 'sonata_type_collection', array('label' => 'Sekcje', 'required' => false, 'by_reference' => false), array('edit' => 'inline','inline' => 'table'))
+				->add('sectionSections', CollectionType::class, array('label' => 'Sekcje', 'required' => false, 'by_reference' => false), array('edit' => 'inline','inline' => 'table'))
 				->end()
-				->add('sectionParameters', 'sonata_type_collection', array('label' => 'Parameters', 'required' => false, 'by_reference' => false), array('edit' => 'inline','inline' => 'table',))
+				->add('sectionParameters', CollectionType::class, array('label' => 'Parameters', 'required' => false, 'by_reference' => false), array('edit' => 'inline','inline' => 'table',))
 				->end()
 				; 
 

@@ -21,7 +21,7 @@ class TypeAdmin extends Admin
 	protected function configureFormFields(FormMapper $formMapper)
 	{
 		$formMapper
-			->add('name', 'text', array('label' => 'Name'))
+			->add('name', TextType::class, array('label' => 'Name'))
 			; 
 
 	}

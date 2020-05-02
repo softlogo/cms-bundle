@@ -7,6 +7,10 @@ use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
 use Sonata\FormatterBundle\Form\Type\SimpleFormatterType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Sonata\Form\Type\CollectionType;
+use Sonata\AdminBundle\Form\Type\ModelListType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 class ArticleAdmin extends Admin
 {
 	public $conf;
@@ -15,8 +19,8 @@ class ArticleAdmin extends Admin
 	protected function configureFormFields(FormMapper $formMapper)
 	{
 		$formMapper
-			->add('title', 'text', array('label' => 'Title'))
-			->add('subtitle', 'text', array('label' => 'Subtitle'))
+			->add('title', TextType::class, array('label' => 'Title'))
+			->add('subtitle', TextType::class, array('label' => 'Subtitle'))
 			/*
 			 *->add('content', 'sonata_formatter_type', array(
 			 *    'event_dispatcher' => $formMapper->getFormBuilder()->getEventDispatcher(),
@@ -38,8 +42,8 @@ class ArticleAdmin extends Admin
 
 
 
-			->add('media', 'sonata_type_model_list', array('required' => false), array())
-			->add('gallery', 'sonata_type_model_list', array('required' => false), array())
+			->add('media', ModelListType::class, array('required' => false), array())
+			->add('gallery', ModelListType::class, array('required' => false), array())
 			->add('language')
 			->add('itemorder', null, array('label'=>'Itemorder'))
 			

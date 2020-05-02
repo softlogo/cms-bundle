@@ -8,6 +8,10 @@ use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
 use Sonata\DoctrineORMAdminBundle\Datagrid\ProxyQuery; 
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Sonata\Form\Type\CollectionType;
+use Sonata\AdminBundle\Form\Type\ModelListType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 class PageAdmin extends Admin
 {
 	public $conf;
@@ -61,17 +65,17 @@ class PageAdmin extends Admin
 			->tab('General')
 			->with('Content', array('class' => 'col-md-9'))
 			->add('name')
-			->add('anchor', 'text', array('label' => 'Anchor'))
-			->add('articles', 'sonata_type_collection', array('label' => 'Articles', 'required' => false, 'by_reference' => false), array('edit' => 'inline','inline' => 'standard'))
+			->add('anchor', TextType::class, array('label' => 'Anchor'))
+			//->add('articles', CollectionType::class, array('label' => 'Articles', 'required' => false, 'by_reference' => false), array('edit' => 'inline','inline' => 'standard'))
 
 			->end()
 			->with('Settings', array('class' => 'col-md-3'))
-			->add('itemorder', 'text', array('label' => 'Item Order'))
-			->add('media', 'sonata_type_model_list', array('required' => false), array())
+			->add('itemorder', TextType::class, array('label' => 'Item Order'))
+			->add('media', ModelListType::class, array('required' => false), array())
 			->add('isMenu')
-			->add('type', 'choice', array('multiple'=>false, 'choices'=>$this->conf->getKeys('page_types')))
-			->add('page', 'sonata_type_model_list', array('required' => false), array())
-			//->add('site', 'sonata_type_model_list', array('required' => false), array())
+			->add('type', ChoiceType::class, array('multiple'=>false, 'choices'=>$this->conf->getKeys('page_types')))
+			->add('page', ModelListType::class, array('required' => false), array())
+			//->add('site', ModelListType::class, array('required' => false), array())
 
 			->end()
 
@@ -96,7 +100,7 @@ class PageAdmin extends Admin
 
 			->tab('Media')
 			->with('Media')
-			->add('pageMedias', 'sonata_type_collection', array('label' => 'Media', 'required' => false, 'by_reference' => false), array('edit' => 'inline','inline' => 'table'))
+			->add('pageMedias', CollectionType::class, array('label' => 'Media', 'required' => false, 'by_reference' => false), array('edit' => 'inline','inline' => 'table'))
 			->end()
 			->end()
 
@@ -111,24 +115,26 @@ class PageAdmin extends Admin
 			->end()
 
 
-				->tab('Languages')
-				->with('Content', array('class' => 'col-md-12'))
-				->add('articles', 'sonata_type_collection', array('label' => 'Articles', 'required' => false, 'by_reference' => false), array('edit' => 'inline','inline' => 'standard'))
-				->add('contents', 'sonata_type_collection', array('label' => 'Wersje językowe', 'required' => false, 'by_reference' => false), array('edit' => 'inline','inline' => 'standard'))
-
-				->end()
-				->end()
+/*
+ *                ->tab('Languages')
+ *                ->with('Content', array('class' => 'col-md-12'))
+ *                ->add('articles', CollectionType::class, array('label' => 'Articles', 'required' => false, 'by_reference' => false), array('edit' => 'inline','inline' => 'standard'))
+ *                ->add('contents', CollectionType::class, array('label' => 'Wersje językowe', 'required' => false, 'by_reference' => false), array('edit' => 'inline','inline' => 'standard'))
+ *
+ *                ->end()
+ *                ->end()
+ */
 
 				->tab('Advanced')
 				->with('Settings', array('class' => 'col-md-6'))
 
 				->add('priority')
 				->add('isDropdown')
-				->add('href', 'text', array('label' => 'Href', 'required' => false))
+				->add('href', TextType::class, array('label' => 'Href', 'required' => false))
 				->add('language')
 				->end()
 				->with('Sections', array('class' => 'col-md-12'))
-				->add('pageSections', 'sonata_type_collection', array('label' => 'Sekcje', 'required' => false, 'by_reference' => false), array('edit' => 'inline','inline' => 'table'))
+				->add('pageSections', CollectionType::class, array('label' => 'Sekcje', 'required' => false, 'by_reference' => false), array('edit' => 'inline','inline' => 'table'))
 				->end()
 				->end()
 

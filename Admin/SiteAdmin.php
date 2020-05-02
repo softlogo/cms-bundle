@@ -76,7 +76,7 @@ class SiteAdmin extends Admin
 			->add('value')
 			->add('itemorder')
 			//->with('Options', array('collapsed' => false))
-			->add('dictionaries', 'sonata_type_collection', array('label' => 'Dictionaries', 'required' => false, 'by_reference' => false), array('edit' => 'inline','inline' => 'table',))
+			->add('dictionaries', CollectionType::class, array('label' => 'Dictionaries', 'required' => false, 'by_reference' => false), array('edit' => 'inline','inline' => 'table',))
 			//->end()
 			;
 	}

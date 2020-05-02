@@ -57,7 +57,7 @@ class MainDictionaryAdmin extends Admin
             ->add('description')
             ->add('itemorder')
             ->add('type')
-			->add('dictionaries', 'sonata_type_collection', array('label' => 'Dictionaries', 'required' => false, 'by_reference' => false), array('edit' => 'inline','inline' => 'table'))
+			->add('dictionaries', CollectionType::class, array('label' => 'Dictionaries', 'required' => false, 'by_reference' => false), array('edit' => 'inline','inline' => 'table'))
         ;
     }
 

@@ -16,7 +16,7 @@ class SectionMediaAdmin extends Admin
 	protected function configureFormFields(FormMapper $formMapper)
 	{
 		$formMapper
-			->add('media', 'sonata_type_model_list', array('required' => false), array())
+			->add('media', ModelListType::class, array('required' => false), array())
 			//->add('position')
 			->add('enabled')
 			->add('itemorder')
