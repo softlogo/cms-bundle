@@ -80,9 +80,9 @@ class Page extends AbstractSection
 	private $keywords;
 
 	/**
-     * @var \Application\Sonata\MediaBundle\Entity\Media
+     * @var \App\Application\Sonata\MediaBundle\Entity\Media
      *
-     * @ORM\ManyToOne(targetEntity="\Application\Sonata\MediaBundle\Entity\Media")
+     * @ORM\ManyToOne(targetEntity="\App\Application\Sonata\MediaBundle\Entity\Media")
      */
     private $media;
 
@@ -398,10 +398,10 @@ class Page extends AbstractSection
     /**
      * Set media
      *
-     * @param \Application\Sonata\MediaBundle\Entity\Media $media
+     * @param \App\Application\Sonata\MediaBundle\Entity\Media $media
      * @return Page
      */
-    public function setMedia(\Application\Sonata\MediaBundle\Entity\Media $media = null)
+    public function setMedia(\App\Application\Sonata\MediaBundle\Entity\Media $media = null)
     {
         $this->media = $media;
 
@@ -411,7 +411,7 @@ class Page extends AbstractSection
     /**
      * Get media
      *
-     * @return \Application\Sonata\MediaBundle\Entity\Media 
+     * @return \App\Application\Sonata\MediaBundle\Entity\Media 
      */
     public function getMedia()
     {

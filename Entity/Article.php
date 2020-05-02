@@ -60,16 +60,16 @@ class Article extends AbstractSection
     private $section;
 
     /**
-     * @var \Application\Sonata\MediaBundle\Entity\Media
+     * @var \App\Application\Sonata\MediaBundle\Entity\Media
      *
-     * @ORM\ManyToOne(targetEntity="\Application\Sonata\MediaBundle\Entity\Media")
+     * @ORM\ManyToOne(targetEntity="\App\Application\Sonata\MediaBundle\Entity\Media")
      */
     private $media;
 
 	/**
-     * @var \Application\Sonata\MediaBundle\Entity\Gallery
+     * @var \App\Application\Sonata\MediaBundle\Entity\Gallery
      *
-     * @ORM\ManyToOne(targetEntity="\Application\Sonata\MediaBundle\Entity\Gallery")
+     * @ORM\ManyToOne(targetEntity="\App\Application\Sonata\MediaBundle\Entity\Gallery")
      */
     private $gallery;
 
@@ -271,10 +271,10 @@ class Article extends AbstractSection
     /**
      * Set media
      *
-     * @param \Application\Sonata\MediaBundle\Entity\Media $media
+     * @param \App\Application\Sonata\MediaBundle\Entity\Media $media
      * @return Article
      */
-    public function setMedia(\Application\Sonata\MediaBundle\Entity\Media $media = null)
+    public function setMedia(\App\Application\Sonata\MediaBundle\Entity\Media $media = null)
     {
         $this->media = $media;
 
@@ -284,7 +284,7 @@ class Article extends AbstractSection
     /**
      * Get media
      *
-     * @return \Application\Sonata\MediaBundle\Entity\Media 
+     * @return \App\Application\Sonata\MediaBundle\Entity\Media 
      */
     public function getMedia()
     {
@@ -294,10 +294,10 @@ class Article extends AbstractSection
      /**
      * Set gallery
      *
-     * @param \Application\Sonata\MediaBundle\Entity\Gallery $gallery
+     * @param \App\Application\Sonata\MediaBundle\Entity\Gallery $gallery
      * @return Article
      */
-    public function setGallery(\Application\Sonata\MediaBundle\Entity\Gallery $gallery = null)
+    public function setGallery(\App\Application\Sonata\MediaBundle\Entity\Gallery $gallery = null)
     {
         $this->gallery = $gallery;
 
@@ -307,7 +307,7 @@ class Article extends AbstractSection
     /**
      * Get gallery
      *
-     * @return \Application\Sonata\MediaBundle\Entity\Gallery 
+     * @return \App\Application\Sonata\MediaBundle\Entity\Gallery 
      */
     public function getGallery()
     {
