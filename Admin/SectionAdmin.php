@@ -51,12 +51,7 @@ class SectionAdmin extends Admin
 				->add('sectionMedias', CollectionType::class, array('label' => 'Media', 'required' => false, 'by_reference' => false), array('edit' => 'inline','inline' => 'table'))
 				->end()
 				->add('articles', CollectionType::class, array('label' => 'Articles', 'required' => false, 'by_reference' => false), array('edit' => 'inline','inline' => 'standard'))
-				->add('contents', CollectionType::class, array('label' => 'Wersje językowe', 'required' => false, 'by_reference' => false), array('edit' => 'inline','inline' => 'standard'))
 				->end()
-				->with('Sekcje')
-				->add('sectionSections', CollectionType::class, array('label' => 'Sekcje', 'required' => false, 'by_reference' => false), array('edit' => 'inline','inline' => 'table'))
-				->end()
-				->add('sectionParameters', CollectionType::class, array('label' => 'Parameters', 'required' => false, 'by_reference' => false), array('edit' => 'inline','inline' => 'table',))
 				->end()
 				; 
 

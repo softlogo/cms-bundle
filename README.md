@@ -1,6 +1,6 @@
 # cms-bundle
 Simple cms
 
-Wersja 2.0.0
+Wersja 3.0.0
 
-Wersja kompatybilna z symfony 3.4
+Wersja kompatybilna z symfony 4.4

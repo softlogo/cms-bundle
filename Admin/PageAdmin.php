@@ -66,7 +66,7 @@ class PageAdmin extends Admin
 			->with('Content', array('class' => 'col-md-9'))
 			->add('name')
 			->add('anchor', TextType::class, array('label' => 'Anchor'))
-			//->add('articles', CollectionType::class, array('label' => 'Articles', 'required' => false, 'by_reference' => false), array('edit' => 'inline','inline' => 'standard'))
+			->add('articles', CollectionType::class, array('label' => 'Articles', 'required' => false, 'by_reference' => false), array('edit' => 'inline','inline' => 'standard'))
 
 			->end()
 			->with('Settings', array('class' => 'col-md-3'))

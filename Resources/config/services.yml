@@ -1,3 +1,4 @@
+
 parameters:
     softlogo_cms_language.class: Softlogo\CMSBundle\Controller\LanguageController
     cms_configpath: "%kernel.root_dir%/../vendor/softlogo/cms-bundle/Softlogo/CMSBundle/Resources/config/config.yml"
@@ -74,10 +75,10 @@ services:
 
 
     #INTL 
-    #twig.extension.intl:       
-        #class: Twig_Extensions_Extension_Intl
-        #tags:
-            #- { name: twig.extension }  
+    twig.extension.intl:       
+        class: Twig_Extensions_Extension_Intl
+        tags:
+            - { name: twig.extension }  
 
 
 
@@ -154,30 +155,6 @@ services:
             conf: "@cms_conf"
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 #    softlogo_cms.admin.section_parameter:
         #class: Softlogo\CMSBundle\Admin\SectionParameterAdmin
         #arguments: [~, Softlogo\CMSBundle\Entity\SectionParameter, SonataAdminBundle: CRUD]
@@ -191,31 +168,11 @@ services:
             #- {name: sonata.admin, manager_type: orm, group: dictionary, label: Dictionary, show_in_dashboard: false }
 
 
-#    softlogo_cms.admin.parameter:
-        #class: Softlogo\CMSBundle\Admin\DictionaryAdmin
-        #arguments: [~, Softlogo\CMSBundle\Entity\Parameter, SonataAdminBundle: CRUD]
-        #tags:
-            #- {name: sonata.admin, manager_type: orm, group: CMS, label: Parameter}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    softlogo_cms.admin.parameter:
+        class: Softlogo\CMSBundle\Admin\DictionaryAdmin
+        arguments: [~, Softlogo\CMSBundle\Entity\Parameter, ~]
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: CMS, label: Parameter}
 
 
     #softlogo_cms.admin.main_dictionary:
@@ -224,26 +181,18 @@ services:
         #tags:
             #- {name: sonata.admin, manager_type: orm, group: admin, label: MainDictionary, show_in_dashboard: false }
 
-    #softlogo_cms.admin.site:
-        #class: Softlogo\CMSBundle\Admin\SiteAdmin
-        #arguments: [~, Softlogo\CMSBundle\Entity\Site, SonataAdminBundle: CRUD]
-        #tags:
-            #- {name: sonata.admin, manager_type: orm, group: CMS, label: Site}
+    softlogo_cms.admin.site:
+        class: Softlogo\CMSBundle\Admin\SiteAdmin
+        arguments: [~, Softlogo\CMSBundle\Entity\Site, ~]
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: CMS, label: Site}
 
-    #softlogo_cms.admin.section_section:
-        #class: Softlogo\CMSBundle\Admin\SectionSectionAdmin
-        #arguments: [~, Softlogo\CMSBundle\Entity\SectionSection, SonataAdminBundle: CRUD]
-        #tags:
-            #- {name: sonata.admin, manager_type: orm, group: admin, label: SectionSection, show_in_dashboard: false }
 
-    #softlogo_cms.admin.content:
-        #class: Softlogo\CMSBundle\Admin\ContentAdmin
-        #arguments: [~, Softlogo\CMSBundle\Entity\Content, SonataAdminBundle: CRUD]
-        #tags:
-            #- {name: sonata.admin, manager_type: orm, group: admin, label: Content, show_in_dashboard: false }
+    softlogo_cms.admin.page_media:
+        class: Softlogo\CMSBundle\Admin\PageMediaAdmin
+        arguments: [~, Softlogo\CMSBundle\Entity\PageMedia, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: admin, label: PageMedia, show_in_dashboard: false }
 
-#    softlogo_cms.admin.page_media:
-        #class: Softlogo\CMSBundle\Admin\PageMediaAdmin
-        #arguments: [~, Softlogo\CMSBundle\Entity\PageMedia, SonataAdminBundle: CRUD]
-        #tags:
-            #- { name: sonata.admin, manager_type: orm, group: admin, label: PageMedia, show_in_dashboard: false }
+
+

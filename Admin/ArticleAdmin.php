@@ -37,7 +37,7 @@ class ArticleAdmin extends Admin
 			//'format' => 'markdown'))
 
 			->add('content', SimpleFormatterType::class, [
-			'format' => 'text',
+			'format' => 'richhtml',
 			])
 
 
