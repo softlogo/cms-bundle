@@ -1,0 +1,42 @@
+softlogo_gallery_routing:
+    resource: "@SoftlogoCMSBundle/Resources/config/routing/gallery.yml"
+    prefix:   /{_locale}/
+    defaults: { _locale: %locale% }
+    requirements:
+        _locale: en|pl|de|ru|se
+
+softlogo_cms_routing:
+    resource: "@SoftlogoCMSBundle/Resources/config/routing/page.yml"
+    prefix:   /{_locale}/
+    defaults: { _locale: %locale% }
+    requirements:
+        _locale: en|pl|de|ru|se
+
+
+
+SoftlogoCMSBundle_sitemap:
+    defaults: { _controller: "SoftlogoCMSBundle:Sitemap:index" }
+    path:  /sitemap.xml
+
+form:
+    path: /form
+    defaults: { _controller: SoftlogoCMSBundle:Contact:form }
+
+form-informacja:
+    path: /form-informacja
+    defaults: { _controller: SoftlogoCMSBundle:Contact:informacja}
+
+
+cms_section_paging:
+    path:     /section/{id}
+    defaults: { _controller: SoftlogoCMSBundle:Section:paging }
+
+cms_section_paging_number:
+    path:     /section/{id}/page/{pageNumber}
+    defaults: { _controller: SoftlogoCMSBundle:Section:paging }
+
+cms_section_show:
+    path:     /section/{id}/show
+    defaults: { _controller: SoftlogoCMSBundle:Section:show }
+
+

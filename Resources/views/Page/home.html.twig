@@ -1,0 +1,9 @@
+{% extends "SoftlogoCMSBundle::Layout.html.twig" %}
+{% block menu %}	
+{{parent()}}
+{%endblock%}
+{% block content%}	
+	{{ render_block({'name':'header', 'page':'home'}) }}
+	{{ render_block({'name':'content'}) }}
+	{{ render_block({'name':'sections'}) }}
+{%endblock%}

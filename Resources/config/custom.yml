@@ -1,0 +1,57 @@
+#dodane zeby media działały
+sonata_admin:
+    title: CMS Admin
+    templates:
+        short_object_description: SoftlogoCMSBundle:Sonata:short-object-description.html.twig
+        #layout:  SonataAdminBundle::layout.html.twig
+sonata_media:
+     #if you don't use default namespace configuration
+    #class:
+        #media: Softlogo\CMSBundle\Entity\Media
+    #    gallery: MyVendor\MediaBundle\Entity\Gallery
+    #    gallery_has_media: MyVendor\MediaBundle\Entity\GalleryHasMedia
+    default_context: Default
+    db_driver: doctrine_orm # or doctrine_mongodb, doctrine_phpcr
+    contexts:
+        Default:  # the default context is mandatory
+            providers:
+                - sonata.media.provider.dailymotion
+                - sonata.media.provider.youtube
+                - sonata.media.provider.image
+                - sonata.media.provider.file
+
+            formats:
+                small: { width: 100 , quality: 90}
+                medium: { width: 400 , quality: 90}
+                big:   { width: 900 , quality: 90}
+                large:   { width: 1200 , quality: 80}
+                xlarge:   { width: 1600 , quality: 70}
+                xxlarge:   { width: 1920 , quality: 80}
+        news:
+            providers:
+                - sonata.media.provider.dailymotion
+                - sonata.media.provider.youtube
+                - sonata.media.provider.image
+
+            formats:
+                small: { width: 150 , quality: 95}
+                big:   { width: 500 , quality: 90}
+                wide:   { width: 800 , quality: 90}
+    providers:
+        image:
+            resizer: sonata.media.resizer.square
+
+    cdn:
+        server:
+            path: /uploads/media # http://media.sonata-project.org/
+
+    filesystem:
+        local:
+            directory:  %kernel.root_dir%/../web/uploads/media
+            create:     false
+
+# app/config/config.yml
+sonata_block:
+    default_contexts: [cms]
+
+

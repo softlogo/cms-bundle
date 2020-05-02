@@ -1,0 +1,13 @@
+{% block menu%}	
+{% for item in collection %}
+
+{% if item.isMenu %}
+<li class="{{app.request.get('anchor')==item.anchor ? 'active'}}">
+<a href="{{ path('cms_page', { 'anchor': item.anchor, host: site.host }) }}">{{item.name}}</a>
+</li>
+
+{% endif %}
+{% endfor%}
+{% endblock menu %}
+
+

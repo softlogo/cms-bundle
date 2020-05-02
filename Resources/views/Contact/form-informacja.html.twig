@@ -1,0 +1,13 @@
+{% extends "SoftlogoCMSBundle::Layout.html.twig" %}
+
+{% block content %}
+<div class="container">
+	<div class="row">
+		<div class="col-lg-4">
+			{% include 'BraincraftedBootstrapBundle::flash.html.twig' with { 'close': true } %}
+			<a href="/" class="btn">Powrót</a>
+
+		</div>
+	</div>
+</div>
+{% endblock %}

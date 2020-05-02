@@ -1,0 +1,11 @@
+{%for ps in collection%}
+
+
+	{{ render_section({'entity':ps.section, 'type':ps.type}) }}
+{%endfor%}
+{%if collection is empty%}
+
+
+	{{ render_section({'type':'articles'}) }}
+{%endif%}
+
