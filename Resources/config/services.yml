@@ -46,52 +46,32 @@ services:
         arguments: ['@templating', '@softlogo.page.params', '@sonata.classification.manager.category', '@doctrine.orm.entity_manager', '@sonata.media.manager.media', '@knp_paginator']
 
 
-#    softlogo.twig.extension:
-        #class: Softlogo\CMSBundle\Extension\TwigCMS
-        #tags:
-            #- { name: 'twig.extension' }
-        #arguments : [ "@service_container", "@doctrine.orm.entity_manager", "@cms.section.pager", "@request_stack", "@sonata.media.manager.media", "@sonata.classification.manager.category", "@twig", "@cms_conf", "@sonata.media.manager.media"]
+    softlogo.twig.extension:
+        class: Softlogo\CMSBundle\Extension\TwigCMS
+        tags:
+            - { name: 'twig.extension' }
+        arguments : [ "@service_container", "@doctrine.orm.entity_manager", "@cms.section.pager", "@request_stack", "@sonata.media.manager.media", "@sonata.classification.manager.category", "@twig", "@cms_conf", "@sonata.media.manager.media"]
 
-    #softlogo.page.params:
-        #class: Softlogo\CMSBundle\Extension\PageParams
-        #arguments : [ "@doctrine.orm.entity_manager", "@request_stack"]
-
-
-    #softlogo_custom_view:
-        #class: Softlogo\CMSBundle\Services\CustomViewService
-        #arguments : [ "@doctrine.orm.entity_manager", "@request_stack", "@cms_conf", "@twig.loader", "%kernel.root_dir%"]
+    softlogo.page.params:
+        class: Softlogo\CMSBundle\Extension\PageParams
+        arguments : [ "@doctrine.orm.entity_manager", "@request_stack"]
 
 
+    softlogo_custom_view:
+        class: Softlogo\CMSBundle\Services\CustomViewService
+        arguments : [ "@doctrine.orm.entity_manager", "@request_stack", "@cms_conf", "@twig.loader", "%kernel.root_dir%"]
 
-    #cms.section.pager:
-        #class: Softlogo\CMSBundle\Extension\SectionCollectionPager
-        #arguments : [ "%cms.section.offset%" ]
+
+
+    cms.section.pager:
+        class: Softlogo\CMSBundle\Extension\SectionCollectionPager
+        arguments : [ "%cms.section.offset%" ]
             
 
     cms_conf:
         class:        Softlogo\CMSBundle\Services\CMSConfiguration
         arguments : ["%kernel.root_dir%", "@router", "@doctrine.orm.entity_manager", "%cms_configpath%", "%custom_configpath%"]
         #scope: request_stack
-
-
-    #INTL 
-#    twig.extension.intl:       
-        #class: Twig_Extensions_Extension_Intl
-        #tags:
-            #- { name: twig.extension }  
-
-
-
-    # KernelRequest listener
-#    extension.listener:
-        #class: Softlogo\CMSBundle\Listener\DoctrineExtensionListener
-        #calls:
-            #- [ setContainer, [ "@service_container" ] ]
-        #tags:
-            ## translatable sets locale after router processing
-            #- { name: kernel.event_listener, event: kernel.request, method: onLateKernelRequest, priority: -10 }
-            ## loggable hooks user username if one is in security context
-            #- { name: kernel.event_listener, event: kernel.request, method: onKernelRequest }
 
  
     #SONATA
