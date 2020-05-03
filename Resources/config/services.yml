@@ -13,6 +13,7 @@ services:
     cms.menu_builder:
         class: Softlogo\CMSBundle\Menu\Builder
         arguments: ["@knp_menu.factory", '@doctrine.orm.entity_manager']
+        public: true
 
     cms.main_menu:
         class: Knp\Menu\MenuItem # the service definition requires setting the class
@@ -20,6 +21,7 @@ services:
         arguments: ["@request_stack"]
         tags:
             - { name: knp_menu.menu, alias: main } # The alias is what is used to retrieve the menu
+        public: true
 
     cms.flat:
         class: Knp\Menu\MenuItem # the service definition requires setting the class
@@ -27,6 +29,7 @@ services:
         arguments: ["@request_stack"]
         tags:
             - { name: knp_menu.menu, alias: flat } # The alias is what is used to retrieve the menu
+        public: true
 
 
     ## ...
@@ -38,12 +41,14 @@ services:
     mail_helper:
         class: Softlogo\CMSBundle\Extension\MailHelper
         arguments: ["@mailer", "@twig"]
+        public: true
     #softlogo.section.controller:
         #class:     "%softlogo.controller.section.class%"
         #arguments: [@cms_conf, @doctrine.orm.entity_manager, @templating]
     softlogo.gallery.controller:
         class: Softlogo\CMSBundle\Controller\GalleryController
         arguments: ['@templating', '@softlogo.page.params', '@sonata.classification.manager.category', '@doctrine.orm.entity_manager', '@sonata.media.manager.media', '@knp_paginator']
+        public: true
 
 
     softlogo.twig.extension:
@@ -51,21 +56,25 @@ services:
         tags:
             - { name: 'twig.extension' }
         arguments : [ "@service_container", "@doctrine.orm.entity_manager", "@cms.section.pager", "@request_stack", "@sonata.media.manager.media", "@sonata.classification.manager.category", "@twig", "@cms_conf", "@sonata.media.manager.media"]
+        public: true
 
     softlogo.page.params:
         class: Softlogo\CMSBundle\Extension\PageParams
         arguments : [ "@doctrine.orm.entity_manager", "@request_stack"]
+        public: true
 
 
     softlogo_custom_view:
         class: Softlogo\CMSBundle\Services\CustomViewService
         arguments : [ "@doctrine.orm.entity_manager", "@request_stack", "@cms_conf", "@twig.loader", "%kernel.root_dir%"]
+        public: true
 
 
 
     cms.section.pager:
         class: Softlogo\CMSBundle\Extension\SectionCollectionPager
         arguments : [ "%cms.section.offset%" ]
+        public: true
             
 
     cms_conf:
