@@ -26,10 +26,12 @@ class CMSConfiguration
 		$cmsConfig = Yaml::parseFile($cmsConfigPath);
 
 		if(true){
-			$this->host=$router->getContext()->getHost();
+			//$this->host=$router->getContext()->getHost();
+			$this->host="proagrianew.localhost";
 
 			if($this->host !='localhost'){
-				$this->site=$this->siteRepository->findOneBy(array('host'=>$this->host))->getName();
+				//$this->site=$this->siteRepository->findOneBy(array('host'=>$this->host))->getName();
+				$this->site="proagrianew";
 			}
 			//$this->site="praxis34.localhost";
 			//echo $this->site;

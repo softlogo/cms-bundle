@@ -39,7 +39,7 @@ class BaseController extends Controller
 
 
 	public function getHost(){
-		return "praxis34.localhost";
+		return "proagrinanew.localhost";
 	}
 
 	public function getView($bundleShort, $view){
