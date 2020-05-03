@@ -71,7 +71,8 @@ services:
     cms_conf:
         class:        Softlogo\CMSBundle\Services\CMSConfiguration
         arguments : ["%kernel.root_dir%", "@router", "@doctrine.orm.entity_manager", "%cms_configpath%", "%custom_configpath%"]
-        #scope: request_stack
+        public: true
+
 
  
     #SONATA
