@@ -15,18 +15,21 @@ class PageController extends BaseController
 		$to=$this->container->getParameter('mailer_to');
 
 		$conf=$this->get('cms_conf');
-		$host=$this->getHost();
+		$host=$request->getHost();
+
 
 		$menu = $this->getRepository()->findBy(array('isMenu'=>true), array('itemorder' => 'ASC'));
-		$sitee= $this->getSiteRepository()->findOneByHost($host);
+		$sitee=$this->getSiteRepository()->findOneBy(array('host'=>$host))->getName();
 
 		$locale = $request->getLocale();
 		$language = $this->getLanguageRepository()->findOneBy(array('abbr'=>$locale));
 
-		$page = $this->getRepository()->findOnePage($anchor, $sitee->getName(), $language);
+		$page = $this->getRepository()->findOnePage($anchor, $sitee, $language);
 
 		
-		$this->get('twig.loader')->addPath($this->get('kernel')->getRootDir() . '/../sites/'.$sitee->getName().'/views', 'home');
+		//$loader=$this->get('twig.loader');
+		//$loader->addPath($this->get('kernel')->getRootDir() . '/../sites/'.$sitee->getName().'/views', 'home');
+		//$this->addHomePath();
 
 		if (!$page) {
 			throw $this->createNotFoundException('Unable to find Section entity.');

@@ -37,11 +37,6 @@ class BaseController extends Controller
 		return $this->getDoctrine()->getManager();
 	}
 
-
-	public function getHost(){
-		return "proagrinanew.localhost";
-	}
-
 	public function getView($bundleShort, $view){
 		$this->setPath();
 		$cv=$this->get('softlogo_custom_view');

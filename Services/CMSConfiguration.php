@@ -26,16 +26,11 @@ class CMSConfiguration
 		$cmsConfig = Yaml::parseFile($cmsConfigPath);
 
 		if(true){
-			//$this->host=$router->getContext()->getHost();
-			$this->host="proagrianew.localhost";
+			$this->host=$router->getContext()->getHost();
 
 			if($this->host !='localhost'){
-				//$this->site=$this->siteRepository->findOneBy(array('host'=>$this->host))->getName();
-				$this->site="proagrianew";
+				$this->site=$this->siteRepository->findOneBy(array('host'=>$this->host))->getName();
 			}
-			//$this->site="praxis34.localhost";
-			//echo $this->site;
-			//echo $this->siteRepository->findOneBy(array('host'=>$this->host))->getId();
 			$siteConfigPath=$rootDir."/../sites/".$this->site."/config/config.yml";
 
 			$root="softlogo_cms";
