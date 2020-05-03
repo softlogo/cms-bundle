@@ -155,17 +155,17 @@ services:
             conf: "@cms_conf"
 
 
-#    softlogo_cms.admin.section_parameter:
-        #class: Softlogo\CMSBundle\Admin\SectionParameterAdmin
-        #arguments: [~, Softlogo\CMSBundle\Entity\SectionParameter, SonataAdminBundle: CRUD]
-        #tags:
-            #- {name: sonata.admin, manager_type: orm, group: admin, label: SectionParameter, show_in_dashboard: false }
+    softlogo_cms.admin.section_parameter:
+        class: Softlogo\CMSBundle\Admin\SectionParameterAdmin
+        arguments: [~, Softlogo\CMSBundle\Entity\SectionParameter, ~]
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: admin, label: SectionParameter, show_in_dashboard: false }
 
-    #softlogo_cms.admin.dictionary:
-        #class: Softlogo\CMSBundle\Admin\DictionaryAdmin
-        #arguments: [~, Softlogo\CMSBundle\Entity\Dictionary, SonataAdminBundle: CRUD]
-        #tags:
-            #- {name: sonata.admin, manager_type: orm, group: dictionary, label: Dictionary, show_in_dashboard: false }
+    softlogo_cms.admin.dictionary:
+        class: Softlogo\CMSBundle\Admin\DictionaryAdmin
+        arguments: [~, Softlogo\CMSBundle\Entity\Dictionary, ~]
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: dictionary, label: Dictionary, show_in_dashboard: false }
 
 
     softlogo_cms.admin.parameter:
@@ -175,11 +175,11 @@ services:
             - {name: sonata.admin, manager_type: orm, group: CMS, label: Parameter}
 
 
-    #softlogo_cms.admin.main_dictionary:
-        #class: Softlogo\CMSBundle\Admin\MainDictionaryAdmin
-        #arguments: [~, Softlogo\CMSBundle\Entity\MainDictionary, SonataAdminBundle: CRUD]
-        #tags:
-            #- {name: sonata.admin, manager_type: orm, group: admin, label: MainDictionary, show_in_dashboard: false }
+    softlogo_cms.admin.main_dictionary:
+        class: Softlogo\CMSBundle\Admin\MainDictionaryAdmin
+        arguments: [~, Softlogo\CMSBundle\Entity\MainDictionary, ~]
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: admin, label: MainDictionary, show_in_dashboard: false }
 
     softlogo_cms.admin.site:
         class: Softlogo\CMSBundle\Admin\SiteAdmin
