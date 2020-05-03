@@ -39,41 +39,12 @@ class PageController extends BaseController
 		$view=$conf->getPageView($page->getType());
 
 
-		$contact=new Contact();
-		$contact->setNazwisko('Borys Jankiewicz');
-		$contact->setTitle('Formularz kontaktowy');
-		$form=$this->createFormBuilder($contact)
-			->add('message',null,array('label'=>'Wiadomość'))
-			->add('email')
-			->add('save','submit',array('label'=>'Wyślij'))
-			->getForm();
-		$form->handleRequest($request);
-		if ($form->isValid()) {
-			$mailHelper = $this->container->get('mail_helper');
-  
-			$mailHelper->sendEmailWithView(
-				$from,
-				$to,
-				$contact->getTitle(),
-				"SoftlogoCMSBundle:Contact:contact.html.twig",
-				array(
-					"message"=>$contact->getMessage(),
-					"email"=>$contact->getEmail()
-				)
-			);
-
-			$flash = $this->get('braincrafted_bootstrap.flash');
-			$flash->success('Formularz został wysłany.');
-			//return $this->redirect($this->generateUrl('form-informacja'));
-		}
-
-
 		return $this->render($view, array(
 			'site'      => $sitee,
 			'page'      => $page,
 			'title'      => $page->getTitle(),
 			'menu'      => $menu,
-			'form'      => $form->createView(),
+			//'form'      => $form->createView(),
 		));
 	}
 }
