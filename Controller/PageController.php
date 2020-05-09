@@ -20,6 +20,7 @@ class PageController extends BaseController
 
 	public function showAction($anchor="home", Request $request)
 	{
+		$em=$this->getEm();
 		$from=$this->container->getParameter('mailer_from');
 		$to=$this->container->getParameter('mailer_to');
 
@@ -31,14 +32,19 @@ class PageController extends BaseController
 		$sitee=$this->getSiteRepository()->findOneBy(array('host'=>$host))->getName();
 
 		$locale = $request->getLocale();
-		$language = $this->getLanguageRepository()->findOneBy(array('abbr'=>$locale));
 
-		$page = $this->getRepository()->findOnePage($anchor, $sitee, $language);
+		$page = $this->getRepository()->findOnePage($anchor, $sitee);
 
 		
 		//$loader=$this->get('twig.loader');
 		//$loader->addPath($this->get('kernel')->getRootDir() . '/../sites/'.$sitee->getName().'/views', 'home');
 		//$this->addHomePath();
+
+		$page->setLocale($locale);
+		//foreach($page->getArticles() as $article){
+			//$article->setLocale($locale);
+		//}
+		$em->refresh($page);
 
 		if (!$page) {
 			throw $this->createNotFoundException('Unable to find Section entity.');

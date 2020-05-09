@@ -127,6 +127,15 @@ class AbstractSection extends AbstractContent implements Translatable
     private $language;
 
 
+
+    /**
+     * @Gedmo\Locale
+     * Used locale to override Translation listener`s locale
+     * this is not a mapped field of entity metadata, just a simple property
+     */
+    protected $locale;
+
+
 	/**
 	 * @var \Page
 	 *
@@ -143,6 +152,11 @@ class AbstractSection extends AbstractContent implements Translatable
 		$this->isPage=0;
 		$this->isMainSection=1;
 	}
+
+    public function setLocale($locale)
+    {
+        $this->locale = $locale;
+    }
 
 	/**
 	 * Get id

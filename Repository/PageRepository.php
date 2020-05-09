@@ -24,15 +24,13 @@ class PageRepository extends EntityRepository
 		$query=$qb->getQuery();
 		return $query->getResult();
 	}
-	public function findOnePage($anchor,$site, $language){
+	public function findOnePage($anchor,$site){
 		$qb = $this->createQueryBuilder('p')
 			->join('p.sites', 's');
 		$qb->add('where', $qb->expr()->in('s.name', ':name'))
 			->setParameter('name', $site);
 		$qb->andWhere('p.anchor= :anchor')
 			->setParameter('anchor', $anchor);
-		$qb->andWhere('p.language= :language')
-			->setParameter('language', $language);
 		$query=$qb->getQuery();
 		return $query->getOneOrNullResult();
 	}

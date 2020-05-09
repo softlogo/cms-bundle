@@ -158,7 +158,6 @@ class PageAdmin extends Admin
 			//->add('pages')
 			->add('itemorder')
 			->add('isMenu')
-			->add('language')
 			->add('_action', 'actions', array(
 				'actions' => array(
 					//'show' => array(),
