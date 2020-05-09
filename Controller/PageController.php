@@ -20,8 +20,6 @@ class PageController extends BaseController
 
 	public function showAction($anchor="home", Request $request)
 	{
-		//echo $this->getParameter("kernel.project_dir");
-		echo getcwd();
 		$from=$this->container->getParameter('mailer_from');
 		$to=$this->container->getParameter('mailer_to');
 
