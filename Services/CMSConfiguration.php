@@ -28,9 +28,8 @@ class CMSConfiguration
 		if(true){
 			$this->host=$router->getContext()->getHost();
 
-			if($this->host !='localhost'){
-				//$this->site=$this->siteRepository->findOneBy(array('host'=>$this->host))->getName();
-				$this->site="proagrianew";
+			if($this->host !='localhost' && $this->host != '127.0.0.1'){
+				$this->site=$this->siteRepository->findOneBy(array('host'=>$this->host))->getName();
 			}
 			$siteConfigPath=$rootDir."/../sites/".$this->site."/config/config.yml";
 
