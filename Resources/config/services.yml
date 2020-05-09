@@ -10,6 +10,17 @@ parameters:
     mailer_to: borysjank@gmail.com
 services:
 
+    _defaults:
+        autowire: true      # Automatically injects dependencies in your services.
+        autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
+        public: true   
+
+    #cms.loader:
+        ##alias: App\Mail\PhpMailer
+        #alias: Symfony\Bundle\TwigBundle\Loader\FilesystemLoader
+        #public: true
+
+
     cms.menu_builder:
         class: Softlogo\CMSBundle\Menu\Builder
         arguments: ["@knp_menu.factory", '@doctrine.orm.entity_manager']

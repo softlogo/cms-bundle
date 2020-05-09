@@ -5,12 +5,23 @@ namespace Softlogo\CMSBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Softlogo\CMSBundle\Entity\Contact;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Bundle\TwigBundle\Loader\FilesystemLoader;
 
 class PageController extends BaseController
 {
+/*
+ *    private $loader;
+ *
+ *    public function __construct(FilesystemLoaderm $loader){
+ *        $this->loader=$loader;
+ *    
+ *    }
+ */
 
 	public function showAction($anchor="home", Request $request)
 	{
+		//echo $this->getParameter("kernel.project_dir");
+		echo getcwd();
 		$from=$this->container->getParameter('mailer_from');
 		$to=$this->container->getParameter('mailer_to');
 
