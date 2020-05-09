@@ -3,6 +3,8 @@
 namespace Softlogo\CMSBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
+use Gedmo\Translatable\Translatable;
 
 /**
  * Article
@@ -10,7 +12,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="article")
  * @ORM\Entity
  */
-class Article extends AbstractSection
+class Article extends AbstractSection implements Translatable
 {
   public function __toString()
   {
@@ -22,6 +24,7 @@ class Article extends AbstractSection
     /**
      * @var string
      *
+ 	 * @Gedmo\Translatable
      * @ORM\Column(name="abstract", type="text", nullable=true)
      */
     private $abstract;
@@ -29,6 +32,7 @@ class Article extends AbstractSection
     /**
      * @var string
      *
+ 	 * @Gedmo\Translatable
      * @ORM\Column(name="description", type="text", nullable=true)
      */
     private $description;
@@ -36,6 +40,7 @@ class Article extends AbstractSection
     /**
      * @var string
      *
+ 	 * @Gedmo\Translatable
      * @ORM\Column(name="content", type="text", nullable=true)
      */
     private $content;

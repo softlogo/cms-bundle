@@ -6,11 +6,13 @@ use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use Softlogo\CMSBundle\Entity\AbstractContent;
 use Doctrine\ORM\Event\LifecycleEventArgs;
+use Gedmo\Mapping\Annotation as Gedmo;
+use Gedmo\Translatable\Translatable;
 /**
 
  * @ORM\MappedSuperclass
  */
-class AbstractSection extends AbstractContent
+class AbstractSection extends AbstractContent implements Translatable
 {
 	public function __toString()
 	{
@@ -28,6 +30,7 @@ class AbstractSection extends AbstractContent
 	/**
 	 * @var string
 	 *
+ 	 * @Gedmo\Translatable
 	 * @ORM\Column(name="name", type="string", length=255, nullable=true)
 	 */
 	private $name;
@@ -35,6 +38,7 @@ class AbstractSection extends AbstractContent
 	/**
 	 * @var string
 	 *
+ 	 * @Gedmo\Translatable
 	 * @ORM\Column(name="title", type="string", length=255, nullable=true)
 	 */
 	private $title;
@@ -42,6 +46,7 @@ class AbstractSection extends AbstractContent
 	/**
 	 * @var string
 	 *
+ 	 * @Gedmo\Translatable
 	 * @ORM\Column(name="subtitle", type="string", length=255, nullable=true)
 	 */
 	private $subtitle;
