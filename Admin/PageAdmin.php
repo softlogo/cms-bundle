@@ -66,7 +66,7 @@ class PageAdmin extends Admin
 			->with('Content', array('class' => 'col-md-9'))
 			->add('name')
 			->add('anchor', TextType::class, array('label' => 'Anchor'))
-			->add('articles', CollectionType::class, array('label' => 'Articles', 'required' => false, 'by_reference' => false), array('edit' => 'inline','inline' => 'standard'))
+			->add('articles', CollectionType::class, array('label' => 'Articles', 'required' => false, 'by_reference' => false), array('edit' => 'inline','inline' => 'standard', 'sortable'=>true))
 
 			->end()
 			->with('Settings', array('class' => 'col-md-3'))
@@ -131,7 +131,6 @@ class PageAdmin extends Admin
 				->add('priority')
 				->add('isDropdown')
 				->add('href', TextType::class, array('label' => 'Href', 'required' => false))
-				->add('language')
 				->end()
 				->with('Sections', array('class' => 'col-md-12'))
 				->add('pageSections', CollectionType::class, array('label' => 'Sekcje', 'required' => false, 'by_reference' => false), array('edit' => 'inline','inline' => 'table'))

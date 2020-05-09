@@ -11,6 +11,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Sonata\Form\Type\CollectionType;
 use Sonata\AdminBundle\Form\Type\ModelListType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Sonata\AdminBundle\Form\Type\ChoiceFieldMaskType;
 class ArticleAdmin extends Admin
 {
 	public $conf;
@@ -43,12 +44,24 @@ class ArticleAdmin extends Admin
 
 
 			->add('media', ModelListType::class, array('required' => false), array())
-			->add('gallery', ModelListType::class, array('required' => false), array())
-			->add('language')
-			->add('itemorder', null, array('label'=>'Itemorder'))
-			
-			
+			//->add('gallery', ModelListType::class, array('required' => false), array())
+
+
 			//->add('anchor', 'text', array('label' => 'Anchor'))
+			->add('name', ChoiceFieldMaskType::class, [
+			'choices' => [
+			'simple' => 'simple',
+			'extended' => 'extended',
+			],
+			'data' => 'simple',
+			'map' => [
+			'simple' => ['title'],
+			'extended' => ['title', 'subtitle', 'media'],
+			],
+			'placeholder' => 'Choose an option',
+			'required' => false
+			])
+
 			; 
 
 	}
