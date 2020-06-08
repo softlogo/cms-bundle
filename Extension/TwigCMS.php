@@ -73,6 +73,7 @@ class TwigCMS extends \Twig_Extension{
 
 			new \Twig_Function('render_section', array($this, 'getSection')),
 			new \Twig_Function('render_section_by_name', array($this, 'getSectionByName')),
+			new \Twig_Function('render_section_by_id', array($this, 'getSectionById')),
 			new \Twig_Function('render_block', array($this, 'getBlock')),
 			new \Twig_Function('render_menu', array($this, 'getMenu')),
 			new \Twig_Function('render_sub_galleries', array($this, 'getSubGalleries')),
