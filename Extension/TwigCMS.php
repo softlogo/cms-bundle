@@ -54,7 +54,7 @@ class TwigCMS extends \Twig_Extension{
 		//$siteName=! isset($urlParams['site']) ? 'main':$urlParams['site'];
 		//$siteHost = $this->request->getHost();
 		//$locale = $this->request->getLocale();
-		$siteHost="proagrianew.localhost";
+		$siteHost=$this->container->getParameter("host");
 		$locale="pl";
 
 		$language = $this->em->getRepository('SoftlogoCMSBundle:Language')->findOneBy(array('abbr'=>$locale));

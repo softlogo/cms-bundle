@@ -8,6 +8,7 @@ parameters:
 
     mailer_from: sklep@localhost
     mailer_to: borysjank@gmail.com
+    host: '%env(resolve:HOST)%'
 services:
 
     _defaults:
