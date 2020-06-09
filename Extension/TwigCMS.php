@@ -77,6 +77,8 @@ class TwigCMS extends \Twig_Extension{
 			new \Twig_Function('render_block', array($this, 'getBlock')),
 			new \Twig_Function('render_menu', array($this, 'getMenu')),
 			new \Twig_Function('render_sub_galleries', array($this, 'getSubGalleries')),
+			new \Twig_Function('render_page_cat', array($this, 'getPageCategories')),
+			new \Twig_Function('render_downloads', array($this, 'getDownloads')),
 
 			/*
 			 *'render_section_by_id' => new \Twig_Function_Method($this, 'getSectionById' ,array('is_safe' => array('html'))),
@@ -91,6 +93,10 @@ class TwigCMS extends \Twig_Extension{
 			new \Twig_SimpleFilter('price', array($this, 'priceFilter')),
 			new \Twig_SimpleFilter('loc', array($this, 'getFieldByLanguage')),
 			new \Twig_SimpleFilter('checkByLoc', array($this, 'checkFieldByLanguage')),
+			new \Twig_SimpleFilter('checkLang', array($this, 'checkLanguage')),
+			new \Twig_SimpleFilter('countryByLocale', array($this, 'checkCountry')),
+			new \Twig_SimpleFilter('pageNameByAnchor', array($this, 'checkAnchor')),
+			new \Twig_SimpleFilter('mediaType', array($this, 'checkFieldMediaType')),
 		);
 	}
 
@@ -129,7 +135,100 @@ class TwigCMS extends \Twig_Extension{
 
 
 
+
+
+	public function checkFieldMediaType($productMedias, $types = array())
+	{
+		$newdata = [];
+		//echo count($productMedias);
+	 	 foreach($productMedias as $elementKey => $productMedia) {
+ 	 		if (in_array($productMedia->getType(), $types)) {
+ 	 			//delete this particular object from the $array
+ 	 			//echo $productMedia->getType();
+ 	 			//unset($productMedias[$elementKey]);
+ 	 			$newdata[] = $productMedia;
+ 	 		}
+	 	 }
+		return $newdata;  
+	}
+	
+	public function checkAnchor($anchor)
+	{
+		$anchor = strtolower($anchor);
+		if(empty($this->urlParams['_locale']))
+			$locale='pl';
+		else
+			$locale=$this->urlParams['_locale'];
+		$pages = $this->em->getRepository('SoftlogoCMSBundle:Page')->findBy(array('anchor'=>$anchor),array());
+		if(!$pages) return false;
+		foreach($pages as $page){
+			if($page->getLanguage()==$locale)
+				return $page->getName();
+		}
+			
+			
+		return false;
+	}
+	
+	public function checkCountry($locale)
+	{
+		$locale = strtoupper($locale);
+		$locale = preg_replace('/_.*/', '', $locale);
+		$country = Intl::getRegionBundle()->getCountryName($locale);
+		return $country;
+	}
+	
+	public function checkLanguage($contents)
+	{
+		$newData = [];
+		if(empty($this->urlParams['_locale']))
+			$locale='pl';
+		else
+			$locale=$this->urlParams['_locale'];
+		foreach($contents as $content){
+			if($content->getLanguage()==$locale)
+				$newData[] = $content;
+		}
+		return $newData;
+	}
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
 	//FUNKCJE
+	//
+	//
+	public function getDownloads($parameters = array()){
+		if(isset($parameters['anchor'])){
+			$page = $this->em->getRepository('SoftlogoCMSBundle:Page')->findOneBy(array('anchor'=>$parameters['anchor']),array());
+		}elseif(isset($parameters['page_id'])){
+			$page = $this->em->getRepository('SoftlogoCMSBundle:Page')->findOneBy(array('id'=>$parameters['page_id']),array());
+		}else{
+			return false;
+		}
+		if(!($page)) return false;
+		$pageId = 1;
+		$entities= $this->em->getRepository('SoftlogoProductBundle:Category')->findBy(array('parent' => $pageId),array());
+		//echo count($entities);
+		
+		$parameters = $parameters + array(
+				'entities' => $entities,
+		);
+		return $this->templating->render("SoftlogoCMSBundle:Product:!downloads.html.twig", $parameters);
+		
+		
+	}
+
 
 	public function getSectionByName($parameters = array())
 	{
@@ -275,6 +374,49 @@ class TwigCMS extends \Twig_Extension{
 			'categories' => $categories,
 		);
 		return $this->templating->render("SoftlogoCMSBundle:Gallery:!galleries.html.twig", $parameters);
+	}
+
+
+
+	/*
+	 *Powinny być w Product Bundle
+	 */
+
+	public function getPageCategories($parameters = array())
+	{
+		if(isset($parameters['page_id'])){
+			$page = $this->em->getRepository('SoftlogoCMSBundle:Page')->findOneBy(array('id'=>$parameters['page_id']),array());
+			$collection = $page->getParent();
+		}elseif(isset($parameters['parent'])){
+			$cat = $this->em->getRepository('SoftlogoProductBundle:Category')->findOneBy(array('name'=>$parameters['parent']), array('id' => 'ASC'));
+			if(empty($cat))
+				return false;
+			$collection = $this->em->getRepository('SoftlogoProductBundle:Category')->findBy(array('parent'=>$cat->getId()), array('itemorder' => 'ASC'));		
+		}else return false;
+		if(empty($collection))
+			return false;
+		$parameters = $parameters + array(
+			'categories' => $collection,
+		);
+		if(isset($parameters['menu']))
+			return $this->templating->render("SoftlogoCMSBundle:Product:!categories-menu.html.twig", $parameters);
+		elseif(isset($parameters['list']))
+			return $this->templating->render("SoftlogoCMSBundle:Product:!categories-list.html.twig", $parameters);
+		else
+			return $this->templating->render("SoftlogoCMSBundle:Product:!categories.html.twig", $parameters);
+	}
+	public function getProducts($parameters = array())
+	{
+		$cat = $this->em->getRepository('SoftlogoProductBundle:Category')->findOneBy(array('name'=>$parameters['cat']), array('id' => 'ASC'));
+		if(empty($cat))
+			return false;
+		$collection = $this->em->getRepository('SoftlogoProductBundle:Product')->findBy(array('category'=>$cat->getId()), array('itemorder' => 'ASC'));
+		if(empty($collection))
+			return false;
+		$parameters = $parameters + array(
+			'categories' => $collection,
+		);
+		return $this->templating->render("SoftlogoCMSBundle:Product:!products.html.twig", $parameters);
 	}
 
 
