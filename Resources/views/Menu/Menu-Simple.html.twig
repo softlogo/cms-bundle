@@ -3,7 +3,7 @@
 
 
 {% if item.pages.count>0%}
-<a href="#" >{{item.name}}</a>
+<a href="#" >{{item.anchor|trans}}</a>
 <ul>
 	{% for subitem in item.pages %}
 	<li><a href="{{ path('cms_page', { 'anchor': subitem.anchor }) }}">{{subitem.name}}</a></li>
@@ -12,7 +12,7 @@
 
 
 {% else %}
-<a href="{{ path('cms_page', { 'anchor': item.anchor }) }}">{{item.name}}</a>
+<a href="{{ path('cms_page', { 'anchor': item.anchor }) }}">{{item.anchor|trans}}</a>
 {% endif %}
 </li>
 {% endfor%}
