@@ -396,8 +396,8 @@ class TwigCMS extends \Twig_Extension{
 		 *PODKATEGORIA
 		 */
 		elseif(isset($parameters['parent'])){
-			$cat = $this->em->getRepository('SoftlogoProductBundle:Category')->findOneBy(array('name'=>$parameters['parent']), array('id' => 'ASC'));
-			$collection = $this->em->getRepository('SoftlogoProductBundle:Category')->findBy(array('parent'=>$cat->getId()), array('itemorder' => 'ASC'));		
+			$category = $this->em->getRepository('SoftlogoProductBundle:Category')->findOneBy(array('slug'=>$parameters['parent']), array('id' => 'ASC'));
+			$collection = $this->em->getRepository('SoftlogoProductBundle:Category')->findBy(array('parent'=>$category->getId()), array('itemorder' => 'ASC'));		
 
 
 
@@ -412,6 +412,7 @@ class TwigCMS extends \Twig_Extension{
 		else
 			return $this->templating->render("SoftlogoCMSBundle:Product:!categories.html.twig", $parameters);
 	}
+
 	public function getProducts($parameters = array())
 	{
 		$cat = $this->em->getRepository('SoftlogoProductBundle:Category')->findOneBy(array('name'=>$parameters['cat']), array('id' => 'ASC'));
