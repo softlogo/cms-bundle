@@ -146,7 +146,9 @@ class TwigCMS extends \Twig_Extension{
  	 			//delete this particular object from the $array
  	 			//echo $productMedia->getType();
  	 			//unset($productMedias[$elementKey]);
+				if($productMedia->getMedia()){
  	 			$newdata[] = $productMedia;
+				}
  	 		}
 	 	 }
 		return $newdata;  
@@ -209,24 +211,22 @@ class TwigCMS extends \Twig_Extension{
 	//
 	//
 	public function getDownloads($parameters = array()){
+		//$locale=$this->urlParams['_locale'];
+		$locale = $this->container->get('sonata.intl.locale_detector.request_stack')->getLocale();
 		if(isset($parameters['anchor'])){
-			$page = $this->em->getRepository('SoftlogoCMSBundle:Page')->findOneBy(array('anchor'=>$parameters['anchor']),array());
-		}elseif(isset($parameters['page_id'])){
-			$page = $this->em->getRepository('SoftlogoCMSBundle:Page')->findOneBy(array('id'=>$parameters['page_id']),array());
-		}else{
-			return false;
+		$category= $this->em->getRepository('SoftlogoProductBundle:Category')->findOneBy(array('slug' => $parameters['anchor']),array());
+		//$category= $this->em->getRepository('SoftlogoProductBundle:Category')->findOneBy(array('slug' => 'landbrug'));
+		$entities=$category->getCategories();
+		foreach($entities as $entity){
+			$entity->setLocale($locale);
 		}
-		if(!($page)) return false;
-		$pageId = 1;
-		$entities= $this->em->getRepository('SoftlogoProductBundle:Category')->findBy(array('parent' => $pageId),array());
-		//echo count($entities);
-		
 		$parameters = $parameters + array(
 				'entities' => $entities,
 		);
 		return $this->templating->render("SoftlogoCMSBundle:Product:!downloads.html.twig", $parameters);
 		
 		
+	}
 	}
 
 

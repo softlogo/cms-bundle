@@ -27,7 +27,7 @@
             	{% for prod in category.products %}
             	<tr>
         			<td><a href="{{ path('product_show', { 'slug': prod.slug, 'cat_slug':category.slug }) }}" >{{ prod.name }}</a></td>
-        			{% set pdfObj = prod.productMedias|mediaType(['PDF']) %}
+        			{% set pdfObj = prod.productMedias|mediaType(['1']) %}
         			{% if pdfObj|length > 0 %}
         			{% for file in pdfObj %}
         			{% if loop.index ==1 %}
@@ -38,7 +38,7 @@
                 		<td>{% trans %}Brak{% endtrans %}</td>
                 	{% endif %}
                 	
-        			{% set pdfObj = prod.productMedias|mediaType(['CE']) %}
+        			{% set pdfObj = prod.productMedias|mediaType(['2']) %}
         			{% if pdfObj|length > 0 %}
         			{% for file in pdfObj %}
         			{% if loop.index ==1 %}
@@ -49,7 +49,7 @@
                 		<td>{% trans %}Brak{% endtrans %}</td>
                 	{% endif %}
         			
-        			{% set pdfObj = prod.productMedias|mediaType(['DTR']) %}
+        			{% set pdfObj = prod.productMedias|mediaType(['3']) %}
         			{% if pdfObj|length > 0 %}
         			{% for file in pdfObj %}
         			{% if loop.index ==1 %}
@@ -61,7 +61,7 @@
                 	{% endif %}
                 	
 					{% if app.user %}
-        			{% set pdfObj = prod.productMedias|mediaType(['DWG']) %}
+        			{% set pdfObj = prod.productMedias|mediaType(['4']) %}
         			{% if pdfObj|length > 0 %}
         			{% for file in pdfObj %}
         			{% if loop.index ==1 %}
@@ -71,7 +71,7 @@
             		{% else %}
                 		<td>{% trans %}Brak{% endtrans %}</td>
                 	{% endif %}
-                	{% set pdfObj = prod.productMedias|mediaType(['ProductCard']) %}
+                	{% set pdfObj = prod.productMedias|mediaType(['5']) %}
         			{% if pdfObj|length > 0 %}
         			{% for file in pdfObj %}
         			{% if loop.index ==1 %}
