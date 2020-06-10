@@ -384,17 +384,24 @@ class TwigCMS extends \Twig_Extension{
 
 	public function getPageCategories($parameters = array())
 	{
+		/*
+		 *NA PODSTRONIE (JEDNAJ Z TRZECH)
+		 */
 		if(isset($parameters['page_id'])){
 			$page = $this->em->getRepository('SoftlogoCMSBundle:Page')->findOneBy(array('id'=>$parameters['page_id']),array());
-			$collection = $page->getParent();
-		}elseif(isset($parameters['parent'])){
+			$categoryMain = $this->em->getRepository('SoftlogoProductBundle:Category')->findOneBy(array('slug'=>$page->getAnchor()));
+			$collection=$categoryMain->getCategories();
+		}
+		/*
+		 *PODKATEGORIA
+		 */
+		elseif(isset($parameters['parent'])){
 			$cat = $this->em->getRepository('SoftlogoProductBundle:Category')->findOneBy(array('name'=>$parameters['parent']), array('id' => 'ASC'));
-			if(empty($cat))
-				return false;
 			$collection = $this->em->getRepository('SoftlogoProductBundle:Category')->findBy(array('parent'=>$cat->getId()), array('itemorder' => 'ASC'));		
+
+
+
 		}else return false;
-		if(empty($collection))
-			return false;
 		$parameters = $parameters + array(
 			'categories' => $collection,
 		);

@@ -29,11 +29,11 @@ class Builder
 		$host=$request->getHost();
 		$site=$this->siteRep->findOneByHost($host);
 
-		$pages = $this->pageRep->findBy(array('isMenu'=>true, 'isVisible' => 1), array('itemorder' => 'ASC'));
+		$pages = $this->pageRep->findBy(array('isMenu'=>true), array('itemorder' => 'ASC'));
 
 		$menu = $this->factory->createItem('root', array(
 			'childrenAttributes'    => array(
-			'class'             => 'nav-links navbar-nav',
+			'class'             => 'nav',
 			)
 		));
 		
