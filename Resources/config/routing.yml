@@ -1,9 +1,9 @@
-softlogo_gallery_routing:
-    resource: "@SoftlogoCMSBundle/Resources/config/routing/gallery.yml"
-    prefix:   /{_locale}/
-    defaults: { _locale: "%locale%"}
-    requirements:
-        _locale: en|pl|de|ru|se|dk
+#softlogo_gallery_routing:
+    #resource: "@SoftlogoCMSBundle/Resources/config/routing/gallery.yml"
+    #prefix:   /{_locale}/
+    #defaults: { _locale: "%locale%"}
+    #requirements:
+        #_locale: en|pl|de|ru|se|dk
 
 softlogo_cms_routing:
     resource: "@SoftlogoCMSBundle/Resources/config/routing/page.yml"
