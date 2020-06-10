@@ -1,0 +1,22 @@
+{% set par = 0 %}
+{% for cat in categories %}
+<div class="col-sm-6 page-child reset-padding">
+	<div class="cont-img col-sm-7">
+	<a href="{{path('product_cat',{'slug':cat.slug})}}" >
+		{% if cat.media|length >0 %}
+			<img src="{% path cat.media, 'medium' %}" alt="{{ cat.media.name }}" class="img-responsive "  />			
+		{% else %}
+			<img src="/img/blank.png" alt="" class="img-responsive " />
+		{% endif %}
+	</a>
+	</div>
+	<div class="cont-text  col-sm-5 reset-padding">
+    	<h5>RIA {{ cat.name |capitalize}}</h5>
+{#		<p>{{cat.description}}</p>	#}
+		<p>{{ cat.description|striptags|truncate(200, true, "...")|raw }}</p>
+	</div>
+</div>
+{% if cat.parent.id is defined %}
+{% set par = cat.parent.name|lower %}
+{% endif %}
+{% endfor %}

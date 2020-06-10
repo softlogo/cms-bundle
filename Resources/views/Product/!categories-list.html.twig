@@ -1,0 +1,15 @@
+<!--
+   -To jest menu na dole
+   -->
+{% set par = 0 %}
+{% for cat in categories %}
+<li><a href="{{ path('product_cat', { 'slug' : cat.slug}) }}">
+	{{ cat.name|lower }}
+</a></li>	
+{% if cat.parent.id is defined %}
+{% set par = cat.parent.name|lower %}
+{% endif %}
+{% endfor %}
+{#
+<li><a href="{{ path('portfolio', { 'cat': par }) }}" >{% trans %}Realizacje{%endtrans%}</a></li>
+#}

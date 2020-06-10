@@ -1,0 +1,98 @@
+<div class="section-header margin40down">
+	<div class="container">
+	<span class="downlads-title">{% trans %}Dane techniczne{% endtrans %}</span>
+	</div>
+</div>
+<div class="files-table">
+	<div class="container">      
+        {% for category in entities %}
+        {% if category.products|length >0 %}
+        <div class="table-responsive">
+        	<table class="table">
+        		<thead>
+        			<tr>
+        				<th class="block-header"><span>
+                    		{{ category.name }}
+        				</span></th>
+        				<th>{% trans %}PDF{% endtrans %}</th>
+        				<th>{% trans %}CERTYFIKAT{% endtrans %}</th>
+        				<th>{% trans %}INSTRUKCJA{% endtrans %}</th>
+        				<th>{% trans %}DWG{% endtrans %}</th>
+        				<th>{% trans %}PRODUKT{% endtrans %}</th>
+        			</tr>
+        		</thead>
+        		<tbody>
+            		
+            	</h2>
+            	{% for prod in category.products %}
+            	<tr>
+        			<td><a href="{{ path('product_show', { 'slug': prod.slug, 'cat_slug':category.slug }) }}" >{{ prod.name }}</a></td>
+        			{% set pdfObj = prod.productMedias|mediaType(['PDF']) %}
+        			{% if pdfObj|length > 0 %}
+        			{% for file in pdfObj %}
+        			{% if loop.index ==1 %}
+                        <td><a href="{% path file.media, 'reference' %}" target="_blank">PDF</a></td>
+                    {% endif %}
+                    {% endfor %}
+            		{% else %}
+                		<td>{% trans %}Brak{% endtrans %}</td>
+                	{% endif %}
+                	
+        			{% set pdfObj = prod.productMedias|mediaType(['CE']) %}
+        			{% if pdfObj|length > 0 %}
+        			{% for file in pdfObj %}
+        			{% if loop.index ==1 %}
+                        <td><a href="{% path file.media, 'reference' %}" target="_blank">CE</a></td>
+                    {% endif %}
+                    {% endfor %}
+            		{% else %}
+                		<td>{% trans %}Brak{% endtrans %}</td>
+                	{% endif %}
+        			
+        			{% set pdfObj = prod.productMedias|mediaType(['DTR']) %}
+        			{% if pdfObj|length > 0 %}
+        			{% for file in pdfObj %}
+        			{% if loop.index ==1 %}
+                        <td><a href="{% path file.media, 'reference' %}" target="_blank">DTR</a></td>
+                    {% endif %}
+                    {% endfor %}
+            		{% else %}
+                		<td>{% trans %}Brak{% endtrans %}</td>
+                	{% endif %}
+                	
+					{% if app.user %}
+        			{% set pdfObj = prod.productMedias|mediaType(['DWG']) %}
+        			{% if pdfObj|length > 0 %}
+        			{% for file in pdfObj %}
+        			{% if loop.index ==1 %}
+                        <td><a href="{% path file.media, 'reference' %}" target="_blank">DWG</a></td>
+                    {% endif %}
+                    {% endfor %}
+            		{% else %}
+                		<td>{% trans %}Brak{% endtrans %}</td>
+                	{% endif %}
+                	{% set pdfObj = prod.productMedias|mediaType(['ProductCard']) %}
+        			{% if pdfObj|length > 0 %}
+        			{% for file in pdfObj %}
+        			{% if loop.index ==1 %}
+                        <td><a href="{% path file.media, 'reference' %}" target="_blank">{% trans %}Karta produktu{% endtrans %}</a></td>
+                    {% endif %}
+                    {% endfor %}
+            		{% else %}
+                		<td>{% trans %}Brak{% endtrans %}</td>
+                	{% endif %}
+                	{% else %}
+                	<td><a href="/login">{% trans %}Zaloguj się{% endtrans %}</a></td>
+                	<td><a href="/login">{% trans %}Zaloguj się{% endtrans %}</a></td>
+					{% endif %} 
+					
+						
+        		</tr>
+            	{% endfor %}
+        		</tbody>
+        	</table>
+        </div>
+        {% endif %}
+        {% endfor %}
+	</div>
+</div>

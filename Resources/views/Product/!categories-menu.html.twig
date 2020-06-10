@@ -1,0 +1,23 @@
+{% set par = 0 %}
+{% set parentCategory = app.request.get('anchor') %}
+
+{% if category is defined %}
+	{% set parentCategory = category %}
+{% endif %}
+<ul>
+{% for cat in categories %}
+	<li {{ parentCategory== cat.id ? 'class="active"'}} title="{{ app.request.get('id')}} {{cat.id}}">
+	<a href="{{path('product_cat',{'slug':cat.slug})}}" data-anchor="{{ cat.name }}" >
+		{{cat.name}}
+	</a></li>
+		{% if cat.parent.id is defined %}
+		{% set par = cat.parent.name|lower %}
+		{% endif %}
+{% endfor %}
+	{#
+	<li {{ path(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')) == '/' ~ app.request.locale ~ '/cases/' ~ app.request.get('cat') ? 'class="active"' }}>
+	<a href="{{ path('portfolio', { 'cat': par }) }}" >{% trans %}Realizacje{%endtrans%}</a>
+	</li>	
+	#}
+</ul>
+<a  href="{#{ path('product_basket', { 'cat': par }) }#}" class="basket">{% trans %}Koszyk{% endtrans %} [<span id="#basket-count">0</span>]</a>
