@@ -354,7 +354,7 @@ class TwigCMS extends \Twig_Extension{
 		$locale = $this->container->get('sonata.intl.locale_detector.request_stack')->getLocale();
 		$language = $this->em->getRepository('SoftlogoCMSBundle:Language')->findOneBy(array('abbr'=>$locale));
 		//$menu = $this->em->getRepository('SoftlogoCMSBundle:Page')->findBy(array('sites'=>$site->getName()), array('id' => 'ASC'));
-		$menu = $this->em->getRepository('SoftlogoCMSBundle:Page')->findBySiteName($site->getName());
+		$menu = $this->em->getRepository('SoftlogoCMSBundle:Page')->findBy(array('isMenu'=>true), array('itemorder'=>'asc'));
 		//$menu = $this->em->getRepository('SoftlogoCMSBundle:Page')->findBySiteName($parameters['site']);
 		//$menu = $this->em->getRepository('SoftlogoCMSBundle:Page')->findAll();
 		$parameters = $parameters + array(
