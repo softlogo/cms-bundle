@@ -4,6 +4,8 @@
 {% if category is defined %}
 	{% set parentCategory = category %}
 {% endif %}
+<div class="menu">
+
 <ul>
 {% for cat in categories %}
 	<li {{ parentCategory== cat.id ? 'class="active"'}} title="{{ app.request.get('id')}} {{cat.id}}">
@@ -21,3 +23,4 @@
 	#}
 </ul>
 <a  href="{#{ path('product_basket', { 'cat': par }) }#}" class="basket">{% trans %}Koszyk{% endtrans %} [<span id="#basket-count">0</span>]</a>
+</div>
