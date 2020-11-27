@@ -49,12 +49,13 @@ class TwigCMS extends \Twig_Extension{
 	private function getPage(){
 		if($this->request!=""){
 			$urlParams = $this->request->attributes->get('_route_params');
-		}
+			$siteHost = $this->request->getCurrentHost();
+		}else $siteHost="localhost";
 		$anchor=! isset($urlParams['anchor']) ? 'home':$urlParams['anchor'];
 		//$siteName=! isset($urlParams['site']) ? 'main':$urlParams['site'];
 		//$siteHost = $this->request->getHost();
 		//$locale = $this->request->getLocale();
-		$siteHost=$this->container->getParameter("host");
+		//$siteHost=$this->container->getParameter("host");
 		$locale="pl";
 
 		$language = $this->em->getRepository('SoftlogoCMSBundle:Language')->findOneBy(array('abbr'=>$locale));
