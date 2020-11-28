@@ -9,36 +9,36 @@ use Symfony\Component\Templating\EngineInterface;
 use Softlogo\CMSBundle\Services\CMSConfiguration;
 use Sonata\ClassificationBundle\Entity\CategoryManager;
 use Symfony\Component\Templating\Helper\Helper;
+use Symfony\Component\HttpFoundation\Request;
 
 class TwigCMS extends \Twig_Extension{
 
 	protected $container;
 	protected $page;
 	protected $sectionPager;
-	protected $request;
-	protected $cm;
+	protected $router;
 	protected $templating;
 	protected $conf;
 	protected $galleryManager;
+	protected $requestStack;
+	protected $request;
 
 	/**
 	 * Constructor.
 	 *
 	 * @param ContainerInterface $container
 	 */
-	public function __construct($container, $em, $sectionPager, RequestStack $request_stack, $mm, CategoryManager $cm, $templating, CMSConfiguration $conf, $galleryManager)
+	public function __construct($container, $em, $sectionPager, $requestStack,  $mm, $templating, CMSConfiguration $conf)
 	{
 		$this->container = $container;
 		$this->em = $em;
 		$this->mm = $mm;
-		$this->cm = $cm;
 		$this->page=$this->getPage();
 		$this->sectionPager=$sectionPager;
-	    $this->request = $request_stack->getCurrentRequest();
+		//$this->router=$router;
 		//$this->urlParams = $this->request->attributes->get('_route_params');
 		$this->templating  = $templating;
 		$this->conf  = $conf;
-		$this->galleryManager  = $galleryManager;
 	}
 
 	public function getName()
@@ -47,24 +47,17 @@ class TwigCMS extends \Twig_Extension{
 	}
 
 	private function getPage(){
-		if($this->request!=""){
-			$urlParams = $this->request->attributes->get('_route_params');
-			$siteHost = $this->request->getCurrentHost();
+    $router = $this->container->get('router');
+		if($siteHost=$router->getContext()->getHost()){
 		}else $siteHost="localhost";
 		$anchor=! isset($urlParams['anchor']) ? 'home':$urlParams['anchor'];
-		//$siteName=! isset($urlParams['site']) ? 'main':$urlParams['site'];
-		//$siteHost = $this->request->getHost();
-		//$locale = $this->request->getLocale();
-		//$siteHost=$this->container->getParameter("host");
 		$locale="pl";
 
 		$language = $this->em->getRepository('SoftlogoCMSBundle:Language')->findOneBy(array('abbr'=>$locale));
-		
 		$site = $this->em->getRepository('SoftlogoCMSBundle:Site')->findOneBy(array('host'=>$siteHost));
-		//$site = $this->em->getRepository('SoftlogoCMSBundle:Site')->findOneBy(array('name'=>$siteName));
-
-
+		if($site){
 		return $page = $this->em->getRepository('SoftlogoCMSBundle:Page')->findOnePage($anchor,$site->getName(), $language);
+		}else return null;
 
 	}
 
@@ -76,7 +69,6 @@ class TwigCMS extends \Twig_Extension{
 			new \Twig_Function('render_section_by_name', array($this, 'getSectionByName')),
 			new \Twig_Function('render_block', array($this, 'getBlock')),
 			new \Twig_Function('render_menu', array($this, 'getMenu')),
-			new \Twig_Function('render_sub_galleries', array($this, 'getSubGalleries')),
 
 			/*
 			 *'render_section_by_id' => new \Twig_Function_Method($this, 'getSectionById' ,array('is_safe' => array('html'))),
@@ -98,7 +90,7 @@ class TwigCMS extends \Twig_Extension{
 
 	public function getFieldByLanguage($entity,$inputField,$locale=''){
 		if($locale==''){$locale=$this->urlParams['_locale'];}
-		$getter='get'.ucfirst($inputField);
+			$getter='get'.ucfirst($inputField);
 		if($content=$entity->getContent($locale)){
 			return $content->$getter();
 		}else return $entity->$getter();
@@ -106,23 +98,23 @@ class TwigCMS extends \Twig_Extension{
 
 	public function checkFieldByLanguage($entity,$inputField,$locale=''){
 		if($locale==''){$locale=$this->urlParams['_locale'];}
-		if($entity->getLanguage()){
-			$language=$entity->getLanguage()->getAbbr();
-		}else $language='pl';
+			if($entity->getLanguage()){
+				$language=$entity->getLanguage()->getAbbr();
+			}else $language='pl';
 
-			
+
 		$getter='get'.ucfirst($inputField);
 		if($locale==$language){
-		
+
 			return $entity->$getter();
 		}else return null;
 	}
 
 
-    public function priceFilter($number, $decimals = 0, $decPoint = '.', $thousandsSep = ',')
-    {
-        $price = number_format($number, $decimals, $decPoint, $thousandsSep);
-        //$price = '$'.$price;
+	public function priceFilter($number, $decimals = 0, $decPoint = '.', $thousandsSep = ',')
+	{
+		$price = number_format($number, $decimals, $decPoint, $thousandsSep);
+		//$price = '$'.$price;
 
         return $price;
     }
@@ -268,14 +260,6 @@ class TwigCMS extends \Twig_Extension{
 		return $this->templating->render($view, $parameters);
 	}
 
-	public function getSubGalleries($parameters = array())
-	{
-		$categories=$this->cm->getSubCategoriesPager($parameters['id'], 1, 25);
-		$parameters = $parameters + array(
-			'categories' => $categories,
-		);
-		return $this->templating->render("SoftlogoCMSBundle:Gallery:!galleries.html.twig", $parameters);
-	}
 
 
 

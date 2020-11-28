@@ -30,6 +30,7 @@ class CMSConfiguration
 
 			if($this->host !='localhost' && $this->host != '127.0.0.1'){
 				$this->site=$this->siteRepository->findOneBy(array('host'=>$this->host))->getName();
+				//$this->site=$this->siteRepository->findOneBy(array('host'=>'audytornew.localhost'))->getName();
 			}
 			$siteConfigPath=$rootDir."/../sites/".$this->site."/config/config.yml";
 
