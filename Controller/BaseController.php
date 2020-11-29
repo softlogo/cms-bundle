@@ -56,7 +56,7 @@ class BaseController extends Controller
 		return $path;
 	}
 	public function addHomePath(){
-        $site= $this->getSiteRepository()->findOneByHost($this->getHost());
+        $site= $this->getSiteRepository()->findOneByHost("audytornew.localhost");
         $this->get('twig.loader')->addPath($this->get('kernel')->getRootDir() . '/../sites/'.$site->getName().'/views', 'home');
 	}
 

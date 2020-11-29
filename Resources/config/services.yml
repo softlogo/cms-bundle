@@ -16,16 +16,22 @@ services:
         autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
         public: false   
 
+
+        bind:
+            $loader: '@twig.loader'
+
     #App\:
         #resource: '../src/*'
         #exclude: '../src/{DependencyInjection,Entity,Migrations,Tests,Kernel.php}'
 
+    Softlogo\CMSBundle\Controller\:
+        resource: '../../Controller'
+        tags: ['controller.service_arguments']
 
     #cms.loader:
         ##alias: App\Mail\PhpMailer
         #alias: Symfony\Bundle\TwigBundle\Loader\FilesystemLoader
         #public: true
-
 
     cms.menu_builder:
         class: Softlogo\CMSBundle\Menu\Builder
