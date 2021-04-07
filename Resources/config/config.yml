@@ -1,6 +1,7 @@
 softlogo_cms:
   section_types:
     articles: Article.html.twig
+    offer: offer.html.twig
   page_types:
     page: page.html.twig
     contact: contact.html.twig

@@ -90,7 +90,7 @@ class PageAdmin extends Admin
 
 				->tab('General')
 				->with('Settings', array('class' => 'col-md-3'))
-				//->add('sites')
+				->add('sites', null, array('disabled'=>true))
 				->end()
 				->end()
 				;
