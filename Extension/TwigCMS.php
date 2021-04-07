@@ -243,11 +243,16 @@ class TwigCMS extends \Twig_Extension{
 	public function getMenu($parameters = array())
 	{
 
-		$site = $this->em->getRepository('SoftlogoCMSBundle:Site')->findOneBy(array('name'=>$parameters['sitename']), array('id' => 'ASC'));
-		$locale = $this->container->get('request')->getLocale();
+    $router = $this->container->get('router');
+		if($siteHost=$router->getContext()->getHost()){
+		}else $siteHost="localhost";
+		$anchor=! isset($urlParams['anchor']) ? 'home':$urlParams['anchor'];
+		$locale="pl";
+
 		$language = $this->em->getRepository('SoftlogoCMSBundle:Language')->findOneBy(array('abbr'=>$locale));
+		$site = $this->em->getRepository('SoftlogoCMSBundle:Site')->findOneBy(array('host'=>$siteHost));
 		//$menu = $this->em->getRepository('SoftlogoCMSBundle:Page')->findBy(array('sites'=>$site->getName()), array('id' => 'ASC'));
-		$menu = $this->em->getRepository('SoftlogoCMSBundle:Page')->findBySiteName($site->getName(), $language);
+		$menu = $this->em->getRepository('SoftlogoCMSBundle:Page')->findBySiteName($site->getName());
 		//$menu = $this->em->getRepository('SoftlogoCMSBundle:Page')->findBySiteName($parameters['site']);
 		//$menu = $this->em->getRepository('SoftlogoCMSBundle:Page')->findAll();
 		$parameters = $parameters + array(
