@@ -10,6 +10,7 @@ softlogo_cms:
     sections: Sections.html.twig
     content: Content.html.twig
     header: Standard.html.twig
+    footer: Standard.html.twig
   article_types:
     Główny-Artykuł: main
     Portfolio-Opis: more
