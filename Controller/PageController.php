@@ -25,10 +25,10 @@ class PageController extends BaseController
 		$conf=$this->get('cms_conf');
 		$host=$request->getHost();
 		$menu = $this->getRepository()->findBy(array('isMenu'=>true), array('itemorder' => 'ASC'));
-		$site=$this->getSiteRepository()->findOneBy(array('host'=>$host))->getName();
+		$site=$this->getSiteRepository()->findOneBy(array('host'=>$host));
 		$locale = $request->getLocale();
-		$page = $this->getRepository()->findOnePage($anchor, $site);
-		$this->loader->addPath($this->get('kernel')->getRootDir() . '/../sites/'.$site.'/views', 'home');
+		$page = $this->getRepository()->findOnePage($anchor, $site->getName());
+		$this->loader->addPath($this->get('kernel')->getRootDir() . '/../sites/'.$site->getName().'/views', 'home');
 		$page->setLocale($locale);
 		$em->refresh($page);
 		if (!$page) {
