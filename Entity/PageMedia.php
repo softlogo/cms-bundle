@@ -68,9 +68,9 @@ class PageMedia
     private $createdAt;
 
     /**
-     * @var \App\Application\Sonata\MediaBundle\Entity\Media
+     * @var \App\Entity\SonataMediaMedia
      *
-     * @ORM\ManyToOne(targetEntity="\App\Application\Sonata\MediaBundle\Entity\Media")
+     * @ORM\ManyToOne(targetEntity="\App\Entity\SonataMediaMedia")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="media_id", referencedColumnName="id")
      * })
@@ -194,10 +194,10 @@ class PageMedia
     /**
      * Set media
      *
-     * @param \App\Application\Sonata\MediaBundle\Entity\Media $media
+     * @param \App\Entity\SonataMediaMedia $media
      * @return PageMedia
      */
-    public function setMedia(\App\Application\Sonata\MediaBundle\Entity\Media $media = null)
+    public function setMedia(\App\Entity\SonataMediaMedia $media = null)
     {
         $this->media = $media;
 
@@ -207,7 +207,7 @@ class PageMedia
     /**
      * Get media
      *
-     * @return \App\Application\Sonata\MediaBundle\Entity\Media 
+     * @return \App\Entity\SonataMediaMedia 
      */
     public function getMedia()
     {

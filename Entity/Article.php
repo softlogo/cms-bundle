@@ -65,16 +65,16 @@ class Article extends AbstractSection implements Translatable
     private $section;
 
     /**
-     * @var \App\Application\Sonata\MediaBundle\Entity\Media
+     * @var \App\Entity\SonataMediaMedia
      *
-     * @ORM\ManyToOne(targetEntity="\App\Application\Sonata\MediaBundle\Entity\Media")
+     * @ORM\ManyToOne(targetEntity="\App\Entity\SonataMediaMedia")
      */
     private $media;
 
 	/**
-     * @var \App\Application\Sonata\MediaBundle\Entity\Gallery
+     * @var \App\Entity\SonataMediaGallery
      *
-     * @ORM\ManyToOne(targetEntity="\App\Application\Sonata\MediaBundle\Entity\Gallery")
+     * @ORM\ManyToOne(targetEntity="\App\Entity\SonataMediaGallery")
      */
     private $gallery;
 
@@ -276,10 +276,10 @@ class Article extends AbstractSection implements Translatable
     /**
      * Set media
      *
-     * @param \App\Application\Sonata\MediaBundle\Entity\Media $media
+     * @param \App\Entity\SonataMediaMedia $media
      * @return Article
      */
-    public function setMedia(\App\Application\Sonata\MediaBundle\Entity\Media $media = null)
+    public function setMedia(\App\Entity\SonataMediaMedia $media = null)
     {
         $this->media = $media;
 
@@ -289,7 +289,7 @@ class Article extends AbstractSection implements Translatable
     /**
      * Get media
      *
-     * @return \App\Application\Sonata\MediaBundle\Entity\Media 
+     * @return \App\Entity\SonataMediaMedia 
      */
     public function getMedia()
     {
@@ -299,10 +299,10 @@ class Article extends AbstractSection implements Translatable
      /**
      * Set gallery
      *
-     * @param \App\Application\Sonata\MediaBundle\Entity\Gallery $gallery
+     * @param \App\Entity\SonataMediaGallery $gallery
      * @return Article
      */
-    public function setGallery(\App\Application\Sonata\MediaBundle\Entity\Gallery $gallery = null)
+    public function setGallery(\App\Entity\SonataMediaGallery $gallery = null)
     {
         $this->gallery = $gallery;
 
@@ -312,7 +312,7 @@ class Article extends AbstractSection implements Translatable
     /**
      * Get gallery
      *
-     * @return \App\Application\Sonata\MediaBundle\Entity\Gallery 
+     * @return \App\Entity\SonataMediaGallery 
      */
     public function getGallery()
     {
