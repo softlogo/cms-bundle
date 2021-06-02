@@ -30,6 +30,7 @@ class TwigCMS extends \Twig_Extension{
 	 */
 	public function __construct($container, $em, $sectionPager, $requestStack,  $mm, $templating, CMSConfiguration $conf)
 	{
+	    $this->request = $requestStack->getCurrentRequest();
 		$this->container = $container;
 		$this->em = $em;
 		$this->mm = $mm;
@@ -47,10 +48,14 @@ class TwigCMS extends \Twig_Extension{
 	}
 
 	private function getPage(){
-    $router = $this->container->get('router');
+		if($this->request){
+			$urlParams = $this->request->attributes->get('_route_params');
+		}
+		$router = $this->container->get('router');
 		if($siteHost=$router->getContext()->getHost()){
 		}else $siteHost="localhost";
 		$anchor=! isset($urlParams['anchor']) ? 'home':$urlParams['anchor'];
+		//$anchor=$urlParams['anchor'];
 		$locale="pl";
 
 		$language = $this->em->getRepository('SoftlogoCMSBundle:Language')->findOneBy(array('abbr'=>$locale));
@@ -229,7 +234,7 @@ class TwigCMS extends \Twig_Extension{
 
 	public function getBlock($parameters = array())
 	{
-		$collection = $this->em->getRepository('SoftlogoCMSBundle:PageSection')->findBy(array('blockType'=>$parameters['name'], 'page'=>$this->page), array('itemorder' => 'ASC'));
+		$collection = $this->em->getRepository('SoftlogoCMSBundle:PageSection')->findBy(array('blockType'=>$parameters['name'], 'page'=>$this->page->getId()), array('itemorder' => 'ASC'));
 		$parameters = $parameters + array(
 			'collection' => $collection,
 			'block' => $parameters['name'],
