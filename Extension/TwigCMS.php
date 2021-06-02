@@ -46,6 +46,7 @@ class TwigCMS extends \Twig_Extension{
 	{
 		return 'softlogo_cms';
 	}
+    //Poprawiony błąd 2021-06-02
 
 	private function getPage(){
 		if($this->request){
