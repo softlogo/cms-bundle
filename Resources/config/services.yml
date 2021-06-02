@@ -102,6 +102,13 @@ services:
         arguments : ["%kernel.root_dir%", "@router", "@doctrine.orm.entity_manager", "%cms_configpath%", "%custom_configpath%"]
         public: true
 
+    #ACL
+
+    softlogo.acl.admin.extension:
+        class: Softlogo\CMSBundle\Admin\AclAdminExtension
+        tags:
+          - { name: sonata.admin.extension, global: true}
+
 
  
     #SONATA
