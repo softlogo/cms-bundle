@@ -187,16 +187,19 @@ class PageAdmin extends Admin
 
 	public function getNewInstance()
 	{
+		$newPage = parent::getNewInstance();
 		$host=$this->getConfigurationPool()->getContainer()->get('router')->getContext()->getHost();
 		$sites=$this->getConfigurationPool()
 			->getContainer()
 			->get('doctrine')
 			->getRepository("SoftlogoCMSBundle:Site")
 			->findByHost($host);
-		$site=$sites[0];
 
-		$newPage = parent::getNewInstance();
-		$newPage->addSite($site);
+		if(!empty($sites)){
+			$site=$sites[0];
+			$newPage->addSite($site);   
+		}
+
 		//$site->addPage($newPage);
 
 		return $newPage;
