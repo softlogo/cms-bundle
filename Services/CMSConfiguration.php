@@ -47,7 +47,7 @@ class CMSConfiguration
 
 			$cmsConfig=$config;
 
-			if($this->site){
+			if($this->site && file_exists($siteConfigPath)){
 				$siteConfig = Yaml::parseFile($siteConfigPath);
 				//print_r($siteConfig);
 				$config1 = array_merge($cmsConfig[$root], $siteConfig[$root]);
