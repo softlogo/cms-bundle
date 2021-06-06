@@ -12,7 +12,7 @@ class CMSConfiguration
 	protected $branchArray;
 	protected $host="";
 	protected $site;
-	public function __construct($rootDir, $router, $em, $cmsConfigPath, $customConfigPath=false){
+	public function __construct($rootDir, $router, $em, $cmsConfigPath, $customConfigPath){
 
 		$this->siteRepository= $em->getRepository('SoftlogoCMSBundle:Site');
 		$this->branchArray["section_types"]="CMS";
@@ -37,6 +37,7 @@ class CMSConfiguration
 			$root="softlogo_cms";
 			if($customConfigPath){
 				$customConfig = Yaml::parseFile($customConfigPath);
+				//print_r($customConfig);
 				$config1 = array_merge($cmsConfig[$root], $customConfig[$root]);
 				$config2 = array_merge($customConfig[$root], $cmsConfig[$root]);
 				foreach($config1 as $key=>$value){
@@ -46,6 +47,7 @@ class CMSConfiguration
 			else $config=$cmsConfig;
 
 			$cmsConfig=$config;
+				//print_r($cmsConfig);
 
 			if($this->site && file_exists($siteConfigPath)){
 				$siteConfig = Yaml::parseFile($siteConfigPath);
@@ -79,8 +81,8 @@ class CMSConfiguration
 		if(array_key_exists($branch, $this->siteConfArray)){
 			if(array_key_exists($type, $this->siteConfArray[$branch])){
 				return "@sites/$this->site/views/$dir/$view";
-			}else return "SoftlogoCMSBundle:$dir:$view";
-		}else return "SoftlogoCMSBundle:$dir:$view";
+			}else return "@SoftlogoCMS/$dir/$view";
+		}else return "@SoftlogoCMS/$dir/$view";
 	}
 	public function getSectionView($type)
 	{

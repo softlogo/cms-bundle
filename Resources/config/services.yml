@@ -2,7 +2,7 @@
 parameters:
     softlogo_cms_language.class: Softlogo\CMSBundle\Controller\LanguageController
     cms_configpath: "%kernel.root_dir%/../vendor/softlogo/cms-bundle/Softlogo/CMSBundle/Resources/config/config.yml"
-    custom_configpath: ""
+    custom_configpath: "%kernel.root_dir%/../config/config.yml"
     softlogo.controller.section.class: Softlogo\CMSBundle\Controller\SectionController
     cms.section.offset: 60
 
