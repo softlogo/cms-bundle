@@ -43,7 +43,7 @@ class ArticleAdmin extends Admin
 
 
 
-			->add('media', ModelListType::class, array('required' => false), array())
+			->add('media', ModelListType::class, array('required' => false ), ['link_parameters' =>['context' => 'article', 'provider'=>'sonata.media.provider.image']])
 			//->add('gallery', ModelListType::class, array('required' => false), array())
 
 
