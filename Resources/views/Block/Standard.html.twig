@@ -1,3 +1,3 @@
 {%for ps in collection%}
-	{{ render_section({'entity':ps.section, 'type':ps.type}) }}
+	{{ render_section({'entity':ps.section, 'type':ps.type, 'class':ps.class}) }}
 {%endfor%}

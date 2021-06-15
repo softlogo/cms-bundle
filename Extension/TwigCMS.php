@@ -22,6 +22,8 @@ class TwigCMS extends \Twig_Extension{
 	protected $galleryManager;
 	protected $requestStack;
 	protected $request;
+	protected $site;
+	protected $siteHost;
 
 	/**
 	 * Constructor.
@@ -48,21 +50,22 @@ class TwigCMS extends \Twig_Extension{
 	}
     //Poprawiony błąd 2021-06-02
 
+	private function getSite(){
+		if($siteHost=$this->request->headers->get('host')){
+		}else $siteHost="localhost";
+
+		return $site = $this->em->getRepository('SoftlogoCMSBundle:Site')->findOneBy(array('host'=>$siteHost));
+
+	}
 	private function getPage(){
 		if($this->request){
 			$urlParams = $this->request->attributes->get('_route_params');
 		}
-		$router = $this->container->get('router');
-		if($siteHost=$router->getContext()->getHost()){
-		}else $siteHost="localhost";
 		$anchor=! isset($urlParams['anchor']) ? 'home':$urlParams['anchor'];
-		//$anchor=$urlParams['anchor'];
 		$locale="pl";
-
 		$language = $this->em->getRepository('SoftlogoCMSBundle:Language')->findOneBy(array('abbr'=>$locale));
-		$site = $this->em->getRepository('SoftlogoCMSBundle:Site')->findOneBy(array('host'=>$siteHost));
-		if($site){
-		return $page = $this->em->getRepository('SoftlogoCMSBundle:Page')->findOnePage($anchor,$site->getName(), $language);
+		if($this->getSite()){
+		return $page = $this->em->getRepository('SoftlogoCMSBundle:Page')->findOnePage($anchor,$this->getSite()->getName(), $language);
 		}else return null;
 
 	}
@@ -136,6 +139,8 @@ class TwigCMS extends \Twig_Extension{
 		$entityType=$entity->getType();
 		$parameters['entity'] =$entity;
 		$parameters['type']= $entityType;
+		$siteClass=$entity->getSiteClass($this->getSite());
+		$parameters['class']= $siteClass;
 		$view=$this->conf->getSectionView($parameters['type']);
 		return $this->templating->render($view, $parameters);
 	}
@@ -185,10 +190,19 @@ class TwigCMS extends \Twig_Extension{
 
 	public function getSection($parameters = array())
 	{
+
+		$site=$this->getSite();
 		if(isset($parameters['entity'])){
 			$entityOryg=$parameters['entity'];
 			$this->sectionPager->setSection($entityOryg);
 			$entity=$this->sectionPager->getSectionsPage(1);
+			$siteClass=$entity->getSiteClass($this->getSite());
+			$pageClass=$entity->getPageClass($this->getPage());
+			if($pageClass){
+				$class=$pageClass;
+			}elseif($siteClass){
+				$class=$siteClass;
+			}else $class="";
 
 			$entityTitle=$entity->getTitle();
 			//$entityType=$entity->getSectionType()->__toString();
@@ -214,16 +228,16 @@ class TwigCMS extends \Twig_Extension{
 				$section=new Section();
 				$section->addArticleCollection($this->page->getLastArticles());
 				$section->setTitle($this->page->getTitle());
-				$parameters['entity']=$section;
 
 			}
 
+		$parameters['class']=$class;
 		}else{
 			$section=new Section();
 			$section->addArticleCollection($this->page->getArticles());
 			$section->setTitle($this->page->getTitle());
 			$parameters['entity']=$section;
-			//$parameters['type']=='';
+			$parameters['class']=$class;
 
 		}
 

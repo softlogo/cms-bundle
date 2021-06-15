@@ -50,6 +50,27 @@ class Section extends AbstractSection
 	private $contents;
 
 
+	public function getSiteClass($site){
+		$class="";
+		foreach($site->getSections() as $ss){
+			if($ss->getSection()===$this){
+				$class=$ss->getClass();
+			}
+		}
+		return $class;
+	}
+
+	public function getPageClass($page){
+		$class="";
+		foreach($page->getPageSections() as $ps){
+			if($ps->getSection()===$this){
+				$class=$ps->getClass();
+			}
+		}
+		return $class;
+	}
+
+
 	/**
 	 * Constructor
 	 */

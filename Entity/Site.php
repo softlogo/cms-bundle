@@ -2,6 +2,8 @@
 
 namespace Softlogo\CMSBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -22,12 +24,20 @@ class Site extends Dictionary{
      */
 	private $host;
 
+	/**
+	 * @ORM\OneToMany(targetEntity="SiteSection", mappedBy="site", cascade="persist", orphanRemoval=true)
+	 * @ORM\OrderBy({"number" = "ASC"})
+     */
+    private $sections;
+
+
     /**
      * Constructor
      */
     public function __construct()
     {
         $this->pages = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->sections = new ArrayCollection();
     }
 
     /**
@@ -87,5 +97,35 @@ class Site extends Dictionary{
     public function getHost()
     {
         return $this->host;
+    }
+
+    /**
+     * @return Collection|SiteSection[]
+     */
+    public function getSections(): Collection
+    {
+        return $this->sections;
+    }
+
+    public function addSection(SiteSection $section): self
+    {
+        if (!$this->sections->contains($section)) {
+            $this->sections[] = $section;
+            $section->setSite($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSection(SiteSection $section): self
+    {
+        if ($this->sections->removeElement($section)) {
+            // set the owning side to null (unless already changed)
+            if ($section->getSite() === $this) {
+                $section->setSite(null);
+            }
+        }
+
+        return $this;
     }
 }

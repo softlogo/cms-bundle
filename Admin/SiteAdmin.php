@@ -70,7 +70,8 @@ class SiteAdmin extends Admin
 			$formMapper
 			->add('description')
 			->add('isMain')
-			->add('pages');
+			->add('pages')
+			->add('sections', CollectionType::class, array('label' => 'Sections', 'required' => false, 'by_reference' => false), array('edit' => 'inline','inline' => 'table',));
 		}
 		$formMapper
 			->add('value')

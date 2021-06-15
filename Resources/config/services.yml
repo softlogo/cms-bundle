@@ -171,6 +171,21 @@ services:
         properties:
             conf: "@cms_conf"
 
+    softlogo.cms.admin.site_section:
+        class: Softlogo\CMSBundle\Admin\SiteSectionAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: CMS, label: Site_Sections, show_in_dashboard: false }
+        arguments:
+            - ~
+            - Softlogo\CMSBundle\Entity\SiteSection
+            - ~
+        calls:
+            - [ setTranslationDomain, [SoftlogoCMSBundle]]
+        properties:
+            conf: "@cms_conf"
+
+
+
 
     softlogo_cms.admin.section_parameter:
         class: Softlogo\CMSBundle\Admin\SectionParameterAdmin

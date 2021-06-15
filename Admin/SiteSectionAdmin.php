@@ -9,7 +9,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Sonata\Form\Type\CollectionType;
 use Sonata\AdminBundle\Form\Type\ModelListType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-class PageSectionAdmin extends Admin
+class SiteSectionAdmin extends Admin
 {
 
 	public $conf;
@@ -18,12 +18,7 @@ class PageSectionAdmin extends Admin
 	{
 		$formMapper
 			->add('section', ModelListType::class, array('required' => false), array())
-			//->add('type', ChoiceType::class, array('multiple'=>false, 'choices'=>$this->conf->getKeys('section_types')))
-			->add('blockType', ChoiceType::class, array('multiple'=>false, 'choices'=>$this->conf->getKeys('block_types')))
-			->add('itemorder')
-			//->add('wrapper', 'choice', array('empty_value' => "brak",'multiple'=>false, 'choices'=>$this->conf->getKeys('wrapper_types')))
-			//->add('offset', 'choice', array('empty_value' => "brak",'multiple'=>false, 'choices'=>$this->conf->getKeys('offset_types')))
-			//->add('anchor')
+			->add('number')
 			->add('class')
 
 			; 
@@ -33,7 +28,7 @@ class PageSectionAdmin extends Admin
 	protected function configureDatagridFilters(DatagridMapper $datagridMapper)
 	{
 		$datagridMapper
-			->add('page')
+			->add('site')
 			->add('section')
 			;
 	}
@@ -41,7 +36,7 @@ class PageSectionAdmin extends Admin
 	protected function configureListFields(ListMapper $listMapper)
 	{
 		$listMapper
-			->add('page')
+			->add('site')
 			->add('section')
 
 			;
