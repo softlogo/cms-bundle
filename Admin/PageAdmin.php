@@ -62,19 +62,19 @@ class PageAdmin extends Admin
 
 
 		$formMapper
-			->tab('General')
-			->with('Content', array('class' => 'col-md-9'))
-			->add('name')
+			->tab('Ogólne')
+			->with('Treść', array('class' => 'col-md-9'))
+			->add('name', null, array('label'=>'Nazwa'))
 			->add('anchor', TextType::class, array('label' => 'Anchor'))
 			->add('articles', CollectionType::class, array('label' => 'Articles', 'required' => false, 'by_reference' => false), array('edit' => 'inline','inline' => 'standard', 'sortable'=>true))
 
 			->end()
-			->with('Settings', array('class' => 'col-md-3'))
-			->add('itemorder', TextType::class, array('label' => 'Item Order'))
+			->with('Ustawienia', array('class' => 'col-md-3'))
+			->add('itemorder', TextType::class, array('label' => 'Kolejnosć'))
 			->add('media', ModelListType::class, array('required' => false), array())
-			->add('isMenu')
+			->add('isMenu', null, array('label'=>'Jest w menu'))
 			->add('type', ChoiceType::class, array('multiple'=>false, 'choices'=>$this->conf->getKeys('page_types')))
-			->add('page', ModelListType::class, array('required' => false), array())
+			->add('page', ModelListType::class, array('required' => false, 'label'=>'Rodzic'), array())
 			//->add('site', ModelListType::class, array('required' => false), array())
 
 			->end()
@@ -90,7 +90,7 @@ class PageAdmin extends Admin
 
 				->tab('General')
 				->with('Settings', array('class' => 'col-md-3'))
-				->add('sites', null, array('disabled'=>true))
+				->add('sites', null, array('disabled'=>true, 'label'=>'Witryny'))
 				->end()
 				->end()
 				;
@@ -108,9 +108,9 @@ class PageAdmin extends Admin
 
 			->tab('SEO')
 			->with('SEO', array('class' => 'col-md-6'))
-			->add('title', null, array('label' => 'Page Title'))
-			->add('description', null, array('label' => 'Page Description'))
-			->add('keywords', null, array('label' => 'Page Keywords'))
+			->add('title', null, array('label' => 'SEO Tytuł'))
+			->add('description', null, array('label' => 'SEO Opis'))
+			->add('keywords', null, array('label' => 'SEO Słowa kluczowe'))
 			->end()
 			->end()
 
@@ -125,7 +125,7 @@ class PageAdmin extends Admin
  *                ->end()
  */
 
-				->tab('Advanced')
+				->tab('Zaawansowane')
 				->with('Settings', array('class' => 'col-md-6'))
 
 				->add('priority')
@@ -152,12 +152,12 @@ class PageAdmin extends Admin
 	protected function configureListFields(ListMapper $listMapper)
 	{
 		$listMapper
-			->add('name')
-			->add('page.fulltitle')
-			->add('sites')
+			->add('name', null, array('label' => 'Nazwa'))
+			->add('page.fulltitle', null, array('label' => 'Pełna nazwa'))
+			->add('sites', null, array('label' => 'Witryna'))
 			//->add('pages')
-			->add('itemorder')
-			->add('isMenu')
+			->add('itemorder', null, array('label' => 'Kolejnosć'))
+			->add('isMenu', null, array('label' => 'Jest w menu'))
 			->add('_action', 'actions', array(
 				'actions' => array(
 					//'show' => array(),
