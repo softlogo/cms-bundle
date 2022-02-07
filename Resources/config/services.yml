@@ -28,6 +28,9 @@ services:
         resource: '../../Controller'
         tags: ['controller.service_arguments']
 
+    Softlogo\CMSBundle\DataFixtures\PopulateDatabase:
+        tags: [doctrine.fixture.orm]
+
     #cms.loader:
         ##alias: App\Mail\PhpMailer
         #alias: Symfony\Bundle\TwigBundle\Loader\FilesystemLoader
