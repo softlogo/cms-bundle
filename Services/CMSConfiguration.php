@@ -25,52 +25,57 @@ class CMSConfiguration
 		 */
 		$cmsConfig = Yaml::parseFile($cmsConfigPath);
 
-		if(true){
-			$this->host=$router->getContext()->getHost();
+		$this->host=$router->getContext()->getHost();
 
-			if($this->host !='localhost' && $this->host != '127.0.0.1'){
-				$this->site=$this->siteRepository->findOneBy(array('host'=>$this->host))->getName();
-				//$this->site=$this->siteRepository->findOneBy(array('host'=>'audytornew.localhost'))->getName();
-			}
-			$siteConfigPath=$rootDir."/../sites/".$this->site."/config/config.yml";
-
-			$root="softlogo_cms";
-			if($customConfigPath){
-				$customConfig = Yaml::parseFile($customConfigPath);
-				//print_r($customConfig);
-				$config1 = array_merge($cmsConfig[$root], $customConfig[$root]);
-				$config2 = array_merge($customConfig[$root], $cmsConfig[$root]);
-				foreach($config1 as $key=>$value){
-					$config[$root][$key]=array_merge($config2[$key], $config1[$key]);
-				}
-			}
-			else $config=$cmsConfig;
-
-			$cmsConfig=$config;
-				//print_r($cmsConfig);
-
-			if($this->site && file_exists($siteConfigPath)){
-				$siteConfig = Yaml::parseFile($siteConfigPath);
-				//print_r($siteConfig);
-				$config1 = array_merge($cmsConfig[$root], $siteConfig[$root]);
-				$config2 = array_merge($siteConfig[$root], $cmsConfig[$root]);
-				foreach($config1 as $key=>$value){
-					$config[$root][$key]=array_merge($config2[$key], $config1[$key]);
-				}
-				$this->siteConfArray=$siteConfig["softlogo_cms"];
-			}
-			else {
-				$config=$cmsConfig;
-				$this->siteConfArray=$cmsConfig["softlogo_cms"];
-			}
-
-			$this->confArray=$config["softlogo_cms"];
-
-
-
-			//print_r($this->siteConfArray);
+		if($this->host == '127.0.0.1' || $this->host=='localhost'){
+			$this->site=$this->siteRepository->findOneBy(array());
 		}
 
+		else{
+			$this->site=$this->siteRepository->findOneBy(array('host'=>$this->host));
+		}
+
+		$siteConfigPath=$rootDir."/../sites/".$this->site->getName()."/config/config.yml";
+
+		$root="softlogo_cms";
+		if($customConfigPath){
+			$customConfig = Yaml::parseFile($customConfigPath);
+			//print_r($customConfig);
+			$config1 = array_merge($cmsConfig[$root], $customConfig[$root]);
+			$config2 = array_merge($customConfig[$root], $cmsConfig[$root]);
+			foreach($config1 as $key=>$value){
+				$config[$root][$key]=array_merge($config2[$key], $config1[$key]);
+			}
+		}
+		else $config=$cmsConfig;
+
+		$cmsConfig=$config;
+		//print_r($cmsConfig);
+
+		if($this->site && file_exists($siteConfigPath)){
+			$siteConfig = Yaml::parseFile($siteConfigPath);
+			//print_r($siteConfig);
+			$config1 = array_merge($cmsConfig[$root], $siteConfig[$root]);
+			$config2 = array_merge($siteConfig[$root], $cmsConfig[$root]);
+			foreach($config1 as $key=>$value){
+				$config[$root][$key]=array_merge($config2[$key], $config1[$key]);
+			}
+			$this->siteConfArray=$siteConfig["softlogo_cms"];
+		}
+		else {
+			$config=$cmsConfig;
+			$this->siteConfArray=$cmsConfig["softlogo_cms"];
+		}
+
+		$this->confArray=$config["softlogo_cms"];
+
+
+
+		//print_r($this->siteConfArray);
+
+	}
+	public function getSite(){
+		return $this->site;
 	}
 	public function getBranchDir($branch){
 		return $this->branchArray[$branch];
@@ -80,7 +85,7 @@ class CMSConfiguration
 		$view=$this->confArray[$branch][$type];
 		if(array_key_exists($branch, $this->siteConfArray)){
 			if(array_key_exists($type, $this->siteConfArray[$branch])){
-				return "@sites/$this->site/views/$dir/$view";
+				return "@sites/".$this->site->getName()."/views/".$dir."/".$view;
 			}else return "@SoftlogoCMS/$dir/$view";
 		}else return "@SoftlogoCMS/$dir/$view";
 	}

@@ -34,19 +34,17 @@ class TwigCMS extends \Twig_Extension{
 		$this->container = $container;
 		$this->em = $em;
 		$this->mm = $mm;
+		$this->conf  = $conf;
 		$this->page=$this->getPage();
 		$this->sectionPager=$sectionPager;
-		//$this->router=$router;
-		//$this->urlParams = $this->request->attributes->get('_route_params');
 		$this->templating  = $templating;
-		$this->conf  = $conf;
 	}
 
 	public function getName()
 	{
 		return 'softlogo_cms';
 	}
-    //Poprawiony błąd 2021-06-02
+    //Pobieramy host z jednego miejsca (conf) 2022-02-07
 
 	private function getPage(){
 		if($this->request){
@@ -56,11 +54,10 @@ class TwigCMS extends \Twig_Extension{
 		if($siteHost=$router->getContext()->getHost()){
 		}else $siteHost="localhost";
 		$anchor=! isset($urlParams['anchor']) ? 'home':$urlParams['anchor'];
-		//$anchor=$urlParams['anchor'];
 		$locale="pl";
 
 		$language = $this->em->getRepository('SoftlogoCMSBundle:Language')->findOneBy(array('abbr'=>$locale));
-		$site = $this->em->getRepository('SoftlogoCMSBundle:Site')->findOneBy(array('host'=>$siteHost));
+		$site=$this->conf->getSite();
 		if($site){
 		return $page = $this->em->getRepository('SoftlogoCMSBundle:Page')->findOnePage($anchor,$site->getName(), $language);
 		}else return null;

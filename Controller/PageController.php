@@ -25,7 +25,7 @@ class PageController extends BaseController
 		$conf=$this->get('cms_conf');
 		$host=$request->getHost();
 		$menu = $this->getRepository()->findBy(array('isMenu'=>true), array('itemorder' => 'ASC'));
-		$site=$this->getSiteRepository()->findOneBy(array('host'=>$host));
+		$site=$conf->getSite();
 		$locale = $request->getLocale();
 		$page = $this->getRepository()->findOnePage($anchor, $site->getName());
 		$this->loader->addPath($this->get('kernel')->getRootDir() . '/../sites/'.$site->getName().'/views', 'home');
